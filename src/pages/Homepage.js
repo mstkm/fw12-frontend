@@ -20,11 +20,11 @@ const Homepage = () => {
       <div className='flex items-center px-[100px] py-7 font-[mulish]'>
         <div className='flex flex-1 items-center'>
           <img className='w-[120.41px] mr-[80px]' src={Logo} alt='logo' />
-          <div className='mr-[80px] cursor-pointer'>Home</div>
-          <div className='cursor-pointer'>List Movie</div>
+          <div className='mr-[80px] cursor-pointer hover:font-bold'>Home</div>
+          <div className='cursor-pointer hover:font-bold'>List Movie</div>
         </div>
         <div >
-          <button className='bg-[#5F2EEA] text-white w-[120px] h-[40px] rounded-[4px]'><Link to='/signin'>Sign In</Link></button>
+          <button className='bg-[#5F2EEA] text-white w-[120px] h-[40px] rounded-[4px] hover:font-bold'><Link to='/signin'>Sign In</Link></button>
         </div>
       </div>
 
@@ -43,7 +43,7 @@ const Homepage = () => {
       <div className='bg-[#F5F6F8] py-10 font-[mulish]'>
         <div className='flex items-align px-[100px] '>
           <div className='flex-1'>
-            <div className='text-[#5F2EEA] font-bold border-b-2 pb-4 border-[#5F2EEA] inline cursor-pointer'>Now Showing</div>
+            <div className='text-[#5F2EEA] font-bold border-b-2 pb-4 border-[#5F2EEA] inline cursor-pointer text-2xl'>Now Showing</div>
           </div>
           <div className='text-[#5F2EEA] font-bold cursor-pointer'>view all</div>
         </div>
@@ -72,24 +72,23 @@ const Homepage = () => {
       {/* Upcoming */}
       <div className='py-10 font-[mulish]'>
         <div className='flex items-center px-[100px]'>
-          <div className='flex-1 font-bold cursor-pointer'>Upcoming</div>
+          <div className='flex-1 font-bold cursor-pointer text-2xl'>Upcoming</div>
           <div className='text-[#5F2EEA] font-bold cursor-pointer'>view all</div>
         </div>
 
         <div className='flex flex-nowrap ml-[100px] py-5 overflow-x-scroll gap-4'>
-          <div className='flex justify-center items-center min-w-[127px] min-h-[40px] border-[1px] border-[#5F2EEA] text-[#5F2EEA] rounded-[4px] cursor-pointer'>September</div>
-          <div className='flex justify-center items-center min-w-[127px] min-h-[40px] border-[1px] border-[#5F2EEA] text-[#5F2EEA] rounded-[4px] cursor-pointer'>October</div>
-          <div className='flex justify-center items-center min-w-[127px] min-h-[40px] border-[1px] border-[#5F2EEA] text-[#5F2EEA] rounded-[4px] cursor-pointer'>November</div>
-          <div className='flex justify-center items-center min-w-[127px] min-h-[40px] border-[1px] border-[#5F2EEA] text-[#5F2EEA] rounded-[4px] cursor-pointer'>December</div>
-          <div className='flex justify-center items-center min-w-[127px] min-h-[40px] border-[1px] border-[#5F2EEA] text-[#5F2EEA] rounded-[4px] cursor-pointer'>January</div>
-          <div className='flex justify-center items-center min-w-[127px] min-h-[40px] border-[1px] border-[#5F2EEA] text-[#5F2EEA] rounded-[4px] cursor-pointer'>February</div>
-          <div className='flex justify-center items-center min-w-[127px] min-h-[40px] border-[1px] border-[#5F2EEA] text-[#5F2EEA] rounded-[4px] cursor-pointer'>March</div>
-          <div className='flex justify-center items-center min-w-[127px] min-h-[40px] border-[1px] border-[#5F2EEA] text-[#5F2EEA] rounded-[4px] cursor-pointer'>April</div>
-          <div className='flex justify-center items-center min-w-[127px] min-h-[40px] border-[1px] border-[#5F2EEA] text-[#5F2EEA] rounded-[4px] cursor-pointer'>May</div>
-          <div className='flex justify-center items-center min-w-[127px] min-h-[40px] border-[1px] border-[#5F2EEA] text-[#5F2EEA] rounded-[4px] cursor-pointer'>June</div>
-          <div className='flex justify-center items-center min-w-[127px] min-h-[40px] border-[1px] border-[#5F2EEA] text-[#5F2EEA] rounded-[4px] cursor-pointer'>July</div>
-          <div className='flex justify-center items-center min-w-[127px] min-h-[40px] border-[1px] border-[#5F2EEA] text-[#5F2EEA] rounded-[4px] cursor-pointer'>Augustus</div>
-          
+          <div className='flex justify-center items-center min-w-[127px] min-h-[40px] border-[1px] border-[#5F2EEA] text-[#5F2EEA] rounded-[4px] cursor-pointer active:bg-[#5F2EEA] active:text-white'>September</div>
+          <div className='flex justify-center items-center min-w-[127px] min-h-[40px] border-[1px] border-[#5F2EEA] text-[#5F2EEA] rounded-[4px] cursor-pointer active:bg-[#5F2EEA] active:text-white'>October</div>
+          <div className='flex justify-center items-center min-w-[127px] min-h-[40px] border-[1px] border-[#5F2EEA] text-[#5F2EEA] rounded-[4px] cursor-pointer active:bg-[#5F2EEA] active:text-white'>November</div>
+          <div className='flex justify-center items-center min-w-[127px] min-h-[40px] border-[1px] border-[#5F2EEA] text-[#5F2EEA] rounded-[4px] cursor-pointer active:bg-[#5F2EEA] active:text-white'>December</div>
+          <div className='flex justify-center items-center min-w-[127px] min-h-[40px] border-[1px] border-[#5F2EEA] text-[#5F2EEA] rounded-[4px] cursor-pointer active:bg-[#5F2EEA] active:text-white'>January</div>
+          <div className='flex justify-center items-center min-w-[127px] min-h-[40px] border-[1px] border-[#5F2EEA] text-[#5F2EEA] rounded-[4px] cursor-pointer active:bg-[#5F2EEA] active:text-white'>February</div>
+          <div className='flex justify-center items-center min-w-[127px] min-h-[40px] border-[1px] border-[#5F2EEA] text-[#5F2EEA] rounded-[4px] cursor-pointer active:bg-[#5F2EEA] active:text-white'>March</div>
+          <div className='flex justify-center items-center min-w-[127px] min-h-[40px] border-[1px] border-[#5F2EEA] text-[#5F2EEA] rounded-[4px] cursor-pointer active:bg-[#5F2EEA] active:text-white'>April</div>
+          <div className='flex justify-center items-center min-w-[127px] min-h-[40px] border-[1px] border-[#5F2EEA] text-[#5F2EEA] rounded-[4px] cursor-pointer active:bg-[#5F2EEA] active:text-white'>May</div>
+          <div className='flex justify-center items-center min-w-[127px] min-h-[40px] border-[1px] border-[#5F2EEA] text-[#5F2EEA] rounded-[4px] cursor-pointer active:bg-[#5F2EEA] active:text-white'>June</div>
+          <div className='flex justify-center items-center min-w-[127px] min-h-[40px] border-[1px] border-[#5F2EEA] text-[#5F2EEA] rounded-[4px] cursor-pointer active:bg-[#5F2EEA] active:text-white'>July</div>
+          <div className='flex justify-center items-center min-w-[127px] min-h-[40px] border-[1px] border-[#5F2EEA] text-[#5F2EEA] rounded-[4px] cursor-pointer active:bg-[#5F2EEA] active:text-white'>Augustus</div>
         </div>
 
         <div className='flex flex-nowrap items-center mt-10 ml-[100px] gap-5 overflow-x-scroll'>
@@ -98,8 +97,8 @@ const Homepage = () => {
             <div className='text-center mt-5'>
               <div className='font-bold text-lg'>Black Widow</div>
               <div className='font-medium text-sm text-[#A0A3BD]'>Action, Adventure, Sci-fi</div>
-              <div className='mt-7 p-1 border-[0.5px] border-[#5F2EEA] rounded-[4px] text-[#5F2EEA]'>
-                <button>Detail</button>
+              <div>
+                <button className='w-[100%] mt-7 p-1 border-[0.5px] border-[#5F2EEA] rounded-[4px] text-[#5F2EEA] hover:bg-[#5F2EEA] hover:text-white'>Detail</button>
               </div>
             </div>
           </div>
@@ -108,8 +107,8 @@ const Homepage = () => {
             <div className='text-center mt-5'>
               <div className='font-bold text-lg'>The Witches</div>
               <div className='font-medium text-sm text-[#A0A3BD]'>Action, Comedy, Family</div>
-              <div className='mt-7 p-1 border-[0.5px] border-[#5F2EEA] rounded-[4px] text-[#5F2EEA]'>
-                <button>Detail</button>
+              <div>
+                <button className='w-[100%] mt-7 p-1 border-[0.5px] border-[#5F2EEA] rounded-[4px] text-[#5F2EEA] hover:bg-[#5F2EEA] hover:text-white'>Detail</button>
               </div>
             </div>
           </div>
@@ -118,8 +117,8 @@ const Homepage = () => {
             <div className='text-center mt-5'>
               <div className='font-bold text-lg'>Tenet</div>
               <div className='font-medium text-sm text-[#A0A3BD]'>Action, Sci-fi</div>
-              <div className='mt-7 p-1 border-[0.5px] border-[#5F2EEA] rounded-[4px] text-[#5F2EEA]'>
-                <button>Detail</button>
+              <div>
+                <button className='w-[100%] mt-7 p-1 border-[0.5px] border-[#5F2EEA] rounded-[4px] text-[#5F2EEA] hover:bg-[#5F2EEA] hover:text-white'>Detail</button>
               </div>
             </div>
           </div>
@@ -128,8 +127,8 @@ const Homepage = () => {
             <div className='text-center mt-5'>
               <div className='font-bold text-lg'>Black Widow</div>
               <div className='font-medium text-sm text-[#A0A3BD]'>Action, Adventure, Sci-fi</div>
-              <div className='mt-7 p-1 border-[0.5px] border-[#5F2EEA] rounded-[4px] text-[#5F2EEA]'>
-                <button>Detail</button>
+              <div>
+                <button className='w-[100%] mt-7 p-1 border-[0.5px] border-[#5F2EEA] rounded-[4px] text-[#5F2EEA] hover:bg-[#5F2EEA] hover:text-white'>Detail</button>
               </div>
             </div>
           </div>
@@ -138,8 +137,8 @@ const Homepage = () => {
             <div className='text-center mt-5'>
               <div className='font-bold text-lg'>The Witches</div>
               <div className='font-medium text-sm text-[#A0A3BD]'>Action, Comedy, Family</div>
-              <div className='mt-7 p-1 border-[0.5px] border-[#5F2EEA] rounded-[4px] text-[#5F2EEA]'>
-                <button>Detail</button>
+              <div>
+                <button className='w-[100%] mt-7 p-1 border-[0.5px] border-[#5F2EEA] rounded-[4px] text-[#5F2EEA] hover:bg-[#5F2EEA] hover:text-white'>Detail</button>
               </div>
             </div>
           </div>
@@ -148,8 +147,8 @@ const Homepage = () => {
             <div className='text-center mt-5'>
               <div className='font-bold text-lg'>Tenet</div>
               <div className='font-medium text-sm text-[#A0A3BD]'>Action, Sci-fi</div>
-              <div className='mt-7 p-1 border-[0.5px] border-[#5F2EEA] rounded-[4px] text-[#5F2EEA]'>
-                <button>Detail</button>
+              <div>
+                <button className='w-[100%] mt-7 p-1 border-[0.5px] border-[#5F2EEA] rounded-[4px] text-[#5F2EEA] hover:bg-[#5F2EEA] hover:text-white'>Detail</button>
               </div>
             </div>
           </div>
