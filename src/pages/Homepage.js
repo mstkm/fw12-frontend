@@ -24,7 +24,7 @@ const Homepage = () => {
           <div className='cursor-pointer hover:font-bold'>List Movie</div>
         </div>
         <div >
-          <button className='bg-[#5F2EEA] text-white w-[120px] h-[40px] rounded-[4px] hover:font-bold'><Link to='/signin'>Sign In</Link></button>
+        <Link to='/signin'><button className='bg-[#5F2EEA] text-white w-[120px] h-[40px] rounded-[4px] hover:font-bold'>Sign In</button></Link>
         </div>
       </div>
 
