@@ -1,1 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Mulish&family=Rancho&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Mulish&family=Rancho&display=swap');
+
+.judul {
+  font-size: 500px;
+}
+
+.hero {
+  background-image: url('../images/image1.png');
+  height: 100vh;
+  background-size: cover;
+}
