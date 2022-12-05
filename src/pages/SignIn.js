@@ -18,13 +18,13 @@ const SignIn = () => {
         <form className='mb-5'>
           <div className='mb-5'>
             <div className='text-[#4E4B66] mb-2'>Email</div>
-            <input className='w-[400px] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4' placeholder='Write your email'></input>
+            <input className='w-[400px] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none' placeholder='Write your email'></input>
           </div>
           <div className='mb-10'>
             <div className='text-[#4E4B66] mb-2'>Password</div>
             <div className='relative'>
               <Eye className='absolute bottom-3 right-[50px]'/>
-              <input className='w-[400px] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4' placeholder='Write your password'></input>
+              <input className='w-[400px] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none' placeholder='Write your password'></input>
             </div>
           </div> 
           <div>
