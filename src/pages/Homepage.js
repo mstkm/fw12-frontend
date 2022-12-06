@@ -14,9 +14,9 @@ import { Facebook, Instagram, Twitter, Youtube } from 'react-feather';
 import { useNavigate } from 'react-router-dom';
 
 const Homepage = () => {
-  const linkTo = useNavigate()
-  const linkToSignin = () => {
-    linkTo('/signin')
+  const navigate = useNavigate()
+  const directToSignin = () => {
+    navigate('/signin')
   }
   return (
     <div>
@@ -28,7 +28,7 @@ const Homepage = () => {
           <div className='cursor-pointer hover:font-bold'>List Movie</div>
         </div>
         <div >
-        <button onClick={linkToSignin} className='bg-[#5F2EEA] text-white w-[120px] h-[40px] rounded-[4px] hover:font-bold'>Sign In</button>
+        <button onClick={directToSignin} className='bg-[#5F2EEA] text-white w-[120px] h-[40px] rounded-[4px] hover:font-bold'>Sign In</button>
         </div>
       </div>
 
