@@ -17,7 +17,7 @@ import Now from '../assets/components/Now';
 const Homepage = () => {
   const navigate = useNavigate()
   const directToSignin = () => {
-    navigate('/signin')
+    navigate('/signup')
   }
   return (
     <div>
@@ -29,7 +29,7 @@ const Homepage = () => {
           <div className='cursor-pointer hover:font-bold'>List Movie</div>
         </div>
         <div >
-        <button onClick={directToSignin} className='bg-[#5F2EEA] text-white w-[120px] h-[40px] rounded-[4px] hover:font-bold'>Sign In</button>
+        <button onClick={directToSignin} className='bg-[#5F2EEA] text-white w-[120px] h-[40px] rounded-[4px] hover:font-bold'>Sign Up</button>
         </div>
       </div>
 
