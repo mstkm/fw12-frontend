@@ -11,9 +11,13 @@ import ebv from '../assets/images/ebv.id.png';
 import cineone21 from '../assets/images/cineone21.png';
 import hiflix from '../assets/images/hiflix.png';
 import { Facebook, Instagram, Twitter, Youtube } from 'react-feather';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Homepage = () => {
+  const linkTo = useNavigate()
+  const linkToSignin = () => {
+    linkTo('/signin')
+  }
   return (
     <div>
       {/* Header */}
@@ -24,7 +28,7 @@ const Homepage = () => {
           <div className='cursor-pointer hover:font-bold'>List Movie</div>
         </div>
         <div >
-        <Link to='/signin'><button className='bg-[#5F2EEA] text-white w-[120px] h-[40px] rounded-[4px] hover:font-bold'>Sign In</button></Link>
+        <button onClick={linkToSignin} className='bg-[#5F2EEA] text-white w-[120px] h-[40px] rounded-[4px] hover:font-bold'>Sign In</button>
         </div>
       </div>
 
