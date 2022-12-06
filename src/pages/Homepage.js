@@ -1,9 +1,9 @@
 import React from 'react';
 import Logo from '../assets/images/logo.png';
 import Jumbotron from '../assets/images/image2.png';
-import Spiderman from '../assets/images/spiderman.png';
-import LionKing from '../assets/images/lion king.png';
-import JohnWick3 from '../assets/images/john wick 3.png';
+// import Spiderman from '../assets/images/spiderman.png';
+// import LionKing from '../assets/images/lion king.png';
+// import JohnWick3 from '../assets/images/john wick 3.png';
 import BlackWidow from '../assets/images/black widow.png';
 import TheWitches from '../assets/images/witches.png';
 import Tenet from '../assets/images/tenet.png';
@@ -12,6 +12,7 @@ import cineone21 from '../assets/images/cineone21.png';
 import hiflix from '../assets/images/hiflix.png';
 import { Facebook, Instagram, Twitter, Youtube } from 'react-feather';
 import { useNavigate } from 'react-router-dom';
+import Now from '../assets/components/Now';
 
 const Homepage = () => {
   const navigate = useNavigate()
@@ -47,11 +48,13 @@ const Homepage = () => {
       <div className='bg-[#F5F6F8] py-10 font-[mulish]'>
         <div className='flex items-align px-[100px] '>
           <div className='flex-1'>
-            <div className='text-[#5F2EEA] font-bold border-b-2 pb-4 border-[#5F2EEA] inline cursor-pointer text-2xl'>Now Showing</div>
+            <div className='text-[#5F2EEA] font-bold border-b-2 pb-4 border-[#5F2EEA] inline text-2xl'>Now Showing</div>
           </div>
           <div className='text-[#5F2EEA] font-bold cursor-pointer'>view all</div>
         </div>
-        <div className='flex flex-nowrap mt-10 gap-6 ml-[100px] overflow-x-scroll'>
+
+        <Now />
+        {/* <div className='flex flex-nowrap mt-10 gap-6 ml-[100px] overflow-x-scroll'>
           <div className='min-w-fit p-6 border-2 border-white rounded-[8px]'>
             <img src={Spiderman} alt='Spiderman' />
           </div>
@@ -70,13 +73,13 @@ const Homepage = () => {
           <div className='min-w-fit p-6 border-2 border-white rounded-[8px]'>
             <img src={JohnWick3} alt='John Wick 3' />
           </div>
-        </div>
+        </div> */}
       </div>
 
       {/* Upcoming */}
       <div className='py-10 font-[mulish]'>
         <div className='flex items-center px-[100px]'>
-          <div className='flex-1 font-bold cursor-pointer text-2xl'>Upcoming</div>
+          <div className='flex-1 font-bold text-2xl'>Upcoming</div>
           <div className='text-[#5F2EEA] font-bold cursor-pointer'>view all</div>
         </div>
 
