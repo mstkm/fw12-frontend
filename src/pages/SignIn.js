@@ -16,7 +16,7 @@ const SignIn = () => {
       </div>
 
       {/* Right */}
-      <div className="flex flex-col flex-[40%] justify-center px-10 max-[425.98px]:py-[18rem] max-[768.98px]:pt-[10rem] max-[768.98px]:pb-[2rem] max-[768.98px]:overflow-y-scroll">
+      <div className="flex flex-col flex-[40%] justify-center px-10 max-[425.98px]:pt-[5rem] max-[768.98px]:pt-[10rem] max-[768.98px]:pb-[2rem] max-[768.98px]:overflow-y-scroll">
         <div className='text-5xl font-bold mb-4'>Sign In</div>
         <div className='text-[#AAAAAA] mb-10'>Sign in with your data that you entered during your registration</div>
         <form className='mb-8'>
@@ -35,7 +35,7 @@ const SignIn = () => {
             <button className='w-[100%] h-[50px] bg-[#5F2EEA] border-[1px] border-[#5F2EEA] rounded-[16px] pl-4 text-white'>Sign In</button>
           </div>         
         </form>
-        <div className='text-[#8692A6] text-center mb-2'>Forgot your password? <span className='text-[#5F2EEA] underline cursor-pointer hover:font-bold'>Reset now</span></div>
+        <div className='text-[#8692A6] text-center mb-2'>Forgot your password? <Link to='/forgotPassword' className='text-[#5F2EEA] underline cursor-pointer hover:font-bold'>Reset now</Link></div>
         <div className='text-[#8692A6] text-center'>Don't have an account? <Link to='/signup' className='text-[#5F2EEA] underline cursor-pointer hover:font-bold'>Sign Up</Link></div>
       </div>
       
