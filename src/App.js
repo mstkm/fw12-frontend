@@ -1,6 +1,6 @@
 import React from 'react';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import Homepage from "./pages/Homepage";
+import Home from './pages/Home';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import ForgotPassword from './pages/ForgotPassword';
@@ -10,7 +10,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Homepage />} />
+        <Route path="/" element={<Home />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/forgotPassword" element={<ForgotPassword />} />
