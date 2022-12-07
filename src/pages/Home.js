@@ -1,9 +1,6 @@
 import React from 'react';
 import Logo from '../assets/images/logo.png';
 import Jumbotron from '../assets/images/image2.png';
-// import BlackWidow from '../assets/images/black widow.png';
-// import TheWitches from '../assets/images/witches.png';
-// import Tenet from '../assets/images/tenet.png';
 import ebv from '../assets/images/ebv.id.png';
 import cineone21 from '../assets/images/cineone21.png';
 import hiflix from '../assets/images/hiflix.png';
