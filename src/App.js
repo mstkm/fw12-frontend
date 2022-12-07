@@ -5,6 +5,10 @@ import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import ForgotPassword from './pages/ForgotPassword';
 import UpdatePassword from './pages/UpdatePassword';
+import Homepage from './pages/Homepage';
+import ViewAll from './pages/ViewAll';
+import MovieDetails from './pages/MovieDetails';
+
 
 const App = () => {
   return (
@@ -15,6 +19,9 @@ const App = () => {
         <Route path="/signin" element={<SignIn />} />
         <Route path="/forgotPassword" element={<ForgotPassword />} />
         <Route path="/updatePassword" element={<UpdatePassword />} />
+        <Route path="/home" element={<Homepage />} />
+        <Route path='/viewAll' element={<ViewAll />} />
+        <Route path='/movieDetails' element={<MovieDetails />} />
       </Routes>
     </BrowserRouter>
   );
