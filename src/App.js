@@ -8,6 +8,7 @@ import UpdatePassword from './pages/UpdatePassword';
 import Homepage from './pages/Homepage';
 import ViewAll from './pages/ViewAll';
 import MovieDetails from './pages/MovieDetails';
+import Order from './pages/Order';
 
 
 const App = () => {
@@ -22,6 +23,7 @@ const App = () => {
         <Route path="/home" element={<Homepage />} />
         <Route path='/viewAll' element={<ViewAll />} />
         <Route path='/movieDetails' element={<MovieDetails />} />
+        <Route path='/order' element={<Order />} />
       </Routes>
     </BrowserRouter>
   );
