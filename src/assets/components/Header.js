@@ -1,14 +1,23 @@
 // import { useNavigate } from 'react-router-dom';
 import { Search } from 'react-feather';
+import { useNavigate } from 'react-router-dom';
 
 
 const Header = () => {
+  const navigate = useNavigate()
+  const directToHome = () => {
+    navigate('/home')
+  }
+
+  const directToViewAll = () => {
+    navigate('/viewAll')
+  }
   return(
     <div className='flex items-center px-[100px] py-7 font-[mulish]'>
       <div className='flex flex-1 items-center'>
         <img className='w-[120.41px] mr-[80px]' src={require('../images/logo.png')} alt='logo' />
-        <div className='mr-[80px] cursor-pointer hover:font-bold'>Home</div>
-        <div className='cursor-pointer hover:font-bold'>List Movie</div>
+        <div onClick={directToHome} className='mr-[80px] cursor-pointer hover:font-bold'>Home</div>
+        <div onClick={directToViewAll} className='cursor-pointer hover:font-bold'>List Movie</div>
       </div>
 
       <div className='relative w-[250px] h-[50px] mr-[50px]'>
