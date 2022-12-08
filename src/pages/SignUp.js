@@ -39,12 +39,12 @@ function SignUp() {
             <div className='text-[#4E4B66] mb-2'>Password</div>
             <div className='relative'>
               <Eye className='absolute top-3 right-[15px]'/>
-              <input className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none' placeholder='Write your password'></input>
+              <input className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none' type='password' placeholder='Write your password'></input>
             </div>
-          </div> 
+          </div>
           <div className='mt-10'>
             <button className='w-[100%] h-[50px] bg-[#5F2EEA] border-[1px] border-[#5F2EEA] rounded-[16px] pl-4 text-white'>Sign Up</button>
-          </div>         
+          </div>
         </form>
         <div className='text-[#8692A6] text-center mb-10'>Already have an account? <Link to='/signin' className='text-[#5F2EEA] underline cursor-pointer hover:font-bold'>Sign In</Link></div>
       </div>

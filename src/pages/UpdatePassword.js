@@ -1,6 +1,11 @@
 import { Eye } from 'react-feather';
+import { useNavigate } from 'react-router-dom';
 
 const UpdatePassword = () => {
+  const navigate = useNavigate()
+  const directToSignIn= () => {
+    navigate('/signin')
+  }
   return(
     <div className='flex font-[mulish] h-screen'>
       {/* Left */}
@@ -42,21 +47,21 @@ const UpdatePassword = () => {
             <div className='text-[#4E4B66] mb-2'>Password</div>
             <div className='relative'>
               <Eye className='absolute bottom-3 right-[15px]'/>
-              <input className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none' placeholder='Write your password'></input>
+              <input className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none' type='password' placeholder='Write your password'></input>
             </div>
           </div> <div className='mb-5'>
             <div className='text-[#4E4B66] mb-2'>Confirm Password</div>
             <div className='relative'>
               <Eye className='absolute bottom-3 right-[15px]'/>
-              <input className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none' placeholder='Write your confirm password'></input>
+              <input className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none' type='password' placeholder='Write your confirm password'></input>
             </div>
-          </div> 
+          </div>
           <div className='mt-10'>
-            <button className='w-[100%] h-[50px] bg-[#5F2EEA] border-[1px] border-[#5F2EEA] rounded-[4px] pl-4 text-white'>Submit</button>
-          </div>         
+            <button onClick={directToSignIn} className='w-[100%] h-[50px] bg-[#5F2EEA] border-[1px] border-[#5F2EEA] rounded-[4px] pl-4 text-white'>Submit</button>
+          </div>
         </form>
       </div>
-      
+
     </div>
   )
 }

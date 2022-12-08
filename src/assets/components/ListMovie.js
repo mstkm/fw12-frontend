@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const ListMovie = () => {
   const [ListMovies, setLisMovies] = React.useState({});
@@ -15,6 +16,11 @@ const ListMovie = () => {
     return data;
   }
 
+  const navigate = useNavigate()
+  const directToMovieDetails= () => {
+    navigate('/movieDetails')
+  }
+
   return(
     <>
     <div className='grid grid-cols-4 gap-4 p-8 bg-[white] mx-[100px] mt-5 rounded-[8px]'>
@@ -27,7 +33,7 @@ const ListMovie = () => {
                 <div className='font-bold whitespace-nowrap overflow-hidden text-ellipsis'>{movie.title}</div>
                 <div className='font-medium text-sm text-[#A0A3BD] whitespace-nowrap overflow-hidden text-ellipsis'>{movie.genre}</div>
                 <div>
-                 <button className='w-[100%] mt-7 p-1 border-[0.5px] border-[#5F2EEA] rounded-[4px] text-[#5F2EEA] hover:bg-[#5F2EEA] hover:text-white'>Detail</button>
+                 <button onClick={directToMovieDetails} className='w-[100%] mt-7 p-1 border-[0.5px] border-[#5F2EEA] rounded-[4px] text-[#5F2EEA] hover:bg-[#5F2EEA] hover:text-white'>Detail</button>
                 </div>
               </div>
             </div>

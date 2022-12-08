@@ -14,6 +14,7 @@ const Home = () => {
   const directToSignin = () => {
     navigate('/signup')
   }
+
   return (
     <div>
       {/* Header */}

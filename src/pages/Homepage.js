@@ -5,8 +5,13 @@ import NowShowing from '../assets/components/NowShowing';
 import Month from '../assets/components/Month';
 import Upcoming from '../assets/components/Upcoming';
 import Footer from '../assets/components/Footer';
+import { useNavigate } from 'react-router-dom';
 
 const Homepage = () => {
+  const navigate = useNavigate()
+  const directToViewAll= () => {
+    navigate('/viewAll')
+  }
   return (
     <div>
       {/* Header */}
@@ -29,7 +34,7 @@ const Homepage = () => {
           <div className='flex-1'>
             <div className='text-[#5F2EEA] font-bold border-b-2 pb-4 border-[#5F2EEA] inline text-2xl'>Now Showing</div>
           </div>
-          <div className='text-[#5F2EEA] font-bold cursor-pointer'>view all</div>
+          <div onClick={directToViewAll} className='text-[#5F2EEA] font-bold cursor-pointer'>view all</div>
         </div>
 
         <NowShowing />

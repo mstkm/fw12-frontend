@@ -1,8 +1,12 @@
 // import React from 'react';
 import {Eye} from 'react-feather';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
 const SignIn = () => {
+  const navigate = useNavigate()
+  const directToHome = () => {
+    navigate('/home')
+  }
   return(
     <div className='flex font-[inter] h-screen'>
       {/* Left */}
@@ -28,17 +32,17 @@ const SignIn = () => {
             <div className='text-[#4E4B66] mb-2'>Password</div>
             <div className='relative'>
               <Eye className='absolute bottom-3 right-[15px]'/>
-              <input className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none' placeholder='Write your password'></input>
+              <input className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none' type='password' placeholder='Write your password'></input>
             </div>
-          </div> 
+          </div>
           <div className='mt-10'>
-            <button className='w-[100%] h-[50px] bg-[#5F2EEA] border-[1px] border-[#5F2EEA] rounded-[16px] pl-4 text-white'>Sign In</button>
-          </div>         
+            <button onClick={directToHome} className='w-[100%] h-[50px] bg-[#5F2EEA] border-[1px] border-[#5F2EEA] rounded-[16px] pl-4 text-white'>Sign In</button>
+          </div>
         </form>
         <div className='text-[#8692A6] text-center mb-2'>Forgot your password? <Link to='/forgotPassword' className='text-[#5F2EEA] underline cursor-pointer hover:font-bold'>Reset now</Link></div>
         <div className='text-[#8692A6] text-center'>Don't have an account? <Link to='/signup' className='text-[#5F2EEA] underline cursor-pointer hover:font-bold'>Sign Up</Link></div>
       </div>
-      
+
     </div>
   )
 }

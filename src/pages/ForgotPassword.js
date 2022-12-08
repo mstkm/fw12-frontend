@@ -1,5 +1,11 @@
+import { useNavigate } from 'react-router-dom'
 
 const ForgotPassword = () => {
+  const navigate = useNavigate()
+  const directToUpdatePassword= () => {
+    navigate('/updatePassword')
+  }
+
   return(
     <div className='flex font-[mulish] h-screen'>
       {/* Left */}
@@ -42,11 +48,11 @@ const ForgotPassword = () => {
             <input className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[4px] pl-4 focus:outline-none' placeholder='Write your email'></input>
           </div>
           <div className='mt-10'>
-            <button className='w-[100%] h-[50px] bg-[#5F2EEA] border-[1px] border-[#5F2EEA] rounded-[4px] pl-4 text-white'>Send</button>
-          </div>         
+            <button onClick={directToUpdatePassword} className='w-[100%] h-[50px] bg-[#5F2EEA] border-[1px] border-[#5F2EEA] rounded-[4px] pl-4 text-white'>Send</button>
+          </div>
         </form>
       </div>
-      
+
     </div>
   )
 }
