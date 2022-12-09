@@ -12,6 +12,7 @@ import Order from './pages/Order';
 import Payment from './pages/Payment';
 import Profile from './pages/Profile';
 import OrderHistory from './pages/OrderHistory';
+import TicketResult from './pages/TicketResult';
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
         <Route path='/payment' element={<Payment />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/orderHistory' element={<OrderHistory />} />
+        <Route path='/ticketResult' element={<TicketResult />} />
       </Routes>
     </BrowserRouter>
   );
