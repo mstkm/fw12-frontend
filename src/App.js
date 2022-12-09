@@ -11,6 +11,7 @@ import MovieDetails from './pages/MovieDetails';
 import Order from './pages/Order';
 import Payment from './pages/Payment';
 import Profile from './pages/Profile';
+import OrderHistory from './pages/OrderHistory';
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
         <Route path='/order' element={<Order />} />
         <Route path='/payment' element={<Payment />} />
         <Route path='/profile' element={<Profile />} />
+        <Route path='/orderHistory' element={<OrderHistory />} />
       </Routes>
     </BrowserRouter>
   );

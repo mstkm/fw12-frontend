@@ -1,8 +1,13 @@
 import Header from "../assets/components/Header"
 import { Eye } from "react-feather"
 import Footer from "../assets/components/Footer"
+import { useNavigate } from "react-router-dom"
 
 const Profile = () => {
+  const navigate = useNavigate()
+  const directToOrderHistory = () => {
+    navigate('/orderHistory')
+  }
   return(
     <>
     <Header />
@@ -25,7 +30,7 @@ const Profile = () => {
       <div className="flex-[70%]">
         <div className="flex gap-12 bg-white rounded-[24px] px-8 mb-5">
           <div className="text-[#4E4B66] font-bold py-5 border-b-2 border-[#5F2EEA] cursor-pointer">Account Setting</div>
-          <div className="text-[#4E4B66] py-5 cursor-pointer hover:font-bold">Order History</div>
+          <div onClick={directToOrderHistory} className="text-[#4E4B66] py-5 cursor-pointer hover:font-bold">Order History</div>
         </div>
         <div className="gap-12 bg-white rounded-[24px] p-8 mb-5">
           <div className="text-[#4E4B66] border-b-[1px] pb-2 mb-5">Details Information</div>
