@@ -10,7 +10,7 @@ import ViewAll from './pages/ViewAll';
 import MovieDetails from './pages/MovieDetails';
 import Order from './pages/Order';
 import Payment from './pages/Payment';
-
+import Profile from './pages/Profile';
 
 const App = () => {
   return (
@@ -26,6 +26,7 @@ const App = () => {
         <Route path='/movieDetails' element={<MovieDetails />} />
         <Route path='/order' element={<Order />} />
         <Route path='/payment' element={<Payment />} />
+        <Route path='/profile' element={<Profile />} />
       </Routes>
     </BrowserRouter>
   );
