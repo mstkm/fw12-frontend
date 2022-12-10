@@ -1,8 +1,6 @@
 import Header from "../assets/components/Header"
 import Footer from "../assets/components/Footer"
 import TicketActive from "../assets/components/TicketActive"
-import TicketExpired from "../assets/components/TicketExpired"
-import TicketUsed from "../assets/components/TicketUsed"
 
 const TicketResult = () => {
   return(
@@ -59,7 +57,7 @@ const TicketResult = () => {
                 <img className="w-[115px] h-[38px]" src={require('../assets/images/tickitz1.png')} alt='Logo' />
               </div>
               <div className="flex justify-center items-center py-5">
-                <TicketExpired />
+                <TicketActive />
               </div>
             </div>
           </div>

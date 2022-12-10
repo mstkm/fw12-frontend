@@ -13,6 +13,8 @@ import Payment from './pages/Payment';
 import Profile from './pages/Profile';
 import OrderHistory from './pages/OrderHistory';
 import TicketResult from './pages/TicketResult';
+import ManageMovie from './pages/ManageMovie';
+import ManageSchedule from './pages/ManageSchedule';
 
 const App = () => {
   return (
@@ -31,6 +33,8 @@ const App = () => {
         <Route path='/profile' element={<Profile />} />
         <Route path='/orderHistory' element={<OrderHistory />} />
         <Route path='/ticketResult' element={<TicketResult />} />
+        <Route path='/manageMovie' element={<ManageMovie />} />
+        <Route path='/manageSchedule' element={<ManageSchedule />} />
       </Routes>
     </BrowserRouter>
   );
