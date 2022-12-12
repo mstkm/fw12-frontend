@@ -16,7 +16,7 @@ const MovieDetails = () => {
   }, []);
 
   const getMovie = async () => {
-    const {data} = await axios.get('http://localhost:8888/movies/'+id);
+    const {data} = await axios.get('http://localhost:8888/movies/'+ id );
     return data;
   }
 
