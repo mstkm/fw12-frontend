@@ -15,6 +15,7 @@ import OrderHistory from './pages/OrderHistory';
 import TicketResult from './pages/TicketResult';
 import ManageMovie from './pages/ManageMovie';
 import ManageSchedule from './pages/ManageSchedule';
+import Dashboard from './pages/Dashboard';
 
 const App = () => {
   return (
@@ -27,7 +28,7 @@ const App = () => {
         <Route path="/updatePassword" element={<UpdatePassword />} />
         <Route path="/home" element={<Homepage />} />
         <Route path='/viewAll' element={<ViewAll />} />
-        <Route path='/movieDetails' element={<MovieDetails />} />
+        <Route path='/movieDetails/:id' element={<MovieDetails />} />
         <Route path='/order' element={<Order />} />
         <Route path='/payment' element={<Payment />} />
         <Route path='/profile' element={<Profile />} />
@@ -35,6 +36,7 @@ const App = () => {
         <Route path='/ticketResult' element={<TicketResult />} />
         <Route path='/manageMovie' element={<ManageMovie />} />
         <Route path='/manageSchedule' element={<ManageSchedule />} />
+        <Route path='/dashboard' element={<Dashboard />} />
       </Routes>
     </BrowserRouter>
   );
