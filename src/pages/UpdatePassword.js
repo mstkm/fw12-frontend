@@ -1,4 +1,5 @@
-import { Eye } from 'react-feather';
+import React from 'react';
+import { Eye, EyeOff } from 'react-feather';
 import { useNavigate } from 'react-router-dom';
 
 const UpdatePassword = () => {
@@ -6,6 +7,32 @@ const UpdatePassword = () => {
   const directToSignIn= () => {
     navigate('/signin')
   }
+
+  const [inputTypeA, setInputTypeA] = React.useState('password')
+  const [inputTypeB, setInputTypeB] = React.useState('password')
+  const [iconEyeA, setIconEyeA] = React.useState(true)
+  const [iconEyeB, setIconEyeB] = React.useState(true)
+  const showPasswordA = () => {
+    if (iconEyeA === true) {
+      setIconEyeA(false)
+      setInputTypeA('text')
+    }
+    if (iconEyeA === false) {
+      setIconEyeA(true)
+      setInputTypeA('password')
+    }
+  }
+  const showPasswordB = () => {
+    if (iconEyeB === true) {
+      setIconEyeB(false)
+      setInputTypeB('text')
+    }
+    if (iconEyeB === false) {
+      setIconEyeB(true)
+      setInputTypeB('password')
+    }
+  }
+
   return(
     <div className='flex font-[mulish] h-screen'>
       {/* Left */}
@@ -46,14 +73,14 @@ const UpdatePassword = () => {
         <div className='mb-5'>
             <div className='text-[#4E4B66] mb-2'>Password</div>
             <div className='relative'>
-              <Eye className='absolute bottom-3 right-[15px]'/>
-              <input className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none' type='password' placeholder='Write your password'></input>
+              {iconEyeA ? <Eye onClick={showPasswordA} className='absolute top-3 right-[15px] cursor-pointer'/> : <EyeOff onClick={showPasswordA} className='absolute top-3 right-[15px] cursor-pointer'/>}
+                <input className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none' name='password' type={inputTypeA} placeholder='Write your password'></input>
             </div>
           </div> <div className='mb-5'>
             <div className='text-[#4E4B66] mb-2'>Confirm Password</div>
             <div className='relative'>
-              <Eye className='absolute bottom-3 right-[15px]'/>
-              <input className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none' type='password' placeholder='Write your confirm password'></input>
+            {iconEyeB ? <Eye onClick={showPasswordB} className='absolute top-3 right-[15px] cursor-pointer'/> : <EyeOff onClick={showPasswordB} className='absolute top-3 right-[15px] cursor-pointer'/>}
+                <input className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none' name='password' type={inputTypeB} placeholder='Write your confirm password'></input>
             </div>
           </div>
           <div className='mt-10'>
