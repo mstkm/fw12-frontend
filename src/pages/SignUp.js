@@ -1,7 +1,44 @@
-import {Eye} from 'react-feather';
-import {Link} from 'react-router-dom';
+import React from 'react'
+import {Eye, EyeOff} from 'react-feather';
+import {Link, useNavigate} from 'react-router-dom';
+import axios from 'axios';
 
-function SignUp() {
+const SignUp = () => {
+  const [alertRegister, setAlertRegister] = React.useState(false)
+
+  const navigate = useNavigate()
+
+  const register = async (event) => {
+    event.preventDefault()
+    const firstName = event.target.firstName.value
+    const lastName = event.target.lastName.value
+    const phoneNumber = event.target.phoneNumber.value
+    const email = event.target.email.value
+    const password = event.target.password.value
+
+    const {data} = await axios.post('http://localhost:8888/auth/register', {firstName, lastName, phoneNumber, email, password})
+
+    setAlertRegister(true)
+
+    setTimeout(() => {
+      navigate('/signin')
+    }, 5000);
+    return data;
+  }
+
+  const [inputType, setInputType] = React.useState('password')
+  const [iconEye, setIconEye] = React.useState(true)
+  const showPassword = () => {
+    if (iconEye === true) {
+      setIconEye(false)
+      setInputType('text')
+    }
+    if (iconEye === false) {
+      setIconEye(true)
+      setInputType('password')
+    }
+  }
+
   return(
     <div className='flex font-[inter] h-screen'>
       {/* Left */}
@@ -18,34 +55,35 @@ function SignUp() {
       <div className='flex flex-col flex-[40%] justify-center px-10 overflow-y-scroll'>
         <div className='text-5xl font-bold mb-4 mt-[18rem] max-[425.98px]:mt-[20rem] max-[768.98px]:mt-[25rem]'>Sign Up</div>
         <div className='text-[#AAAAAA] mb-10'>Fill your additional details</div>
-        <form className='mb-8'>
+        <form onSubmit={register} className='mb-8'>
           <div className='mb-5'>
           <div className='text-[#4E4B66] mb-2'>First Name</div>
-            <input className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none' placeholder='Write your first name'></input>
+            <input className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none' name='firstName' placeholder='Write your first name'></input>
           </div>
           <div className='mb-5'>
           <div className='text-[#4E4B66] mb-2'>Last Name</div>
-            <input className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none' placeholder='Write your last name'></input>
+            <input className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none' name='lastName' placeholder='Write your last name'></input>
           </div>
           <div className='mb-5'>
           <div className='text-[#4E4B66] mb-2'>Phone Number</div>
-            <input className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none' placeholder='Write your phone number'></input>
+            <input className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none' name='phoneNumber' placeholder='Write your phone number'></input>
           </div>
           <div className='mb-5'>
             <div className='text-[#4E4B66] mb-2'>Email</div>
-            <input className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none' placeholder='Write your email'></input>
+            <input className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none' name='email' placeholder='Write your email'></input>
           </div>
           <div className='mb-5'>
             <div className='text-[#4E4B66] mb-2'>Password</div>
             <div className='relative'>
-              <Eye className='absolute top-3 right-[15px]'/>
-              <input className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none' type='password' placeholder='Write your password'></input>
+              {iconEye ? <Eye onClick={showPassword} className='absolute top-3 right-[15px] cursor-pointer'/> : <EyeOff onClick={showPassword} className='absolute top-3 right-[15px] cursor-pointer'/>}
+              <input className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none' name='password' type={inputType} placeholder='Write your password'></input>
             </div>
           </div>
           <div className='mt-10'>
             <button className='w-[100%] h-[50px] bg-[#5F2EEA] border-[1px] border-[#5F2EEA] rounded-[16px] pl-4 text-white'>Sign Up</button>
           </div>
         </form>
+        {alertRegister ? <div className='bg-green-100 border-[1px] border-green-600 p-3 text-center rounded-[8px] mb-3'>Register berhasil. <br/>Silahkan login dengan email dan password!</div> : false}
         <div className='text-[#8692A6] text-center mb-10'>Already have an account? <Link to='/signin' className='text-[#5F2EEA] underline cursor-pointer hover:font-bold'>Sign In</Link></div>
       </div>
     </div>
