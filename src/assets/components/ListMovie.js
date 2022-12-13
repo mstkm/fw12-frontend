@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const ListMovie = () => {
   const [ListMovies, setLisMovies] = React.useState({});
@@ -12,13 +12,8 @@ const ListMovie = () => {
 
 
   const getLisMovies = async () => {
-    const {data} = await axios.get('http://localhost:8888/movies/upcoming?limit=8');
+    const {data} = await axios.get(`http://localhost:8888/movies?limit=8&page=1`);
     return data;
-  }
-
-  const navigate = useNavigate()
-  const directToMovieDetails= () => {
-    navigate('/movieDetails')
   }
 
   return(
@@ -33,7 +28,7 @@ const ListMovie = () => {
                 <div className='font-bold whitespace-nowrap overflow-hidden text-ellipsis'>{movie.title}</div>
                 <div className='font-medium text-sm text-[#A0A3BD] whitespace-nowrap overflow-hidden text-ellipsis'>{movie.genre}</div>
                 <div>
-                 <button onClick={directToMovieDetails} className='w-[100%] mt-7 p-1 border-[0.5px] border-[#5F2EEA] rounded-[4px] text-[#5F2EEA] hover:bg-[#5F2EEA] hover:text-white'>Detail</button>
+                <Link to={'/movieDetails/'+movie.id}><button className='w-[100%] mt-7 p-1 border-[0.5px] border-[#5F2EEA] rounded-[4px] text-[#5F2EEA] hover:bg-[#5F2EEA] hover:text-white'>Detail</button></Link>
                 </div>
               </div>
             </div>
