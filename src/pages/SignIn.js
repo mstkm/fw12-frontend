@@ -1,12 +1,37 @@
-// import React from 'react';
-import {Eye} from 'react-feather';
+import React from 'react';
+import {Eye, EyeOff} from 'react-feather';
 import {Link, useNavigate} from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+// import { login as loginAction } from '../redux/reducers/auth';
+import { loginAction } from '../redux/actions/auth';
 
 const SignIn = () => {
   const navigate = useNavigate()
-  const directToHome = () => {
-    navigate('/home')
+
+  const dispatch = useDispatch()
+  const login = (event) => {
+    event.preventDefault()
+    const email = event.target.email.value
+    const password = event.target.password.value
+    const cb = () => {
+      navigate('/')
+    }
+    dispatch(loginAction({email, password, cb}))
   }
+
+  const [inputType, setInputType] = React.useState('password')
+  const [iconEye, setIconEye] = React.useState(true)
+  const showPassword = () => {
+    if (iconEye === true) {
+      setIconEye(false)
+      setInputType('text')
+    }
+    if (iconEye === false) {
+      setIconEye(true)
+      setInputType('password')
+    }
+  }
+
   return(
     <div className='flex font-[inter] h-screen'>
       {/* Left */}
@@ -23,20 +48,20 @@ const SignIn = () => {
       <div className="flex flex-col flex-[40%] justify-center px-10 max-[425.98px]:pt-[5rem] max-[768.98px]:pt-[10rem] max-[768.98px]:pb-[2rem] max-[768.98px]:overflow-y-scroll">
         <div className='text-5xl font-bold mb-4'>Sign In</div>
         <div className='text-[#AAAAAA] mb-10'>Sign in with your data that you entered during your registration</div>
-        <form className='mb-8'>
+        <form onSubmit={login} className='mb-8'>
           <div className='mb-5'>
             <div className='text-[#4E4B66] mb-2'>Email</div>
-            <input className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none' placeholder='Write your email'></input>
+            <input className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none' type='text' name='email' placeholder='Write your email'></input>
           </div>
           <div className='mb-5'>
             <div className='text-[#4E4B66] mb-2'>Password</div>
             <div className='relative'>
-              <Eye className='absolute bottom-3 right-[15px]'/>
-              <input className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none' type='password' placeholder='Write your password'></input>
+              {iconEye ? <Eye onClick={showPassword} className='absolute top-3 right-[15px] cursor-pointer'/> : <EyeOff onClick={showPassword} className='absolute top-3 right-[15px] cursor-pointer'/>}
+                <input className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none' name='password' type={inputType} placeholder='Write your password'></input>
             </div>
           </div>
           <div className='mt-10'>
-            <button onClick={directToHome} className='w-[100%] h-[50px] bg-[#5F2EEA] border-[1px] border-[#5F2EEA] rounded-[16px] pl-4 text-white'>Sign In</button>
+            <button className='w-[100%] h-[50px] bg-[#5F2EEA] border-[1px] border-[#5F2EEA] rounded-[16px] pl-4 text-white'>Sign In</button>
           </div>
         </form>
         <div className='text-[#8692A6] text-center mb-2'>Forgot your password? <Link to='/forgotPassword' className='text-[#5F2EEA] underline cursor-pointer hover:font-bold'>Reset now</Link></div>
