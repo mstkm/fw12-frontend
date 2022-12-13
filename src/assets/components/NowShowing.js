@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import {Link} from 'react-router-dom';
 
 
 function NowShowing() {
@@ -27,7 +28,7 @@ function NowShowing() {
                 <div className='font-bold whitespace-nowrap overflow-hidden text-ellipsis'>{movie.title}</div>
                 <div className='font-medium text-sm text-[#A0A3BD] whitespace-nowrap overflow-hidden text-ellipsis'>{movie.genre}</div>
                 <div>
-                  <button className='w-[100%] mt-7 p-1 border-[0.5px] border-[#5F2EEA] rounded-[4px] text-[#5F2EEA] hover:bg-[#5F2EEA] hover:text-white'>Detail</button>
+                  <Link to={'/movieDetails/'+movie.id}><button className='w-[100%] mt-7 p-1 border-[0.5px] border-[#5F2EEA] rounded-[4px] text-[#5F2EEA] hover:bg-[#5F2EEA] hover:text-white'>Detail</button></Link>
                 </div>
               </div>
             </div>
