@@ -23,6 +23,9 @@ const MovieDetails = () => {
   const title = movie?.results?.title;
   const genre = movie?.results?.genre;
   const casts = movie?.results?.casts;
+  const releaseDateArr = Date(movie?.results?.releaseDate).split(' ');
+  const releaseDate = releaseDateArr[1]+' '+releaseDateArr[2]+', '+releaseDateArr[3]
+  const duration = movie?.results?.duration?.charAt('1')+' hours '+movie?.results?.duration?.charAt('3')+movie?.results?.duration?.charAt('4')+' minutes';
 
   return(
     <>
@@ -41,7 +44,7 @@ const MovieDetails = () => {
         <div className="grid grid-cols-2 gap-3 mb-5">
           <div>
             <div className="text-[#4E4B66]">Release date</div>
-            <div>{movie?.results?.releaseDate}</div>
+            <div>{releaseDate}</div>
           </div>
           <div>
             <div className="text-[#4E4B66]">Directed by</div>
@@ -49,7 +52,7 @@ const MovieDetails = () => {
           </div>
           <div>
             <div className="text-[#4E4B66]">Duration</div>
-            <div>{movie?.results?.duration}</div>
+            <div>{duration}</div>
           </div>
           <div>
             <div className="text-[#4E4B66]">Casts</div>
