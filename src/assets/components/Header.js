@@ -7,7 +7,7 @@ import { logout as logoutAction } from '../../redux/reducers/auth';
 const Header = () => {
   const navigate = useNavigate()
   const directToHome = () => {
-    navigate('/home')
+    navigate('/')
   }
   const directToProfile = () => {
     navigate('/profile')
