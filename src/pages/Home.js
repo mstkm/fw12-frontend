@@ -7,7 +7,11 @@ import hiflix from '../assets/images/hiflix.png';
 import { Facebook, Instagram, Twitter, Youtube } from 'react-feather';
 import { useNavigate } from 'react-router-dom';
 import Now from '../assets/components/Now';
+import NowShowing from '../assets/components/NowShowing';
 import Upcoming from '../assets/components/Upcoming';
+
+import { useSelector } from 'react-redux';
+import Header from '../assets/components/Header';
 
 const Home = () => {
   const navigate = useNavigate()
@@ -15,19 +19,27 @@ const Home = () => {
     navigate('/signup')
   }
 
+  const Head = () => {
+    return(
+      <div className='flex items-center px-[100px] py-7 font-[mulish]'>
+      <div className='flex flex-1 items-center'>
+        <img className='w-[120.41px] mr-[80px]' src={Logo} alt='logo' />
+        <div className='mr-[80px] cursor-pointer hover:font-bold'>Home</div>
+        <div className='cursor-pointer hover:font-bold'>List Movie</div>
+      </div>
+      <div >
+      <button onClick={directToSignin} className='bg-[#5F2EEA] text-white w-[120px] h-[40px] rounded-[4px] hover:font-bold'>Sign Up</button>
+      </div>
+    </div>
+    )
+  }
+
+  const token = useSelector((state) => state.auth.token)
+
   return (
     <div>
       {/* Header */}
-      <div className='flex items-center px-[100px] py-7 font-[mulish]'>
-        <div className='flex flex-1 items-center'>
-          <img className='w-[120.41px] mr-[80px]' src={Logo} alt='logo' />
-          <div className='mr-[80px] cursor-pointer hover:font-bold'>Home</div>
-          <div className='cursor-pointer hover:font-bold'>List Movie</div>
-        </div>
-        <div >
-        <button onClick={directToSignin} className='bg-[#5F2EEA] text-white w-[120px] h-[40px] rounded-[4px] hover:font-bold'>Sign Up</button>
-        </div>
-      </div>
+      {!token ? <Head /> : <Header />}
 
       {/* Jumbotron */}
       <div className='flex items-center px-[100px] py-7 font-[mulish]'>
@@ -49,7 +61,7 @@ const Home = () => {
           <div className='text-[#5F2EEA] font-bold cursor-pointer'>view all</div>
         </div>
 
-        <Now />
+        {!token ? <Now /> : <NowShowing />}
       </div>
 
       {/* Upcoming */}
