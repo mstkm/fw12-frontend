@@ -1,31 +1,45 @@
 import React from 'react'
 import Header from "../assets/components/Header"
-import ShowtimesTickets from "../assets/components/ShowtimesTickets"
 import Footer from "../assets/components/Footer"
 import { useParams } from "react-router-dom"
 import axios from "axios"
+import moment from 'moment'
 
 const MovieDetails = () => {
   const {id} = useParams()
 
   const [movie, setMovie] = React.useState({});
+  const [date, setDate] = React.useState(moment().format('YYYY-MM-DD'));
+  const [city, setCity] = React.useState('Jakarta');
+  const [dataSchedule, setDataSchedule] = React.useState([]);
+
+  // Get Movie Detail
   React.useEffect(() => {
     getMovie().then((data) => {
       setMovie(data)
     })
   }, []);
-
   const getMovie = async () => {
-    const {data} = await axios.get('http://localhost:8888/movies/'+ id );
+    const {data} = await axios.get(`http://localhost:8888/movies/${id}`);
     return data;
   }
-
   const title = movie?.results?.title;
   const genre = movie?.results?.genre;
   const casts = movie?.results?.casts;
   const releaseDateArr = Date(movie?.results?.releaseDate).split(' ');
   const releaseDate = releaseDateArr[1]+' '+releaseDateArr[2]+', '+releaseDateArr[3]
   const duration = movie?.results?.duration?.charAt('1')+' hours '+movie?.results?.duration?.charAt('3')+movie?.results?.duration?.charAt('4')+' minutes';
+
+  // Get Movie Schedule
+  React.useEffect(() => {
+    getDataSchedule().then((data) => {
+      setDataSchedule(data)
+    })
+  }, [id, city, date]);
+  const getDataSchedule = async () => {
+    const {data} = await axios.get(`http://localhost:8888/movieSchedule/listMovieSChedule/${id}/${city}/${date}`)
+    return data
+  }
 
   return(
     <>
@@ -68,17 +82,51 @@ const MovieDetails = () => {
 
     <div className="px-[100px] py-10 font-[mulish] bg-[#F5F6F8]">
       <div className="text-center mb-5 text-xl font-bold">Showtimes and Tickets</div>
-      <form className="flex gap-5 mb-[50px] justify-center items-center">
+      <div className="flex gap-5 mb-[50px] justify-center items-center">
         <div>
-          <input className="border-[1px] rounded-[6px] bg-[#EFF0F6] w-[200px] h-[40px] pl-3" type='date'></input>
+          <input id='selectDate' className="border-[1px] rounded-[6px] bg-[#EFF0F6] w-[200px] h-[40px] px-3" type='date' placeholder='Select Date' name='date' defaultValue={date} onChange={(e) => setDate(e.target.value)}></input>
         </div>
-        <select className="border-[1px] rounded-[6px] bg-[#EFF0F6] w-[200px] h-[40px] pl-3">
-          <option>Purwokerto</option>
+        <select id='selectCity' onChange={(e) => setCity(e.target.value)} className="border-[1px] rounded-[6px] bg-[#EFF0F6] w-[200px] h-[40px] px-3">
+          <option value='Jakarta'>Jakarta</option>
+          <option value='Purwokerto'>Purwokerto</option>
         </select>
-      </form>
+      </div>
 
-      <ShowtimesTickets />
-    </div>
+      <div className='grid grid-cols-3 gap-8'>
+        {dataSchedule?.results?.map((cinema, index) => {
+          return(
+            <div key={String(index)} className="w-[320px] bg-white pb-5 font-[mulish] rounded-[8px]">
+          <div className="grid grid-cols-2 items-center px-5 py-5 border-b-[1px]">
+            <div>
+              <img className="w-[70%]" src={cinema.cinemaPicture} alt='ebv.id' />
+            </div>
+            <div>
+              <div className="font-bold text-lg">{cinema.cinemaName}</div>
+              <div className="text-sm">{cinema.address}</div>
+            </div>
+          </div>
+          <div className="grid grid-cols-4 px-5 py-5 gap-2 text-sm">
+            {cinema.time.sort().map((el, index) => {
+              return(<button key={String(index)} className='hover:font-bold hover:text-[#5F2EEA]'>{el.slice(0, 2) <= 12 ? el.slice(0, 5)+'am' : el.slice(0, 5)+'pm'}</button>)
+            })}
+          </div>
+
+          <div className="flex px-5 py-5 mb-3">
+            <div className="flex-1">Price</div>
+            <div className="font-bold">{'Rp'+new Intl.NumberFormat('id-ID').format(Number(cinema.price))+'/seat'}</div>
+          </div>
+
+          <div className="px-5">
+            <button className="border-[1px] w-[100%] h-[40px] bg-[#5F2EEA] rounded-[4px] text-white">Book Now</button>
+          </div>
+        </div>
+          )
+        })}
+
+
+
+        </div>
+      </div>
 
     <Footer />
     </>
