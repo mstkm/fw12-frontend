@@ -4,8 +4,16 @@ import Footer from "../assets/components/Footer"
 import { useParams } from "react-router-dom"
 import axios from "axios"
 import moment from 'moment'
+import { useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
 
 const MovieDetails = () => {
+  const token = useSelector((state) => state.auth.token)
+  const navigate = useNavigate()
+  if (!token) {
+    navigate('/signin')
+  }
+
   const {id} = useParams()
 
   const [movie, setMovie] = React.useState({});
