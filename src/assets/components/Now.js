@@ -1,6 +1,5 @@
 import React from 'react';
-import axios from 'axios';
-
+import http from '../../helpers/http';
 
 function Now() {
   const [nowMovies, setNowMovies] = React.useState({});
@@ -12,7 +11,7 @@ function Now() {
 
 
   const getNowMovies = async () => {
-    const {data} = await axios.get('http://localhost:8888/movies/nowShowing?limit=8');
+    const {data} = await http().get('/movies/nowShowing?limit=8')
     return data;
   }
 

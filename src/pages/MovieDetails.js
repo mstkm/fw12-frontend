@@ -2,7 +2,7 @@ import React from 'react'
 import Header from "../assets/components/Header"
 import Footer from "../assets/components/Footer"
 import { useParams } from "react-router-dom"
-import axios from "axios"
+import http from '../helpers/http'
 import moment from 'moment'
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
@@ -28,7 +28,7 @@ const MovieDetails = () => {
     })
   }, []);
   const getMovie = async () => {
-    const {data} = await axios.get(`http://localhost:8888/movies/${id}`);
+    const {data} = await http().get(`/movies/${id}`);
     return data;
   }
   const title = movie?.results?.title;
@@ -45,7 +45,7 @@ const MovieDetails = () => {
     })
   }, [id, city, date]);
   const getDataSchedule = async () => {
-    const {data} = await axios.get(`http://localhost:8888/movieSchedule/listMovieSChedule/${id}/${city}/${date}`)
+    const {data} = await http().get(`/movieSchedule/listMovieSChedule/${id}/${city}/${date}`)
     return data
   }
 

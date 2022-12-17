@@ -5,20 +5,22 @@ import { useNavigate } from 'react-router-dom';
 
 const HeaderAdmin = () => {
   const navigate = useNavigate()
-  const directToHome = () => {
-    navigate('/home')
+  const directToDashboard = () => {
+    navigate('/dashboard')
   }
-
-  const directToViewAll = () => {
-    navigate('/viewAll')
+  const directToManageMovie = () => {
+    navigate('/manageMovie')
+  }
+  const directTomanageSchedule = () => {
+    navigate('/manageSchedule')
   }
   return(
     <div className='flex items-center px-[100px] py-7 font-[mulish]'>
       <div className='flex flex-1 items-center'>
         <img className='w-[120.41px] mr-[80px]' src={require('../images/logo.png')} alt='logo' />
-        <div onClick={directToHome} className='mr-[50px] cursor-pointer hover:font-bold'>Dashboard</div>
-        <div onClick={directToViewAll} className='mr-[50px] cursor-pointer hover:font-bold'>Manage Movie</div>
-        <div onClick={directToViewAll} className='cursor-pointer hover:font-bold'>Manage Schedule</div>
+        <div onClick={directToDashboard} className='mr-[50px] cursor-pointer hover:font-bold'>Dashboard</div>
+        <div onClick={directToManageMovie} className='mr-[50px] cursor-pointer hover:font-bold'>Manage Movie</div>
+        <div onClick={directTomanageSchedule} className='cursor-pointer hover:font-bold'>Manage Schedule</div>
       </div>
 
       <div className='relative w-[250px] h-[50px] mr-[50px]'>

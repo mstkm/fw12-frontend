@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import http from '../../helpers/http';
 
 const DataMovie = () => {
   const [ListMovies, setLisMovies] = React.useState({});
@@ -11,7 +11,7 @@ const DataMovie = () => {
 
 
   const getLisMovies = async () => {
-    const {data} = await axios.get('http://localhost:8888/movies/upcoming?limit=8');
+    const {data} = await http().get('/movies/upcoming?limit=8');
     return data;
   }
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import http from '../../helpers/http';
 import { Link } from 'react-router-dom';
 
 const ListMovie = () => {
@@ -12,7 +12,7 @@ const ListMovie = () => {
 
 
   const getLisMovies = async () => {
-    const {data} = await axios.get(`http://localhost:8888/movies?limit=8&page=1`);
+    const {data} = await http().get(`/movies?limit=8&page=1`);
     return data;
   }
 

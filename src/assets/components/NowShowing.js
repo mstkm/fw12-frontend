@@ -1,6 +1,6 @@
 import React from 'react';
-import axios from 'axios';
 import {Link} from 'react-router-dom';
+import http from '../../helpers/http';
 
 
 function NowShowing() {
@@ -13,7 +13,7 @@ function NowShowing() {
 
 
   const getNowShowingMovies = async () => {
-    const {data} = await axios.get('http://localhost:8888/movies/nowShowing?limit=8');
+    const {data} = await http().get('/movies/nowShowing?limit=8');
     return data;
   }
 
