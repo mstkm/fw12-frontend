@@ -106,7 +106,7 @@ const MovieDetails = () => {
             <div key={String(index)} className="w-[320px] bg-white pb-5 font-[mulish] rounded-[8px]">
           <div className="grid grid-cols-2 items-center px-5 py-5 border-b-[1px]">
             <div>
-              <img className="w-[70%]" src={cinema.cinemaPicture} alt='ebv.id' />
+              <img className="w-[70%]" src={cinema.cinemaPicture} alt='logo cinema' />
             </div>
             <div>
               <div className="font-bold text-lg">{cinema.cinemaName}</div>
@@ -115,7 +115,7 @@ const MovieDetails = () => {
           </div>
           <div className="grid grid-cols-4 px-5 py-5 gap-2 text-sm">
             {cinema.time.sort().map((el, index) => {
-              return(<button key={String(index)} className='hover:font-bold hover:text-[#5F2EEA]'>{el.slice(0, 2) <= 12 ? el.slice(0, 5)+'am' : el.slice(0, 5)+'pm'}</button>)
+              return(<button key={String(index)} className='hover:font-bold hover:text-[#5F2EEA]'>{el.slice(0, 2) < 12 ? el.slice(0, 5)+'am' : el.slice(0, 5)+'pm'}</button>)
             })}
           </div>
 
