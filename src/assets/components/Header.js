@@ -3,6 +3,7 @@ import { Search } from 'react-feather';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logout as logoutAction } from '../../redux/reducers/auth';
+import { logoutTransaction as logoutTransactionAction } from '../../redux/reducers/transactions';
 
 const Header = () => {
   const navigate = useNavigate()
@@ -51,7 +52,7 @@ const Header = () => {
           <img className='w-[50px] h-[50px] rounded-full' src='https://picsum.photos/200/300' alt='foto-profil'/>
           <div id='drop-profile' className='group-hover:block hidden absolute top-[50px] right-1 border-[1px] border-[#DEDED] rounded-[2px] bg-[#FCFDFE] pl-2 pr-8 pt-1 pb-3'>
           <div onClick={directToProfile} className='mb-3 cursor-pointer hover:font-bold'>Profile</div>
-          <div onClick={()=>dispatch(logoutAction())} className='cursor-pointer hover:font-bold'>Logout</div>
+          <div onClick={()=>dispatch(logoutAction()) & dispatch(logoutTransactionAction())} className='cursor-pointer hover:font-bold'>Logout</div>
         </div>
         </div>
       </div>

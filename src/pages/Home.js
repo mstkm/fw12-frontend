@@ -53,7 +53,7 @@ const Home = () => {
       </div>
 
       {/* Now Showing */}
-      <div className='bg-[#F5F6F8] py-10 font-[mulish]'>
+      <div className='bg-[#F5F6F8] h-[500px] py-10 font-[mulish]'>
         <div className='flex items-align px-[100px] '>
           <div className='flex-1'>
             <div className='text-[#5F2EEA] font-bold border-b-2 pb-4 border-[#5F2EEA] inline text-2xl'>Now Showing</div>
