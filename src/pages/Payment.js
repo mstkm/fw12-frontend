@@ -121,7 +121,7 @@ const Payment = () => {
         phoneNumber: phoneNumber,
         statusId: 1
       }))
-      const {data} = await http().post('/profile/transaction', {
+      const {data} = await http(token).post('/profile/transaction', {
         bookingDate: booking,
         movieId,
         userId,
