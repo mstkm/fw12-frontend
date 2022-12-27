@@ -33,9 +33,9 @@ const Header = () => {
 
   return(
     <div className='flex items-center px-[100px] py-7 font-[mulish]'>
-      <div className='flex flex-1 items-center'>
-        <img className='w-[120.41px] mr-[80px]' src={require('../images/logo.png')} alt='logo' />
-        <div onClick={directToHome} className='mr-[80px] cursor-pointer hover:font-bold'>Home</div>
+      <div className='flex gap-20 flex-1 items-center'>
+        <img className='w-1/4' src={require('../images/bannerKarcis.png')} alt='logo' />
+        <div onClick={directToHome} className='cursor-pointer hover:font-bold'>Home</div>
         <div onClick={directToViewAll} className='cursor-pointer hover:font-bold'>List Movie</div>
       </div>
 

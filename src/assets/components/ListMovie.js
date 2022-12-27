@@ -28,7 +28,7 @@ const ListMovie = () => {
                 <div className='font-bold whitespace-nowrap overflow-hidden text-ellipsis'>{movie.title}</div>
                 <div className='font-medium text-sm text-[#A0A3BD] whitespace-nowrap overflow-hidden text-ellipsis'>{movie.genre}</div>
                 <div>
-                <Link to={'/movieDetails/'+movie.id}><button className='w-[100%] mt-7 p-1 border-[0.5px] border-[#5F2EEA] rounded-[4px] text-[#5F2EEA] hover:bg-[#5F2EEA] hover:text-white'>Detail</button></Link>
+                <Link to={'/movieDetails/'+movie.id}><button className='w-[100%] mt-7 p-1 border-[0.5px] border-primary rounded-[4px] text-primary hover:bg-primary hover:text-white'>Detail</button></Link>
                 </div>
               </div>
             </div>
@@ -38,10 +38,10 @@ const ListMovie = () => {
     </div>
 
     <div className='flex justify-center gap-3 mt-8 mb-8'>
-      <div className='flex justify-center items-center w-[40px] h-[40px] border-[1px] border-[#DEDEDE] bg-[#FFFFFF] rounded-[8px] text-[#4E4B66] cursor-pointer hover:bg-[#5F2EEA] hover:text-white'>1</div>
-      <div className='flex justify-center items-center w-[40px] h-[40px] border-[1px] border-[#DEDEDE] bg-[#FFFFFF] rounded-[8px] text-[#4E4B66] cursor-pointer hover:bg-[#5F2EEA] hover:text-white'>2</div>
-      <div className='flex justify-center items-center w-[40px] h-[40px] border-[1px] border-[#DEDEDE] bg-[#FFFFFF] rounded-[8px] text-[#4E4B66] cursor-pointer hover:bg-[#5F2EEA] hover:text-white'>3</div>
-      <div className='flex justify-center items-center w-[40px] h-[40px] border-[1px] border-[#DEDEDE] bg-[#FFFFFF] rounded-[8px] text-[#4E4B66] cursor-pointer hover:bg-[#5F2EEA] hover:text-white'>4</div>
+      <div className='flex justify-center items-center w-[40px] h-[40px] border-[1px] border-[#DEDEDE] bg-[#FFFFFF] rounded-[8px] text-primary cursor-pointer hover:bg-primary hover:text-white'>1</div>
+      <div className='flex justify-center items-center w-[40px] h-[40px] border-[1px] border-[#DEDEDE] bg-[#FFFFFF] rounded-[8px] text-primary cursor-pointer hover:bg-primary hover:text-white'>2</div>
+      <div className='flex justify-center items-center w-[40px] h-[40px] border-[1px] border-[#DEDEDE] bg-[#FFFFFF] rounded-[8px] text-primary cursor-pointer hover:bg-primary hover:text-white'>3</div>
+      <div className='flex justify-center items-center w-[40px] h-[40px] border-[1px] border-[#DEDEDE] bg-[#FFFFFF] rounded-[8px] text-primary cursor-pointer hover:bg-primary hover:text-white'>4</div>
     </div>
 
     </>

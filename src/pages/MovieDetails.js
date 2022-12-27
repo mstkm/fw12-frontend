@@ -162,7 +162,7 @@ const MovieDetails = () => {
           </div>
           <div className="grid grid-cols-4 px-5 py-5 gap-2 text-sm">
             {cinema.time.sort().map((el, index) => {
-              return(<button key={String(index)} className={`btn-ghost ${cinema.cinemaId === selectedCinema && (el.slice(0, 2) < 12 ? el.slice(0, 5)+'am' : el.slice(0, 5)+'pm') === selectedTime && 'text-[#5F2EEA] font-bold'}`} onClick={() => selectSchedule(el, cinema.cinemaId, cinema.price, cinema.cinemaName, cinema.id)}>{el.slice(0, 2) < 12 ? el.slice(0, 5)+'am' : el.slice(0, 5)+'pm'}</button>)
+              return(<button key={String(index)} className={`btn-ghost ${cinema.cinemaId === selectedCinema && (el.slice(0, 2) < 12 ? el.slice(0, 5)+'am' : el.slice(0, 5)+'pm') === selectedTime && 'text-primary font-bold'}`} onClick={() => selectSchedule(el, cinema.cinemaId, cinema.price, cinema.cinemaName, cinema.id)}>{el.slice(0, 2) < 12 ? el.slice(0, 5)+'am' : el.slice(0, 5)+'pm'}</button>)
             })}
           </div>
 
@@ -172,14 +172,11 @@ const MovieDetails = () => {
           </div>
 
           <div className="px-5">
-            <button disabled={cinema.cinemaId !== selectedCinema} onClick={book} className={`btn hover:bg-[#5F2EEA] rounded bg-border-[1px] w-[100%] h-[40px] ${cinema.cinemaId === selectedCinema && 'bg-[#5F2EEA]'}}rounded-[4px] text-white`}>Book Now</button>
+            <button disabled={cinema.cinemaId !== selectedCinema} onClick={book} className={`btn hover:bg-primary rounded bg-border-[1px] w-[100%] h-[40px] ${cinema.cinemaId === selectedCinema && 'bg-primary'}}rounded-[4px] text-white`}>Book Now</button>
           </div>
         </div>
           )
         })}
-
-
-
         </div>
       </div>
 

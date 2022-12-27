@@ -37,8 +37,8 @@ const UpdatePassword = () => {
     <div className='flex font-[mulish] h-screen'>
       {/* Left */}
       <div className="flex-[60%] bg-[url('../images/image1.png')] bg-cover max-[426px]:hidden">
-        <div className='bg-[#2B156B] opacity-80 h-screen px-[100px] py-[20px] max-[768.98px]:px-[2rem]'>
-          <img className='w-[50%] mb-10' src={require('../assets/images/tickitz1.png')} alt='Logo' />
+        <div className='bg-primary opacity-80 h-screen px-[100px] py-[20px] max-[768.98px]:px-[2rem]'>
+          <img className='w-2/4 py-10' src={require('../assets/images/bannerKarcisWhite.png')} alt='Logo' />
           <div className='text-white text-3xl font-bold mb-3 max-[768.98px]:text-xl'>Lets reset your password</div>
           <div className='text-white text-xl opacity-80 mb-10 max-[768.98px]:text-base'>To be able to use your account again, please complete the following steps.</div>
           <div className='relative'>
@@ -51,7 +51,7 @@ const UpdatePassword = () => {
               <div className='opacity-80'>Check your email</div>
             </div>
             <div className='flex gap-8 items-center text-white text-lg mb-5 max-[768.98px]:text-base max-[768.98px]:mb-3'>
-              <div className='flex items-center justify-center border-2 border-white w-[40px] h-[40px] rounded-full bg-white text-[#290341] font-bold'>3</div>
+              <div className='flex items-center justify-center border-2 border-white w-[40px] h-[40px] rounded-full bg-white text-primary font-bold'>3</div>
               <div className='font-bold'>Enter your new password</div>
             </div>
             <div className='flex gap-8 items-center text-white text-lg mb-5 max-[768.98px]:text-base max-[768.98px]:mb-3'>
@@ -84,7 +84,7 @@ const UpdatePassword = () => {
             </div>
           </div>
           <div className='mt-10'>
-            <button onClick={directToSignIn} className='w-[100%] h-[50px] bg-[#5F2EEA] border-[1px] border-[#5F2EEA] rounded-[4px] pl-4 text-white'>Submit</button>
+            <button onClick={directToSignIn} className='w-[100%] h-[50px] bg-primary border-[1px] border-primary rounded-[4px] pl-4 text-white'>Submit</button>
           </div>
         </form>
       </div>

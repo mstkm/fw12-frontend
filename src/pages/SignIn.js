@@ -60,9 +60,9 @@ const SignIn = () => {
     <div className='flex font-[inter] h-screen'>
       {/* Left */}
       <div className="flex-[60%] bg-[url('../images/image1.png')] bg-cover max-[426px]:hidden">
-        <div className='flex flex-col justify-center items-center bg-[#2B156B] opacity-80 h-screen'>
+        <div className='flex flex-col justify-center items-center bg-primary opacity-80 h-screen'>
           <div className='flex justify-center'>
-            <img className='max-[769px]:w-[80%]' src={require('../assets/images/tickitz1.png')} alt='Logo' />
+          <img className='w-3/4 mb-5' src={require('../assets/images/bannerKarcisWhite.png')} alt='Logo' />
           </div>
           <div className='flex justify-center text-5xl text-white opacity-80 max-[769px]:text-[2rem]'>wait, watch, wow!</div>
         </div>
@@ -86,11 +86,11 @@ const SignIn = () => {
             </div>
           </div>
           <div className='mt-10'>
-            <button className='w-[100%] h-[50px] bg-[#5F2EEA] border-[1px] border-[#5F2EEA] rounded-[16px] pl-4 text-white'>Sign In</button>
+            <button className='w-[100%] h-[50px] bg-primary border-[1px] border-primary rounded-[16px] pl-4 text-white'>Sign In</button>
           </div>
         </form>
-        <div className='text-[#8692A6] text-center mb-2'>Forgot your password? <Link to='/forgotPassword' className='text-[#5F2EEA] underline cursor-pointer hover:font-bold'>Reset now</Link></div>
-        <div className='text-[#8692A6] text-center'>Don't have an account? <Link to='/signup' className='text-[#5F2EEA] underline cursor-pointer hover:font-bold'>Sign Up</Link></div>
+        <div className='text-[#8692A6] text-center mb-2'>Forgot your password? <Link to='/forgotPassword' className='text-primary underline cursor-pointer hover:font-bold'>Reset now</Link></div>
+        <div className='text-[#8692A6] text-center'>Don't have an account? <Link to='/signup' className='text-primary underline cursor-pointer hover:font-bold'>Sign Up</Link></div>
       </div>
 
     </div>

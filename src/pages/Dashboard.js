@@ -26,10 +26,10 @@ const Dashboard = () => {
               <option>Select Location</option>
             </select>
             <div className="mb-5">
-              <button className="border-[1px] rounded-[4px] border-[#5F2EEA] h-[50px] w-[100%] font-bold text-[#5F2EEA] hover:text-white hover:bg-[#5F2EEA]">Filter</button>
+              <button className="border-[1px] rounded-[4px] border-primary h-[50px] w-[100%] font-bold text-primary hover:text-white hover:bg-primary">Filter</button>
             </div>
             <div>
-              <button className="border-[1px] rounded-[4px] border-[#5F2EEA] h-[50px] w-[100%] font-bold text-[#5F2EEA] hover:text-white hover:bg-[#5F2EEA]">Reset</button>
+              <button className="border-[1px] rounded-[4px] border-primary h-[50px] w-[100%] font-bold text-primary hover:text-white hover:bg-primary">Reset</button>
             </div>
           </div>
         </div>

@@ -6,7 +6,7 @@ const Footer = () => {
         <div className='flex gap-8'>
           <div className='flex-1'>
             <div className='mb-4'>
-              <img src={require('../images/logo.png')} alt='Logo'/>
+              <img src={require('../images/bannerKarcis.png')} alt='Logo' className='w-3/4'/>
             </div>
             <div className='text-[#6E7191] text-sm'>Stop waiting in line. Buy tickets conveniently, watch movies quietly.</div>
           </div>

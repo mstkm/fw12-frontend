@@ -12,7 +12,7 @@ const TicketResult = () => {
           <div className="font-bold mb-5">Proof of Payment</div>
           <div className="flex w-[600px] border-[1px] rounded-[16px]">
             <div className="flex-[70%]">
-              <div className="flex bg-[#5F2EEA] rounded-tl-[16px] items-center px-10 mb-5 py-2">
+              <div className="flex bg-primary rounded-tl-[16px] items-center px-10 mb-5 py-2">
                 <div className="flex-1">
                   <img className="w-[115px] h-[38px]" src={require('../assets/images/tickitz1.png')} alt='Logo' />
                 </div>
@@ -53,7 +53,7 @@ const TicketResult = () => {
             </div>
 
             <div className="flex-[30%] border-l-2 border-dashed">
-              <div className="bg-[#5F2EEA] rounded-tr-[16px] flex justify-center py-2">
+              <div className="bg-primary rounded-tr-[16px] flex justify-center py-2">
                 <img className="w-[115px] h-[38px]" src={require('../assets/images/tickitz1.png')} alt='Logo' />
               </div>
               <div className="flex justify-center items-center py-5">

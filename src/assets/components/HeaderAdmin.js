@@ -16,10 +16,10 @@ const HeaderAdmin = () => {
   }
   return(
     <div className='flex items-center px-[100px] py-7 font-[mulish]'>
-      <div className='flex flex-1 items-center'>
-        <img className='w-[120.41px] mr-[80px]' src={require('../images/logo.png')} alt='logo' />
-        <div onClick={directToDashboard} className='mr-[50px] cursor-pointer hover:font-bold'>Dashboard</div>
-        <div onClick={directToManageMovie} className='mr-[50px] cursor-pointer hover:font-bold'>Manage Movie</div>
+      <div className='flex gap-10 flex-1 items-center'>
+        <img className='w-1/4' src={require('../images/bannerKarcis.png')} alt='logo' />
+        <div onClick={directToDashboard} className='cursor-pointer hover:font-bold'>Dashboard</div>
+        <div onClick={directToManageMovie} className='cursor-pointer hover:font-bold'>Manage Movie</div>
         <div onClick={directTomanageSchedule} className='cursor-pointer hover:font-bold'>Manage Schedule</div>
       </div>
 

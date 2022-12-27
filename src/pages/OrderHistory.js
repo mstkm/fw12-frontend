@@ -21,7 +21,7 @@ const OrderHistory = () => {
             <div className="text-[#4E4B66]">Moviegoers</div>
           </div>
           <div className="flex justify-center pt-5 border-t-[1px]">
-            <button className="bg-[#5F2EEA] w-[150px] h-[50px] text-white rounded-[16px]">Logout</button>
+            <button className="bg-primary w-[150px] h-[50px] text-white rounded-[16px]">Logout</button>
           </div>
         </div>
       </div>
@@ -29,7 +29,7 @@ const OrderHistory = () => {
       <div className="flex-[70%]">
         <div className="flex gap-12 bg-white rounded-[24px] px-8 mb-5">
           <div onClick={directToAccountSetting} className="text-[#4E4B66] py-5 cursor-pointer hover:font-bold ">Account Setting</div>
-          <div className="text-[#4E4B66] font-bold  py-5 cursor-pointer border-b-2 border-[#5F2EEA]">Order History</div>
+          <div className="text-[#4E4B66] font-bold  py-5 cursor-pointer border-b-2 border-primary">Order History</div>
         </div>
 
         <div className="gap-12 bg-white rounded-[24px] p-8 mb-5">
@@ -46,7 +46,7 @@ const OrderHistory = () => {
             <div className="flex-1">
               <div className="flex items-center justify-center w-[150px] h-[40px] bg-[#00BA88] rounded-[4px] text-white">Ticket Active</div>
             </div>
-            <div className="text-[#AAAAAA] cursor-pointer hover:font-bold">See Details</div>
+            <div className="text-[#AAAAAA] cursor-pointer hover:font-bold hover:text-primary">See Details</div>
           </div>
         </div>
         <div className="gap-12 bg-white rounded-[24px] p-8 mb-5">
@@ -63,7 +63,7 @@ const OrderHistory = () => {
             <div className="flex-1">
               <div className="flex items-center justify-center w-[150px] h-[40px] bg-[#6E7191] rounded-[4px] text-white">Ticket Used</div>
             </div>
-            <div className="text-[#AAAAAA] cursor-pointer hover:font-bold">See Details</div>
+            <div className="text-[#AAAAAA] cursor-pointer hover:font-bold hover:text-primary">See Details</div>
           </div>
         </div>
         <div className="gap-12 bg-white rounded-[24px] p-8 mb-5">
@@ -80,7 +80,7 @@ const OrderHistory = () => {
             <div className="flex-1">
               <div className="flex items-center justify-center w-[150px] h-[40px] bg-[#6E7191] rounded-[4px] text-white">Ticket Expired</div>
             </div>
-            <div className="text-[#AAAAAA] cursor-pointer hover:font-bold">See Details</div>
+            <div className="text-[#AAAAAA] cursor-pointer hover:font-bold hover:text-primary">See Details</div>
           </div>
         </div>
 

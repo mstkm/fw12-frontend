@@ -178,7 +178,7 @@ const Payment = () => {
               <div className="grid grid-cols-4 gap-5">
                 {paymentMethod?.results?.map((payment, index) => {
                   return(
-                    <button onClick={()=>setSelectedPaymentMethod(payment.id) & setShowAlertPaymentMethod(false)} key={String(index)} className={`flex justify-center items-center border-2 w-[145px] h-[50px] rounded-[8px] hover:border-[#5F2EEA] ${(payment.id === selectedPaymentMethod) ? ' bg-[#5F2EEA]' : ''}`}>
+                    <button onClick={()=>setSelectedPaymentMethod(payment.id) & setShowAlertPaymentMethod(false)} key={String(index)} className={`flex justify-center items-center border-2 w-[145px] h-[50px] rounded-[8px] hover:border-primary ${(payment.id === selectedPaymentMethod) ? ' bg-primary' : ''}`}>
                       <img src={payment.picture} alt={payment.name} />
                    </button>
                   )
@@ -189,20 +189,20 @@ const Payment = () => {
                 <div className='flex-1'>
                   <div className='border-[1px] bg-[#DEDEDE]'></div>
                 </div>
-                <div className='text-[#5F2EEA] px-5 cursor-pointer hover:font-bold'>or</div>
+                <div className='text-primary px-5 cursor-pointer hover:font-bold'>or</div>
                 <div className='flex-1 relative'>
                   <div className='border-[1px] bg-[#DEDEDE]'></div>
                 </div>
               </div>
-              <div className="text-center">Pay via cash. <span className="text-[#5F2EEA]">See how it work</span></div>
+              <div className="text-center">Pay via cash. <span className="text-primary">See how it work</span></div>
             </div>
 
             <div className="flex">
               <div className="flex-1">
-                <button onClick={() => navigate('/order')} className="flex justify-center items-center w-[300px] h-[50px] p-5 border-[2px] border-[#5F2EEA] text-[#5F2EEA] font-bold rounded-[4px] hover:bg-[#5F2EEA] hover:text-white">Previous Step</button>
+                <button onClick={() => navigate('/order')} className="flex justify-center items-center w-[300px] h-[50px] p-5 border-[2px] border-primary text-primary font-bold rounded-[4px] hover:bg-primary hover:text-white">Previous Step</button>
               </div>
               <div>
-                <button onClick={payOrder} className="flex justify-center items-center w-[300px] h-[50px] p-5 border-[2px] border-[#5F2EEA] text-[#5F2EEA] font-bold rounded-[4px] hover:bg-[#5F2EEA] hover:text-white">Pay Your Order</button>
+                <button onClick={payOrder} className="flex justify-center items-center w-[300px] h-[50px] p-5 border-[2px] border-primary text-primary font-bold rounded-[4px] hover:bg-primary hover:text-white">Pay Your Order</button>
               </div>
 
             </div>

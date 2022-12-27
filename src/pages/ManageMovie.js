@@ -54,10 +54,10 @@ lives with his Aunt May, | '></textarea>
         </div>
         <div className="flex gap-5 justify-end">
           <div>
-            <button className="w-[180px] h-[50px] border-2 border-[#5F2EEA] text-[#5F2EEA] rounded-[4px] font-bold">Reset</button>
+            <button className="w-[180px] h-[50px] border-2 border-primary text-primary rounded-[4px] font-bold hover:bg-primary hover:text-white">Reset</button>
           </div>
           <div>
-            <button className="w-[180px] h-[50px] border-2 border-[#5F2EEA] text-[#5F2EEA] rounded-[4px] font-bold">Submit</button>
+            <button className="w-[180px] h-[50px] border-2 border-primary text-primary rounded-[4px] font-bold hover:bg-primary hover:text-white">Submit</button>
           </div>
         </div>
       </div>

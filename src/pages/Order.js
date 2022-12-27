@@ -125,7 +125,7 @@ const Order = () => {
             <div className="flex bg-[white] p-5 rounded-[6px]">
               <div className='flex-1 font-bold text-xl'>{title}</div>
               <div>
-                <button onClick={changeMovie} className="w-[140px] h-[35px] border-[1px] bg-[#EFF0F7] rounded-[4px] text-[#5F2EEA] font-bold">Change Movie</button>
+                <button onClick={changeMovie} className="w-[140px] h-[35px] border-[1px] bg-[#EFF0F7] rounded-[4px] text-primary font-bold">Change Movie</button>
               </div>
             </div>
           </div>
@@ -147,7 +147,7 @@ const Order = () => {
                         if (alphabet !== ' ') {
                           const seatNumber = alphabet+String(number)
                           return(
-                          <button key={String(i)} onClick={() => selectSeat(seatNumber)} className={`flex justify-center items-center w-5 h-5 hover:bg-[#5F2EEA] rounded ${selectedSeat.includes(seatNumber) ? ' bg-[#5F2EEA]' : ' bg-[#D6D8E7]'}`} />
+                          <button key={String(i)} onClick={() => selectSeat(seatNumber)} className={`flex justify-center items-center w-5 h-5 hover:bg-primary rounded ${selectedSeat.includes(seatNumber) ? ' bg-primary' : ' bg-[#D6D8E7]'}`} />
                         )} else {
                           return(<button key={String(i)} className="flex justify-center items-center w-5 h-5">{number}</button>)
                         }
@@ -163,7 +163,7 @@ const Order = () => {
                       if ((number > 0)) {
                         if (alphabet !== ' ') {
                           const seatNumber = alphabet+String(number)
-                          return(<button key={String(i)} onClick={() => selectSeat(seatNumber)} className={`flex justify-center items-center w-5 h-5 hover:bg-[#5F2EEA] rounded ${selectedSeat.includes(seatNumber) ? ' bg-[#5F2EEA]' : ' bg-[#D6D8E7]'}`} />
+                          return(<button key={String(i)} onClick={() => selectSeat(seatNumber)} className={`flex justify-center items-center w-5 h-5 hover:bg-primary rounded ${selectedSeat.includes(seatNumber) ? ' bg-primary' : ' bg-[#D6D8E7]'}`} />
                         )} else {
                           return(<button key={String(i)} className="flex justify-center items-center w-5 h-5">{number}</button>)
                         }
@@ -182,7 +182,7 @@ const Order = () => {
                   <div>Available</div>
                 </div>
                 <div className="flex items-center gap-5">
-                  <div className="w-[26px] h-[26px] bg-[#5F2EEA] rounded-[4px]"></div>
+                  <div className="w-[26px] h-[26px] bg-primary rounded-[4px]"></div>
                   <div>Selected</div>
                 </div>
                 <div className="flex items-center gap-5">
@@ -195,10 +195,10 @@ const Order = () => {
 
             <div className="flex">
               <div className="flex-1">
-                <button onClick={changeMovie} className="flex justify-center items-center w-[300px] h-[50px] p-5 border-[2px] border-[#5F2EEA] text-[#5F2EEA] font-bold rounded-[4px] hover:bg-[#5F2EEA] hover:text-white">Change your movie</button>
+                <button onClick={changeMovie} className="flex justify-center items-center w-[300px] h-[50px] p-5 border-[2px] border-primary text-primary font-bold rounded-[4px] hover:bg-primary hover:text-white">Change your movie</button>
               </div>
               <div>
-                <button onClick={checkOut} className="flex justify-center items-center w-[300px] h-[50px] p-5 border-[2px] border-[#5F2EEA] text-[#5F2EEA] font-bold rounded-[4px] hover:bg-[#5F2EEA] hover:text-white">Checkout now</button>
+                <button onClick={checkOut} className="flex justify-center items-center w-[300px] h-[50px] p-5 border-[2px] border-primary text-primary font-bold rounded-[4px] hover:bg-primary hover:text-white">Checkout now</button>
               </div>
 
             </div>
@@ -231,7 +231,7 @@ const Order = () => {
             </div>
             <div className="flex py-5 border-t-[1px]">
               <div className="flex-1 font-bold">Total Payment</div>
-              <div className="font-bold text-[#5F2EEA]">{'Rp'+new Intl.NumberFormat('id-ID').format(Number(selectedSeat.length*price))}</div>
+              <div className="font-bold text-primary">{'Rp'+new Intl.NumberFormat('id-ID').format(Number(selectedSeat.length*price))}</div>
             </div>
             {showAlertChooseSeat ? <div className="relative rounded p-5 border-2 border-red-500 bg-red-200">
             <p className="text-center">You haven't chosen a seat yet.<br/>Please select a seat before checkout!</p>

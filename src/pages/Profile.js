@@ -2,12 +2,21 @@ import Header from "../assets/components/Header"
 import { Eye } from "react-feather"
 import Footer from "../assets/components/Footer"
 import { useNavigate } from "react-router-dom"
+import { useSelector } from "react-redux"
+import jwt_decode from 'jwt-decode'
 
 const Profile = () => {
   const navigate = useNavigate()
+  const token = useSelector((state) => state.auth.token)
+  const {id} = jwt_decode(token)
+
   const directToOrderHistory = () => {
     navigate('/orderHistory')
   }
+
+  // Get user data by id
+
+
   return(
     <>
     <Header />
@@ -22,14 +31,14 @@ const Profile = () => {
             <div className="text-[#4E4B66]">Moviegoers</div>
           </div>
           <div className="flex justify-center pt-5 border-t-[1px]">
-            <button className="bg-[#5F2EEA] w-[150px] h-[50px] text-white rounded-[16px]">Logout</button>
+            <button className="bg-primary w-[150px] h-[50px] text-white rounded-[16px]">Logout</button>
           </div>
         </div>
       </div>
 
       <div className="flex-[70%]">
         <div className="flex gap-12 bg-white rounded-[24px] px-8 mb-5">
-          <div className="text-[#4E4B66] font-bold py-5 border-b-2 border-[#5F2EEA] cursor-pointer">Account Setting</div>
+          <div className="text-[#4E4B66] font-bold py-5 border-b-2 border-primary cursor-pointer">Account Setting</div>
           <div onClick={directToOrderHistory} className="text-[#4E4B66] py-5 cursor-pointer hover:font-bold">Order History</div>
         </div>
         <div className="gap-12 bg-white rounded-[24px] p-8 mb-5">
@@ -62,7 +71,7 @@ const Profile = () => {
           </div>
         </div>
         <div className="mb-8">
-          <button className="bg-[#5F2EEA] w-[350px] h-[50px] text-white rounded-[16px]">Update changes</button>
+          <button className="bg-primary w-[350px] h-[50px] text-white rounded-[16px]">Update changes</button>
         </div>
 
         <div className="gap-12 bg-white rounded-[24px] p-8 mb-5">
@@ -85,7 +94,7 @@ const Profile = () => {
           </div>
         </div>
         <div className="mb-5">
-          <button className="bg-[#5F2EEA] w-[350px] h-[50px] text-white rounded-[16px]">Update changes</button>
+          <button className="bg-primary w-[350px] h-[50px] text-white rounded-[16px]">Update changes</button>
         </div>
 
 
