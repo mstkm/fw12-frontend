@@ -1,13 +1,14 @@
-import Header from "../assets/components/Header"
-import Footer from "../assets/components/Footer"
-import { useNavigate } from "react-router-dom"
+import React from 'react'
+import Header from '../assets/components/Header'
+import Footer from '../assets/components/Footer'
+import { useNavigate } from 'react-router-dom'
 
 const OrderHistory = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const directToAccountSetting = () => {
     navigate('/profile')
   }
-  return(
+  return (
     <>
     <Header />
 

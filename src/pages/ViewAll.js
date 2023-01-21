@@ -1,9 +1,10 @@
-import Header from "../assets/components/Header"
-import Month from "../assets/components/Month"
-import ListMovie from "../assets/components/ListMovie"
-import Footer from "../assets/components/Footer"
-import { useSelector } from "react-redux"
-import { useNavigate } from "react-router-dom"
+import React from 'react'
+import Header from '../assets/components/Header'
+import Month from '../assets/components/Month'
+import ListMovie from '../assets/components/ListMovie'
+import Footer from '../assets/components/Footer'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 const ViewAll = () => {
   const token = useSelector((state) => state.auth.token)
@@ -12,7 +13,7 @@ const ViewAll = () => {
     navigate('/signin')
   }
 
-  return(
+  return (
     <>
       <Header />
 
@@ -36,7 +37,6 @@ const ViewAll = () => {
 
       <Footer />
     </>
-
 
   )
 }

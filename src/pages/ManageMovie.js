@@ -1,9 +1,10 @@
-import HeaderAdmin from "../assets/components/HeaderAdmin"
-import DataMovie from "../assets/components/DataMovie"
-import Footer from "../assets/components/Footer"
+import React from 'react'
+import HeaderAdmin from '../assets/components/HeaderAdmin'
+import DataMovie from '../assets/components/DataMovie'
+import Footer from '../assets/components/Footer'
 
 const ManageMovie = () => {
-  return(
+  return (
     <>
      <HeaderAdmin />
 

@@ -1,5 +1,7 @@
+import React from 'react'
+
 const TicketActive = () => {
-  return(
+  return (
     <div className="flex justify-center items-center">
       <img src={require('../images/qr-code.png')} alt='qr-code' />
     </div>

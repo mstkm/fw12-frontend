@@ -1,5 +1,7 @@
+import React from 'react'
+
 const Month = () => {
-  return(
+  return (
     <div className='flex flex-nowrap ml-[100px] py-5 overflow-x-scroll gap-4'>
       <div className='flex justify-center items-center min-w-[127px] min-h-[40px] border-[1px] border-primary text-primary rounded-[4px] cursor-pointer hover:bg-primary hover:text-white'>September</div>
       <div className='flex justify-center items-center min-w-[127px] min-h-[40px] border-[1px] border-primary text-primary rounded-[4px] cursor-pointer hover:bg-primary hover:text-white'>October</div>

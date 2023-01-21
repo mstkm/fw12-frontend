@@ -1,14 +1,16 @@
-import Header from "../assets/components/Header"
-import { Eye } from "react-feather"
-import Footer from "../assets/components/Footer"
-import { useNavigate } from "react-router-dom"
-import { useSelector } from "react-redux"
-import jwt_decode from 'jwt-decode'
+/* eslint-disable camelcase */
+import React from 'react'
+import Header from '../assets/components/Header'
+import { Eye } from 'react-feather'
+import Footer from '../assets/components/Footer'
+import { useNavigate } from 'react-router-dom'
+// import { useSelector } from 'react-redux'
+// import jwt_decode from 'jwt-decode'
 
 const Profile = () => {
   const navigate = useNavigate()
-  const token = useSelector((state) => state.auth.token)
-  const {id} = jwt_decode(token)
+  // const token = useSelector((state) => state.auth.token)
+  // const { id } = jwt_decode(token)
 
   const directToOrderHistory = () => {
     navigate('/orderHistory')
@@ -16,8 +18,7 @@ const Profile = () => {
 
   // Get user data by id
 
-
-  return(
+  return (
     <>
     <Header />
 
@@ -96,7 +97,6 @@ const Profile = () => {
         <div className="mb-5">
           <button className="bg-primary w-[350px] h-[50px] text-white rounded-[16px]">Update changes</button>
         </div>
-
 
       </div>
     </div>

@@ -1,21 +1,20 @@
-import React from 'react';
-import http from '../../helpers/http';
+import React from 'react'
+import http from '../../helpers/http'
 
 const DataMovie = () => {
-  const [ListMovies, setLisMovies] = React.useState({});
+  const [ListMovies, setLisMovies] = React.useState({})
   React.useEffect(() => {
     getLisMovies().then((data) => {
       setLisMovies(data)
     })
-  }, []);
-
+  }, [])
 
   const getLisMovies = async () => {
-    const {data} = await http().get('/movies/upcoming?limit=8');
-    return data;
+    const { data } = await http().get('/movies/upcoming?limit=8')
+    return data
   }
 
-  return(
+  return (
     <div className='px-[100px] py-5 font-[mulish] bg-[#E5E5E5]'>
     <div className='grid grid-cols-4 gap-4 p-8 bg-[white] rounded-[8px]'>
       {ListMovies?.results?.map((movie, index) => {
@@ -49,7 +48,6 @@ const DataMovie = () => {
     </div>
 
   )
-
 }
 
 export default DataMovie

@@ -1,7 +1,6 @@
-// import { useNavigate } from 'react-router-dom';
-import { Search } from 'react-feather';
-import { useNavigate } from 'react-router-dom';
-
+import React from 'react'
+import { Search } from 'react-feather'
+import { useNavigate } from 'react-router-dom'
 
 const HeaderAdmin = () => {
   const navigate = useNavigate()
@@ -14,7 +13,7 @@ const HeaderAdmin = () => {
   const directTomanageSchedule = () => {
     navigate('/manageSchedule')
   }
-  return(
+  return (
     <div className='flex items-center px-[100px] py-7 font-[mulish]'>
       <div className='flex gap-10 flex-1 items-center'>
         <img className='w-1/4' src={require('../images/bannerKarcis.png')} alt='logo' />

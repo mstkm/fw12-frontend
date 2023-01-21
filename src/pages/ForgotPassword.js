@@ -1,12 +1,13 @@
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const ForgotPassword = () => {
   const navigate = useNavigate()
-  const directToUpdatePassword= () => {
+  const directToUpdatePassword = () => {
     navigate('/updatePassword')
   }
 
-  return(
+  return (
     <div className='flex font-[mulish] h-screen'>
       {/* Left */}
       <div className="flex-[60%] bg-[url('../images/image1.png')] bg-cover max-[426px]:hidden">
@@ -41,7 +42,7 @@ const ForgotPassword = () => {
       {/* Right */}
       <div className="flex flex-col flex-[40%] justify-center px-10 max-[425.98px]:py-0">
         <div className='text-3xl font-bold mb-4'>Fill your complete email</div>
-        <div className='text-[#AAAAAA] mb-10'>we'll send a link to your email shortly</div>
+        <div className='text-[#AAAAAA] mb-10'>we`ll send a link to your email shortly</div>
         <form className='mb-8'>
           <div className='mb-5'>
             <div className='text-[#4E4B66] mb-2'>Email</div>

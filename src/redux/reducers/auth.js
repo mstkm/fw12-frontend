@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-import {loginAction} from '../actions/auth'
+import { createSlice } from '@reduxjs/toolkit'
+import { loginAction } from '../actions/auth'
 
 const initialState = {
   token: null
@@ -17,12 +17,12 @@ const authReducer = createSlice({
     }
   },
   extraReducers: (build) => {
-    build.addCase(loginAction.fulfilled, (state, {payload}) => {
+    build.addCase(loginAction.fulfilled, (state, { payload }) => {
       state.token = payload
     })
   }
 })
 
-export const {login, logout} = authReducer.actions
+export const { login, logout } = authReducer.actions
 
 export default authReducer.reducer

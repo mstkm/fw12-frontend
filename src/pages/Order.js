@@ -1,10 +1,10 @@
-import Header from "../assets/components/Header"
-import Footer from "../assets/components/Footer"
-import http from "../helpers/http"
-import { useSelector, useDispatch } from "react-redux"
+import Header from '../assets/components/Header'
+import Footer from '../assets/components/Footer'
+import http from '../helpers/http'
+import { useSelector, useDispatch } from 'react-redux'
 import React from 'react'
-import { chooseSeat as chooseSeatAction, changeMovie as changeMovieAction } from "../redux/reducers/transactions"
-import { useNavigate } from "react-router-dom"
+import { chooseSeat as chooseSeatAction, changeMovie as changeMovieAction } from '../redux/reducers/transactions'
+import { useNavigate } from 'react-router-dom'
 
 const Order = () => {
   const token = useSelector((state) => state.auth.token)
@@ -19,10 +19,10 @@ const Order = () => {
     getMovie().then((data) => {
       setMovie(data)
     })
-  }, [movieId]);
+  }, [movieId])
   const getMovie = async () => {
-    const {data} = await http().get(`/movies/${movieId}`);
-    return data;
+    const { data } = await http().get(`/movies/${movieId}`)
+    return data
   }
   const title = movie?.results?.title
 
@@ -93,7 +93,7 @@ const Order = () => {
   const [showAlertChooseSeat, setShowAlertChooseSeat] = React.useState(false)
   const checkOut = () => {
     if (selectedSeat.length) {
-      dispatch(chooseSeatAction({seatNum: selectedSeat}))
+      dispatch(chooseSeatAction({ seatNum: selectedSeat }))
       navigate('/payment')
     } else {
       setShowAlertChooseSeat(true)
@@ -114,7 +114,7 @@ const Order = () => {
     navigate('/viewAll')
   }
 
-  return(
+  return (
     <div>
       <Header />
 
@@ -141,34 +141,36 @@ const Order = () => {
               {/* Select Seat */}
               <div className="grid grid-cols-2 mb-8 gap-10">
                 <div className="grid gap-2">{['A', 'B', 'C', 'D', 'E', 'F', 'G', ' '].map((alphabet, i) => {
-                  return(
+                  return (
                     <div key={String(i)} className="grid grid-cols-8 gap-2">{[0, 1, 2, 3, 4, 5, 6, 7].map((number, i) => {
                       if ((number > 0)) {
                         if (alphabet !== ' ') {
-                          const seatNumber = alphabet+String(number)
-                          return(
+                          const seatNumber = alphabet + String(number)
+                          return (
                           <button key={String(i)} onClick={() => selectSeat(seatNumber)} className={`flex justify-center items-center w-5 h-5 hover:bg-primary rounded ${selectedSeat.includes(seatNumber) ? ' bg-primary' : ' bg-[#D6D8E7]'}`} />
-                        )} else {
-                          return(<button key={String(i)} className="flex justify-center items-center w-5 h-5">{number}</button>)
+                          )
+                        } else {
+                          return (<button key={String(i)} className="flex justify-center items-center w-5 h-5">{number}</button>)
                         }
                       } else {
-                        return(<button key={String(i)} className="flex justify-center items-center w-5 h-5">{alphabet}</button>)
+                        return (<button key={String(i)} className="flex justify-center items-center w-5 h-5">{alphabet}</button>)
                       }
                     })}</div>
                   )
                 })}</div>
                 <div className="grid gap-2">{['A', 'B', 'C', 'D', 'E', 'F', 'G', ' '].map((alphabet, i) => {
-                  return(
+                  return (
                     <div key={String(i)} className="grid grid-cols-8">{[8, 9, 10, 11, 12, 13, 14].map((number, i) => {
                       if ((number > 0)) {
                         if (alphabet !== ' ') {
-                          const seatNumber = alphabet+String(number)
-                          return(<button key={String(i)} onClick={() => selectSeat(seatNumber)} className={`flex justify-center items-center w-5 h-5 hover:bg-primary rounded ${selectedSeat.includes(seatNumber) ? ' bg-primary' : ' bg-[#D6D8E7]'}`} />
-                        )} else {
-                          return(<button key={String(i)} className="flex justify-center items-center w-5 h-5">{number}</button>)
+                          const seatNumber = alphabet + String(number)
+                          return (<button key={String(i)} onClick={() => selectSeat(seatNumber)} className={`flex justify-center items-center w-5 h-5 hover:bg-primary rounded ${selectedSeat.includes(seatNumber) ? ' bg-primary' : ' bg-[#D6D8E7]'}`} />
+                          )
+                        } else {
+                          return (<button key={String(i)} className="flex justify-center items-center w-5 h-5">{number}</button>)
                         }
                       } else {
-                        return(<button key={String(i)} className="flex justify-center items-center w-5 h-5">{alphabet}</button>)
+                        return (<button key={String(i)} className="flex justify-center items-center w-5 h-5">{alphabet}</button>)
                       }
                     })}</div>
                   )
@@ -223,7 +225,7 @@ const Order = () => {
             </div>
             <div className="flex mb-2">
               <div className="flex-1 text-sm text-[#6B6B6B]">One ticket price</div>
-              <div className="text-sm font-bold">{'Rp'+new Intl.NumberFormat('id-ID').format(Number(price))}</div>
+              <div className="text-sm font-bold">{'Rp' + new Intl.NumberFormat('id-ID').format(Number(price))}</div>
             </div>
             <div className="flex mb-2">
               <div className="flex-1 text-sm text-[#6B6B6B]">Seat choosed</div>
@@ -231,14 +233,16 @@ const Order = () => {
             </div>
             <div className="flex py-5 border-t-[1px]">
               <div className="flex-1 font-bold">Total Payment</div>
-              <div className="font-bold text-primary">{'Rp'+new Intl.NumberFormat('id-ID').format(Number(selectedSeat.length*price))}</div>
+              <div className="font-bold text-primary">{'Rp' + new Intl.NumberFormat('id-ID').format(Number(selectedSeat.length * price))}</div>
             </div>
-            {showAlertChooseSeat ? <div className="relative rounded p-5 border-2 border-red-500 bg-red-200">
-            <p className="text-center">You haven't chosen a seat yet.<br/>Please select a seat before checkout!</p>
+            {showAlertChooseSeat
+              ? <div className="relative rounded p-5 border-2 border-red-500 bg-red-200">
+            <p className="text-center">You haven`t chosen a seat yet.<br/>Please select a seat before checkout!</p>
             <div className="absolute top-1 right-1 flex items-center justify-center border-2 border-black w-3 h-3 p-2 rounded bg-slate-500">
               <button onClick={closeShowAlert} className="text-white text-sm">X</button>
             </div>
-          </div> : false}
+          </div>
+              : false}
           </div>
         </div>
       </div>

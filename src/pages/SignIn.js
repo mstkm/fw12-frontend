@@ -1,10 +1,9 @@
-import React from 'react';
-import {Eye, EyeOff} from 'react-feather';
-import {Link, useNavigate} from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import React from 'react'
+import { Eye, EyeOff } from 'react-feather'
+import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 // import { login as loginAction } from '../redux/reducers/auth';
-import { loginAction } from '../redux/actions/auth';
-import { useSelector } from 'react-redux';
+import { loginAction } from '../redux/actions/auth'
 
 const SignIn = () => {
   const navigate = useNavigate()
@@ -20,20 +19,20 @@ const SignIn = () => {
     const cb = () => {
       navigate('/')
     }
-    dispatch(loginAction({email, password, cb}))
+    dispatch(loginAction({ email, password, cb }))
     if (token === null) {
       setTimeout(() => {
-        setShowAlertLogin(true);
-      }, 500);
+        setShowAlertLogin(true)
+      }, 500)
     }
   }
 
   const hideAlertLogin = () => {
-    setShowAlertLogin(false);
+    setShowAlertLogin(false)
   }
 
   const AlertLogin = () => {
-    return(
+    return (
       <div className='flex bg-red-100 border-[1px] border-red-600 py-3 px-5 rounded-[8px] mb-3'>
         <div className='flex-1'>Wrong username or password</div>
         <div>
@@ -56,7 +55,7 @@ const SignIn = () => {
     }
   }
 
-  return(
+  return (
     <div className='flex font-[inter] h-screen'>
       {/* Left */}
       <div className="flex-[60%] bg-[url('../images/image1.png')] bg-cover max-[426px]:hidden">
@@ -90,7 +89,7 @@ const SignIn = () => {
           </div>
         </form>
         <div className='text-[#8692A6] text-center mb-2'>Forgot your password? <Link to='/forgotPassword' className='text-primary underline cursor-pointer hover:font-bold'>Reset now</Link></div>
-        <div className='text-[#8692A6] text-center'>Don't have an account? <Link to='/signup' className='text-primary underline cursor-pointer hover:font-bold'>Sign Up</Link></div>
+        <div className='text-[#8692A6] text-center'>Don`t have an account? <Link to='/signup' className='text-primary underline cursor-pointer hover:font-bold'>Sign Up</Link></div>
       </div>
 
     </div>

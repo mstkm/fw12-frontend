@@ -1,7 +1,7 @@
 import React from 'react'
-import {Eye, EyeOff} from 'react-feather';
-import {Link, useNavigate} from 'react-router-dom';
-import axios from 'axios';
+import { Eye, EyeOff } from 'react-feather'
+import { Link, useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 const SignUp = () => {
   const [alertRegister, setAlertRegister] = React.useState(false)
@@ -16,14 +16,14 @@ const SignUp = () => {
     const email = event.target.email.value
     const password = event.target.password.value
 
-    const {data} = await axios.post('http://localhost:8888/auth/register', {firstName, lastName, phoneNumber, email, password})
+    const { data } = await axios.post('http://localhost:8888/auth/register', { firstName, lastName, phoneNumber, email, password })
 
     setAlertRegister(true)
 
     setTimeout(() => {
       navigate('/signin')
-    }, 5000);
-    return data;
+    }, 5000)
+    return data
   }
 
   const [inputType, setInputType] = React.useState('password')
@@ -39,7 +39,7 @@ const SignUp = () => {
     }
   }
 
-  return(
+  return (
     <div className='flex font-[inter] h-screen'>
       {/* Left */}
       <div className='flex-[60%] bg-[url("../images/image1.png")] bg-cover max-[426px]:hidden'>

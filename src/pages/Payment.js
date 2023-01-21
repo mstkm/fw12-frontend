@@ -1,11 +1,11 @@
-import Header from "../assets/components/Header"
-import Footer from "../assets/components/Footer"
-import { AlertTriangle } from "react-feather"
+import Header from '../assets/components/Header'
+import Footer from '../assets/components/Footer'
+import { AlertTriangle } from 'react-feather'
 import React from 'react'
-import { useSelector, useDispatch } from "react-redux"
-import http from "../helpers/http"
-import { choosePayment as choosePaymentAction } from "../redux/reducers/transactions"
-import { useNavigate } from "react-router-dom"
+import { useSelector, useDispatch } from 'react-redux'
+import http from '../helpers/http'
+import { choosePayment as choosePaymentAction } from '../redux/reducers/transactions'
+import { useNavigate } from 'react-router-dom'
 
 const Payment = () => {
   const token = useSelector((state) => state.auth.token)
@@ -80,10 +80,10 @@ const Payment = () => {
     getMovie().then((data) => {
       setMovie(data)
     })
-  }, [movieId]);
+  }, [movieId])
   const getMovie = async () => {
-    const {data} = await http().get(`/movies/${movieId}`);
-    return data;
+    const { data } = await http().get(`/movies/${movieId}`)
+    return data
   }
   const title = movie?.results?.title
 
@@ -95,7 +95,7 @@ const Payment = () => {
     })
   }, [])
   const getPaymentMethod = async () => {
-    const {data} = await http().get('/paymentMethod?limit=8')
+    const { data } = await http().get('/paymentMethod?limit=8')
     return data
   }
 
@@ -116,12 +116,12 @@ const Payment = () => {
     } else {
       dispatch(choosePaymentAction({
         paymentMethodId: selectedPaymentMethod,
-        fullName: fullName,
-        email: email,
-        phoneNumber: phoneNumber,
+        fullName,
+        email,
+        phoneNumber,
         statusId: 1
       }))
-      const {data} = await http(token).post('/profile/transaction', {
+      const { data } = await http(token).post('/profile/transaction', {
         bookingDate: booking,
         movieId,
         userId,
@@ -135,12 +135,11 @@ const Payment = () => {
         seatNum,
         bookingTime
       })
-      return data;
+      return data
     }
   }
 
-
-  return(
+  return (
     <div>
       <Header />
 
@@ -167,7 +166,7 @@ const Payment = () => {
               </div>
               <div className="flex p-3">
                 <div className="flex-1 text-[#6B6B6B]">Total payment</div>
-                <div className="font-bold text-lg">{'Rp'+new Intl.NumberFormat('id-ID').format(Number(seatNum.length*price))}</div>
+                <div className="font-bold text-lg">{'Rp' + new Intl.NumberFormat('id-ID').format(Number(seatNum.length * price))}</div>
               </div>
             </div>
           </div>
@@ -177,8 +176,8 @@ const Payment = () => {
             <div className="bg-[white] p-5 rounded-[6px] mb-8">
               <div className="grid grid-cols-4 gap-5">
                 {paymentMethod?.results?.map((payment, index) => {
-                  return(
-                    <button onClick={()=>setSelectedPaymentMethod(payment.id) & setShowAlertPaymentMethod(false)} key={String(index)} className={`flex justify-center items-center border-2 w-[145px] h-[50px] rounded-[8px] hover:border-primary ${(payment.id === selectedPaymentMethod) ? ' bg-primary' : ''}`}>
+                  return (
+                    <button onClick={() => setSelectedPaymentMethod(payment.id) & setShowAlertPaymentMethod(false)} key={String(index)} className={`flex justify-center items-center border-2 w-[145px] h-[50px] rounded-[8px] hover:border-primary ${(payment.id === selectedPaymentMethod) ? ' bg-primary' : ''}`}>
                       <img src={payment.picture} alt={payment.name} />
                    </button>
                   )
@@ -234,16 +233,20 @@ const Payment = () => {
             <div className="mb-5">
               <div className="flex items-center justify-center border-[1px] w-[100%] h-[50px] rounded-[4px] bg-[#F4B740]"><AlertTriangle className="mr-5"/>Fill your data correctly.</div>
             </div>
-            {showAlertPaymentMethod ? <div className="mb-5">
+            {showAlertPaymentMethod
+              ? <div className="mb-5">
               <div className="flex items-center justify-center border-[1px] w-[100%] h-[50px] rounded-[4px] bg-red-300 border-red-500 p2">
                  <p>Please select a payment method</p>
               </div>
-            </div> : false}
-            {showAlertForm ? <div className="mb-5">
+            </div>
+              : false}
+            {showAlertForm
+              ? <div className="mb-5">
               <div className="flex items-center justify-center border-[1px] w-[100%] h-[50px] rounded-[4px] bg-red-300 border-red-500 text-center">
                  <p>Name, email and mobile number cannot be empty</p>
               </div>
-            </div> : false}
+            </div>
+              : false}
           </div>
         </div>
       </div>

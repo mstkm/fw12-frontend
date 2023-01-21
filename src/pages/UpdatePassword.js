@@ -1,10 +1,10 @@
-import React from 'react';
-import { Eye, EyeOff } from 'react-feather';
-import { useNavigate } from 'react-router-dom';
+import React from 'react'
+import { Eye, EyeOff } from 'react-feather'
+import { useNavigate } from 'react-router-dom'
 
 const UpdatePassword = () => {
   const navigate = useNavigate()
-  const directToSignIn= () => {
+  const directToSignIn = () => {
     navigate('/signin')
   }
 
@@ -33,7 +33,7 @@ const UpdatePassword = () => {
     }
   }
 
-  return(
+  return (
     <div className='flex font-[mulish] h-screen'>
       {/* Left */}
       <div className="flex-[60%] bg-[url('../images/image1.png')] bg-cover max-[426px]:hidden">

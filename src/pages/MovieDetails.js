@@ -1,34 +1,34 @@
+/* eslint-disable camelcase */
 import React from 'react'
-import Header from "../assets/components/Header"
-import Footer from "../assets/components/Footer"
-import { useParams } from "react-router-dom"
+import Header from '../assets/components/Header'
+import Footer from '../assets/components/Footer'
+import { useParams, useNavigate } from 'react-router-dom'
 import http from '../helpers/http'
 import moment from 'moment'
-import { useSelector, useDispatch } from "react-redux"
-import { useNavigate } from "react-router-dom"
+import { useSelector, useDispatch } from 'react-redux'
 import { chooseMovie as chooseMovieAction } from '../redux/reducers/transactions'
 import jwt_decode from 'jwt-decode'
 
 const MovieDetails = () => {
   const token = useSelector((state) => state.auth.token)
-  const {id: userId} = jwt_decode(token)
+  const { id: userId } = jwt_decode(token)
 
   const navigate = useNavigate()
   if (!token) {
     navigate('/signin')
   }
 
-  const {id} = useParams()
+  const { id } = useParams()
   const dispatch = useDispatch()
 
-  const [movie, setMovie] = React.useState({});
-  const [date, setDate] = React.useState(moment().format('YYYY-MM-DD'));
-  const [city, setCity] = React.useState('Jakarta');
-  const [dataSchedule, setDataSchedule] = React.useState([]);
-  const [selectedCinema, setSelectedCinema] = React.useState(null);
-  const [selectedTime, setSelectedTime] = React.useState('');
-  const [selectedPrice, setselectedPrice] = React.useState(null);
-  const [selectedCinemaName, setSelectedCinemaName] = React.useState('');
+  const [movie, setMovie] = React.useState({})
+  const [date, setDate] = React.useState(moment().format('YYYY-MM-DD'))
+  const [city, setCity] = React.useState('Jakarta')
+  const [dataSchedule, setDataSchedule] = React.useState([])
+  const [selectedCinema, setSelectedCinema] = React.useState(null)
+  const [selectedTime, setSelectedTime] = React.useState('')
+  const [selectedPrice, setselectedPrice] = React.useState(null)
+  const [selectedCinemaName, setSelectedCinemaName] = React.useState('')
   const [selectedMovieScheduleId, setSelectedMovieScheduleId] = React.useState(null)
 
   // Get Movie Detail
@@ -36,32 +36,32 @@ const MovieDetails = () => {
     getMovie().then((data) => {
       setMovie(data)
     })
-  }, [id]);
+  }, [id])
   const getMovie = async () => {
-    const {data} = await http().get(`/movies/${id}`);
-    return data;
+    const { data } = await http().get(`/movies/${id}`)
+    return data
   }
-  const title = movie?.results?.title;
-  const genre = movie?.results?.genre;
-  const casts = movie?.results?.casts;
-  const releaseDateArr = Date(movie?.results?.releaseDate).split(' ');
-  const releaseDate = releaseDateArr[1]+' '+releaseDateArr[2]+', '+releaseDateArr[3]
-  const duration = movie?.results?.duration?.charAt('1')+' hours '+movie?.results?.duration?.charAt('3')+movie?.results?.duration?.charAt('4')+' minutes';
+  const title = movie?.results?.title
+  const genre = movie?.results?.genre
+  const casts = movie?.results?.casts
+  const releaseDateArr = Date(movie?.results?.releaseDate).split(' ')
+  const releaseDate = releaseDateArr[1] + ' ' + releaseDateArr[2] + ', ' + releaseDateArr[3]
+  const duration = movie?.results?.duration?.charAt('1') + ' hours ' + movie?.results?.duration?.charAt('3') + movie?.results?.duration?.charAt('4') + ' minutes'
 
   // Get Movie Schedule
   React.useEffect(() => {
     getDataSchedule().then((data) => {
       setDataSchedule(data)
     })
-  }, [id, city, date]);
+  }, [id, city, date])
   const getDataSchedule = async () => {
-    const {data} = await http().get(`/movieSchedule/listMovieSChedule/${id}/${city}/${date}`)
+    const { data } = await http().get(`/movieSchedule/listMovieSChedule/${id}/${city}/${date}`)
     return data
   }
 
   // Select Schedule
   const selectSchedule = (el, cinema, price, cinemaName, movieScheduleId) => {
-    setSelectedTime(el.slice(0, 2) < 12 ? el.slice(0, 5)+'am' : el.slice(0, 5)+'pm')
+    setSelectedTime(el.slice(0, 2) < 12 ? el.slice(0, 5) + 'am' : el.slice(0, 5) + 'pm')
     setSelectedCinema(cinema)
     setselectedPrice(price)
     setSelectedCinemaName(cinemaName)
@@ -81,7 +81,7 @@ const MovieDetails = () => {
         price: selectedPrice,
         cinemaName: selectedCinemaName,
         movieScheduleId: selectedMovieScheduleId,
-        userId: userId
+        userId
       }))
       navigate('/order')
     } else {
@@ -92,7 +92,7 @@ const MovieDetails = () => {
     setShowAlertDate(false)
   }
 
-  return(
+  return (
     <>
     <Header />
 
@@ -142,14 +142,16 @@ const MovieDetails = () => {
           <option value='Purwokerto'>Purwokerto</option>
         </select>
       </div>
-      {showAlertDate ? <div className='flex items-center gap-10 absolute top-0 left-[25%] p-2 bg-red-300 border-2 border-red-500 rounded'>
+      {showAlertDate
+        ? <div className='flex items-center gap-10 absolute top-0 left-[25%] p-2 bg-red-300 border-2 border-red-500 rounded'>
         <p>Ticket reservations can only be made at least day-1. Please check the date.</p>
         <button onClick={hideAlertDate} className='flex items-center px-1 h-6 border-2 border-slate-500 bg-slate-200 rounded'>X</button>
-      </div> : false}
+      </div>
+        : false}
 
       <div className='grid grid-cols-3 gap-8'>
         {dataSchedule?.results?.map((cinema, index) => {
-          return(
+          return (
             <div key={String(index)} className="w-[320px] bg-white pb-5 font-[mulish] rounded-[8px]">
           <div className="grid grid-cols-2 items-center px-5 py-5 border-b-[1px]">
             <div>
@@ -162,13 +164,13 @@ const MovieDetails = () => {
           </div>
           <div className="grid grid-cols-4 px-5 py-5 gap-2 text-sm">
             {cinema.time.sort().map((el, index) => {
-              return(<button key={String(index)} className={`btn-ghost ${cinema.cinemaId === selectedCinema && (el.slice(0, 2) < 12 ? el.slice(0, 5)+'am' : el.slice(0, 5)+'pm') === selectedTime && 'text-primary font-bold'}`} onClick={() => selectSchedule(el, cinema.cinemaId, cinema.price, cinema.cinemaName, cinema.id)}>{el.slice(0, 2) < 12 ? el.slice(0, 5)+'am' : el.slice(0, 5)+'pm'}</button>)
+              return (<button key={String(index)} className={`btn-ghost ${cinema.cinemaId === selectedCinema && (el.slice(0, 2) < 12 ? el.slice(0, 5) + 'am' : el.slice(0, 5) + 'pm') === selectedTime && 'text-primary font-bold'}`} onClick={() => selectSchedule(el, cinema.cinemaId, cinema.price, cinema.cinemaName, cinema.id)}>{el.slice(0, 2) < 12 ? el.slice(0, 5) + 'am' : el.slice(0, 5) + 'pm'}</button>)
             })}
           </div>
 
           <div className="flex px-5 py-5 mb-3">
             <div className="flex-1">Price</div>
-            <div className="font-bold">{'Rp'+new Intl.NumberFormat('id-ID').format(Number(cinema.price))+'/seat'}</div>
+            <div className="font-bold">{'Rp' + new Intl.NumberFormat('id-ID').format(Number(cinema.price)) + '/seat'}</div>
           </div>
 
           <div className="px-5">

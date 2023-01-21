@@ -1,22 +1,26 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import http from '../../helpers/http';
+import React from 'react'
+import { Link } from 'react-router-dom'
+import http from '../../helpers/http'
+import { useSelector } from 'react-redux'
 
 const Upcoming = () => {
-  const [upcomingMovies, setUpcomingMovies] = React.useState({});
+  const token = useSelector((state) => state?.auth?.token)
+  console.log(token)
+
+  const [upcomingMovies, setUpcomingMovies] = React.useState({})
   React.useEffect(() => {
     getUpcomingMovies().then((data) => {
       setUpcomingMovies(data)
     })
-  }, []);
+  }, [])
 
   const getUpcomingMovies = async () => {
-    const {data} = await http().get('/movies/upcoming?limit=8');
-    return data;
+    const { data } = await http().get('/movies/upcoming?limit=8')
+    return data
   }
 
-  return(
-    <div className='flex flex-nowrap items-center mt-10 ml-[100px] gap-5 overflow-x-scroll'>
+  return (
+    <div className='flex flex-nowrap items-center mt-10 mx-5 md:mx-[100px] gap-5 overflow-x-scroll'>
       {upcomingMovies?.results?.map((movie, index) => {
         return (
           <React.Fragment key={String(index)}>
@@ -26,7 +30,7 @@ const Upcoming = () => {
                 <div className='font-bold whitespace-nowrap overflow-hidden text-ellipsis'>{movie.title}</div>
                 <div className='font-medium text-sm text-[#A0A3BD] whitespace-nowrap overflow-hidden text-ellipsis'>{movie.genre}</div>
                 <div>
-                 <Link to={'/movieDetails/'+movie.id}><button className='w-[100%] mt-7 p-1 border-[0.5px] border-primary rounded-[4px] text-primary hover:bg-primary hover:text-white'>Detail</button></Link>
+                 <Link to={'/movieDetails/' + movie.id}><button className='w-[100%] mt-7 p-1 border-[0.5px] border-primary rounded-[4px] text-primary hover:bg-primary hover:text-white'>Detail</button></Link>
                 </div>
               </div>
             </div>

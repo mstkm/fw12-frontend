@@ -1,22 +1,21 @@
-import React from 'react';
-import http from '../../helpers/http';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import http from '../../helpers/http'
+import { Link } from 'react-router-dom'
 
 const ListMovie = () => {
-  const [ListMovies, setLisMovies] = React.useState({});
+  const [ListMovies, setLisMovies] = React.useState({})
   React.useEffect(() => {
     getLisMovies().then((data) => {
       setLisMovies(data)
     })
-  }, []);
-
+  }, [])
 
   const getLisMovies = async () => {
-    const {data} = await http().get(`/movies?limit=8&page=1`);
-    return data;
+    const { data } = await http().get('/movies?limit=8&page=1')
+    return data
   }
 
-  return(
+  return (
     <>
     <div className='grid grid-cols-4 gap-4 p-8 bg-[white] mx-[100px] mt-5 rounded-[8px]'>
       {ListMovies?.results?.map((movie, index) => {
@@ -28,7 +27,7 @@ const ListMovie = () => {
                 <div className='font-bold whitespace-nowrap overflow-hidden text-ellipsis'>{movie.title}</div>
                 <div className='font-medium text-sm text-[#A0A3BD] whitespace-nowrap overflow-hidden text-ellipsis'>{movie.genre}</div>
                 <div>
-                <Link to={'/movieDetails/'+movie.id}><button className='w-[100%] mt-7 p-1 border-[0.5px] border-primary rounded-[4px] text-primary hover:bg-primary hover:text-white'>Detail</button></Link>
+                <Link to={'/movieDetails/' + movie.id}><button className='w-[100%] mt-7 p-1 border-[0.5px] border-primary rounded-[4px] text-primary hover:bg-primary hover:text-white'>Detail</button></Link>
                 </div>
               </div>
             </div>
@@ -47,7 +46,6 @@ const ListMovie = () => {
     </>
 
   )
-
 }
 
 export default ListMovie

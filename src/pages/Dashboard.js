@@ -1,8 +1,9 @@
-import Footer from "../assets/components/Footer"
-import HeaderAdmin from "../assets/components/HeaderAdmin"
+import React from 'react'
+import Footer from '../assets/components/Footer'
+import HeaderAdmin from '../assets/components/HeaderAdmin'
 
 const Dashboard = () => {
-  return(
+  return (
     <div>
       <HeaderAdmin />
 

@@ -1,20 +1,20 @@
-import React from 'react';
-import {BrowserRouter, Route, Routes} from "react-router-dom";
-import Home from './Home';
-import SignIn from './SignIn';
-import SignUp from './SignUp';
-import ForgotPassword from './ForgotPassword';
-import UpdatePassword from './UpdatePassword';
-import ViewAll from './ViewAll';
-import MovieDetails from './MovieDetails';
-import Order from './Order';
-import Payment from './Payment';
-import Profile from './Profile';
-import OrderHistory from './OrderHistory';
-import TicketResult from './TicketResult';
-import ManageMovie from './ManageMovie';
-import ManageSchedule from './ManageSchedule';
-import Dashboard from './Dashboard';
+import React from 'react'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import Home from './Home'
+import SignIn from './SignIn'
+import SignUp from './SignUp'
+import ForgotPassword from './ForgotPassword'
+import UpdatePassword from './UpdatePassword'
+import ViewAll from './ViewAll'
+import MovieDetails from './MovieDetails'
+import Order from './Order'
+import Payment from './Payment'
+import Profile from './Profile'
+import OrderHistory from './OrderHistory'
+import TicketResult from './TicketResult'
+import ManageMovie from './ManageMovie'
+import ManageSchedule from './ManageSchedule'
+import Dashboard from './Dashboard'
 
 const Main = () => {
   return (
@@ -37,8 +37,7 @@ const Main = () => {
         <Route path='/dashboard' element={<Dashboard />} />
       </Routes>
     </BrowserRouter>
-  );
-
+  )
 }
 
-export default Main;
+export default Main

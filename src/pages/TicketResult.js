@@ -1,9 +1,10 @@
-import Header from "../assets/components/Header"
-import Footer from "../assets/components/Footer"
-import TicketActive from "../assets/components/TicketActive"
+import React from 'react'
+import Header from '../assets/components/Header'
+import Footer from '../assets/components/Footer'
+import TicketActive from '../assets/components/TicketActive'
 
 const TicketResult = () => {
-  return(
+  return (
     <>
       <Header />
 
