@@ -9,7 +9,7 @@ const SignIn = () => {
   const navigate = useNavigate()
   const token = useSelector((state) => state.auth.token)
 
-  const [showAlertLogin, setShowAlertLogin] = React.useState(false)
+  const [showAlertLogin, setShowAlertLogin] = React.useState(true)
 
   const dispatch = useDispatch()
   const login = (event) => {

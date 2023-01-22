@@ -1,31 +1,78 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 import { Eye, EyeOff } from 'react-feather'
 import { Link, useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import http from '../helpers/http'
+import { useDispatch } from 'react-redux'
+import { login as loginAction } from '../redux/reducers/auth'
+import { Oval } from 'react-loader-spinner'
+import { Formik, Form, Field } from 'formik'
+import * as Yup from 'yup'
+import YupPassword from 'yup-password'
+YupPassword(Yup)
+
+const phoneRegExpID = /^(^08)(\d{8,10})$/
+
+const SignupSchema = Yup.object().shape({
+  firstName: Yup.string()
+    .min(2, 'Too Short!')
+    .max(50, 'Too Long!')
+    .required('Required'),
+  lastName: Yup.string()
+    .min(2, 'Too Short!')
+    .max(50, 'Too Long!')
+    .required('Required'),
+  phoneNumber: Yup.string()
+    .matches(phoneRegExpID, 'Invalid phone number')
+    .required('Required'),
+  email: Yup.string().email('Invalid email').required('Required'),
+  password: Yup.string()
+    .password()
+    .min(8, 'Min length 8')
+    .minLowercase(1, 'Lowercase 1')
+    .minUppercase(1, 'Uppercase 1')
+    .minSymbols(1, 'Symbols 1')
+    .minNumbers(1, 'Numbers 1')
+})
 
 const SignUp = () => {
-  const [alertRegister, setAlertRegister] = React.useState(false)
-
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
-  const register = async (event) => {
-    event.preventDefault()
-    const firstName = event.target.firstName.value
-    const lastName = event.target.lastName.value
-    const phoneNumber = event.target.phoneNumber.value
-    const email = event.target.email.value
-    const password = event.target.password.value
-
-    const { data } = await axios.post('http://localhost:8888/auth/register', { firstName, lastName, phoneNumber, email, password })
-
-    setAlertRegister(true)
-
+  // Register
+  const [alertError, setAlertError] = React.useState(null)
+  const [alertSuccess, setAlertSuccess] = React.useState(null)
+  const [loadingRegister, setLoadingRegister] = React.useState(false)
+  const cb = () => {
     setTimeout(() => {
-      navigate('/signin')
-    }, 5000)
-    return data
+      navigate('/')
+    }, 2000)
+  }
+  const register = async (value) => {
+    setLoadingRegister(true)
+    try {
+      const response = await http().post('/auth/register', value)
+      setAlertSuccess(response?.data?.message)
+      if (response?.data?.message) {
+        setLoadingRegister(false)
+      }
+      const token = response?.data?.results?.token
+      dispatch(loginAction({ token }))
+      cb()
+      return response
+    } catch (error) {
+      console.log(error)
+      setAlertError(error?.response?.data?.message)
+      if (error?.response?.data?.message) {
+        setLoadingRegister(false)
+      }
+      setTimeout(() => {
+        setAlertError(null)
+      }, 5000)
+    }
   }
 
+  // Show / hide password
   const [inputType, setInputType] = React.useState('password')
   const [iconEye, setIconEye] = React.useState(true)
   const showPassword = () => {
@@ -55,36 +102,79 @@ const SignUp = () => {
       <div className='flex flex-col flex-[40%] justify-center px-10 overflow-y-scroll'>
         <div className='text-5xl font-bold mb-4 mt-[18rem] max-[425.98px]:mt-[20rem] max-[768.98px]:mt-[25rem]'>Sign Up</div>
         <div className='text-[#AAAAAA] mb-10'>Fill your additional details</div>
-        <form onSubmit={register} className='mb-8'>
+        {loadingRegister && <div className='flex justify-center mb-10'>
+          <Oval
+            height={50}
+            width={50}
+            color="#00005C"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
+            ariaLabel='oval-loading'
+            secondaryColor="grey"
+            strokeWidth={2}
+            strokeWidthSecondary={2}
+          />
+        </div>}
+        {alertError && <div className="alert alert-error shadow-lg mb-10">
+          <div>
+            <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            <span>{alertError}</span>
+          </div>
+        </div>}
+        {alertSuccess && <div className="alert alert-success shadow-lg mb-10">
+          <div>
+            <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            <span>{alertSuccess}</span>
+          </div>
+        </div>}
+        <Formik
+          initialValues={{
+            firstName: '',
+            lastName: '',
+            phoneNumber: '',
+            email: '',
+            password: ''
+          }}
+          validationSchema={SignupSchema}
+          onSubmit={(value) => register(value)}>
+            {({ errors, touched }) => (
+              <Form>
           <div className='mb-5'>
           <div className='text-[#4E4B66] mb-2'>First Name</div>
-            <input className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none' name='firstName' placeholder='Write your first name'></input>
+            <Field className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none' name='firstName' placeholder='Write your first name'></Field>
+            {errors.firstName && touched.firstName ? <div className=' text-red-500 text-sm'>{errors.firstName}</div> : null}
           </div>
           <div className='mb-5'>
           <div className='text-[#4E4B66] mb-2'>Last Name</div>
-            <input className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none' name='lastName' placeholder='Write your last name'></input>
+            <Field className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none' name='lastName' placeholder='Write your last name'></Field>
+            {errors.lastName && touched.lastName ? <div className=' text-red-500 text-sm'>{errors.lastName}</div> : null}
           </div>
           <div className='mb-5'>
           <div className='text-[#4E4B66] mb-2'>Phone Number</div>
-            <input className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none' name='phoneNumber' placeholder='Write your phone number'></input>
+            <Field className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none' name='phoneNumber' placeholder='Write your phone number'></Field>
+            {errors.phoneNumber && touched.phoneNumber ? <div className=' text-red-500 text-sm'>{errors.phoneNumber}</div> : null}
           </div>
           <div className='mb-5'>
             <div className='text-[#4E4B66] mb-2'>Email</div>
-            <input className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none' name='email' placeholder='Write your email'></input>
+            <Field className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none' name='email' placeholder='Write your email'></Field>
+            {errors.email && touched.email ? <div className=' text-red-500 text-sm'>{errors.email}</div> : null}
           </div>
           <div className='mb-5'>
             <div className='text-[#4E4B66] mb-2'>Password</div>
             <div className='relative'>
               {iconEye ? <Eye onClick={showPassword} className='absolute top-3 right-[15px] cursor-pointer'/> : <EyeOff onClick={showPassword} className='absolute top-3 right-[15px] cursor-pointer'/>}
-              <input className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none' name='password' type={inputType} placeholder='Write your password'></input>
+              <Field className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none' name='password' type={inputType} placeholder='Write your password'></Field>
+              {errors.password && touched.password ? <div className=' text-red-500 text-sm'>{errors.password}</div> : null}
             </div>
           </div>
           <div className='mt-10'>
-            <button className='w-[100%] h-[50px] bg-primary border-[1px] border-primary rounded-[16px] pl-4 text-white'>Sign Up</button>
+            <button type='submit' className='btn w-[100%] h-[50px] bg-primary border-[1px] border-primary rounded-[16px] pl-4 text-white'>Sign Up</button>
           </div>
-        </form>
-        {alertRegister ? <div className='bg-green-100 border-[1px] border-green-600 p-3 text-center rounded-[8px] mb-3'>Register berhasil. <br/>Silahkan login dengan email dan password!</div> : false}
-        <div className='text-[#8692A6] text-center mb-10'>Already have an account? <Link to='/signin' className='text-primary underline cursor-pointer hover:font-bold'>Sign In</Link></div>
+              </Form>
+            )}
+        </Formik>
+        <div className='text-[#8692A6] text-center my-10'>Already have an account? <Link to='/signin' className='text-primary underline cursor-pointer hover:font-bold'>Sign In</Link></div>
       </div>
     </div>
   )

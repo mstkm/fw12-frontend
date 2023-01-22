@@ -3,17 +3,28 @@ import Footer from '../assets/components/Footer'
 import http from '../helpers/http'
 import { useSelector, useDispatch } from 'react-redux'
 import React from 'react'
-import { chooseSeat as chooseSeatAction, changeMovie as changeMovieAction } from '../redux/reducers/transactions'
+import { transaction as transactionAction } from '../redux/reducers/transactions'
 import { useNavigate } from 'react-router-dom'
 
 const Order = () => {
   const token = useSelector((state) => state.auth.token)
+  const {
+    bookingDate,
+    bookingTime,
+    movieId,
+    movieTitle,
+    cinemaId,
+    price,
+    cinemaName,
+    cinemaPicture,
+    movieScheduleId,
+    userId
+  } = useSelector((state) => state?.transactions)
   const navigate = useNavigate()
   if (!token) {
     navigate('/signin')
   }
   // Get data movie by id
-  const movieId = useSelector((state) => state.transactions.movieId)
   const [movie, setMovie] = React.useState({})
   React.useEffect(() => {
     getMovie().then((data) => {
@@ -26,7 +37,6 @@ const Order = () => {
   }
   const title = movie?.results?.title
 
-  let bookingDate = useSelector((state) => state.transactions.bookingDate)
   const date = new Date(bookingDate).getDate()
   const [day, setDay] = React.useState(new Date(bookingDate).getDay() + 1)
   React.useEffect(() => {
@@ -75,9 +85,7 @@ const Order = () => {
     }
   }, [month])
   const year = new Date(bookingDate).getFullYear()
-  bookingDate = `${day}, ${date} ${month} ${year}`
-  const bookingTime = useSelector((state) => state.transactions.bookingTime)
-  const price = useSelector((state) => state.transactions.price)
+  const bookingDateFormat = `${day}, ${date} ${month} ${year}`
 
   // Select seat
   const [selectedSeat, setSelectedSeat] = React.useState([])
@@ -93,7 +101,19 @@ const Order = () => {
   const [showAlertChooseSeat, setShowAlertChooseSeat] = React.useState(false)
   const checkOut = () => {
     if (selectedSeat.length) {
-      dispatch(chooseSeatAction({ seatNum: selectedSeat }))
+      dispatch(transactionAction({
+        bookingDate,
+        bookingTime,
+        movieId,
+        movieTitle,
+        cinemaId,
+        price,
+        cinemaName,
+        cinemaPicture,
+        movieScheduleId,
+        userId,
+        seatNum: selectedSeat
+      }))
       navigate('/payment')
     } else {
       setShowAlertChooseSeat(true)
@@ -103,12 +123,17 @@ const Order = () => {
     setShowAlertChooseSeat(false)
   }
   const changeMovie = () => {
-    dispatch(changeMovieAction({
+    dispatch(transactionAction({
       bookingDate: null,
       bookingTime: null,
       movieId: null,
+      movieTitle: null,
       cinemaId: null,
       price: null,
+      cinemaName: null,
+      cinemaPicture: null,
+      movieScheduleId: null,
+      userId: null,
       seatNum: null
     }))
     navigate('/viewAll')
@@ -118,7 +143,7 @@ const Order = () => {
     <div>
       <Header />
 
-      <div className="flex gap-8 px-[100px] py-10 font-[mulish] bg-[#EFF0F7]">
+      <div className="flex flex-col-reverse md:flex-row gap-8 px-5 md:px-[100px] py-10 font-[mulish] bg-[#EFF0F7]">
         <div className="flex-[70%]">
           <div className="mb-8">
             <div className='flex-1 font-bold text-lg mb-5'>Movie Selected</div>
@@ -132,14 +157,14 @@ const Order = () => {
 
           <div>
             <div className='flex-1 font-bold text-lg mb-5'>Choose Your Seat</div>
-            <div className="bg-[white] py-10 px-[100px] rounded-[6px] mb-8">
+            <div className="bg-[white] py-10 px-1 md:px-[100px] rounded-[6px] mb-8">
               <div className="flex flex-col items-center ">
                 <div className="font-bold mb-2">Screen</div>
                 <div className="border-[1px] w-[50%] h-[8px] bg-[#D6D8E7] rounded-[4px] mb-5"></div>
               </div>
 
               {/* Select Seat */}
-              <div className="grid grid-cols-2 mb-8 gap-10">
+              <div className="grid grid-cols-2 mb-8 gap-4 md:gap-10">
                 <div className="grid gap-2">{['A', 'B', 'C', 'D', 'E', 'F', 'G', ' '].map((alphabet, i) => {
                   return (
                     <div key={String(i)} className="grid grid-cols-8 gap-2">{[0, 1, 2, 3, 4, 5, 6, 7].map((number, i) => {
@@ -195,7 +220,7 @@ const Order = () => {
 
             </div>
 
-            <div className="flex">
+            <div className="flex flex-col items-center md:flex-row gap-4">
               <div className="flex-1">
                 <button onClick={changeMovie} className="flex justify-center items-center w-[300px] h-[50px] p-5 border-[2px] border-primary text-primary font-bold rounded-[4px] hover:bg-primary hover:text-white">Change your movie</button>
               </div>
@@ -220,7 +245,7 @@ const Order = () => {
               <div className="text-sm font-bold">{title}</div>
             </div>
             <div className="flex mb-2">
-              <div className="flex-1 text-sm text-[#6B6B6B]">{bookingDate}</div>
+              <div className="flex-1 text-sm text-[#6B6B6B]">{bookingDateFormat}</div>
               <div className="text-sm font-bold">{bookingTime}</div>
             </div>
             <div className="flex mb-2">

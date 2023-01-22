@@ -31,7 +31,7 @@ const Main = () => {
         <Route path='/payment' element={<Payment />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/orderHistory' element={<OrderHistory />} />
-        <Route path='/ticketResult' element={<TicketResult />} />
+        <Route path='/ticketResult/:id' element={<TicketResult />} />
         <Route path='/manageMovie' element={<ManageMovie />} />
         <Route path='/manageSchedule' element={<ManageSchedule />} />
         <Route path='/dashboard' element={<Dashboard />} />

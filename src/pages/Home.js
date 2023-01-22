@@ -10,18 +10,25 @@ import Header from '../assets/components/Header'
 import Footer from '../assets/components/Footer'
 
 const Home = () => {
+  const token = useSelector((state) => state.auth.token)
   const navigate = useNavigate()
   const directToSignin = () => {
     navigate('/signup')
   }
-
+  const toListMovie = () => {
+    if (!token) {
+      navigate('/signin')
+    } else {
+      navigate('/viewAll')
+    }
+  }
   const Head = () => {
     return (
       <div className='flex items-center p-5 md:px-24 md:py-7 font-[mulish]'>
         <div className='flex gap-16 flex-1 items-center'>
           <img className='w-28' src={Logo} alt='logo' />
           <div className='hidden md:block cursor-pointer hover:font-bold'>Home</div>
-          <div className='hidden md:block cursor-pointer hover:font-bold'>List Movie</div>
+          <div onClick={toListMovie} className='hidden md:block cursor-pointer hover:font-bold'>List Movie</div>
         </div>
         <div>
           <button onClick={directToSignin} className='bg-primary text-white w-28 h-10 rounded hover:font-bold active:border-2 active:border-white'>Sign Up</button>
@@ -29,8 +36,6 @@ const Home = () => {
       </div>
     )
   }
-
-  const token = useSelector((state) => state.auth.token)
 
   return (
     <div>
@@ -54,7 +59,7 @@ const Home = () => {
           <div className='flex-1'>
             <div className='text-primary font-bold border-b-2 pb-4 border-primary inline text-2xl'>Now Showing</div>
           </div>
-          <div className='text-primary font-bold cursor-pointer'>view all</div>
+          <div onClick={toListMovie} className='text-primary font-bold cursor-pointer'>view all</div>
         </div>
 
         {!token ? <Now /> : <NowShowing />}
@@ -64,22 +69,7 @@ const Home = () => {
       <div className='py-10 font-[mulish]'>
         <div className='flex items-center px-5 md:px-[100px]'>
           <div className='flex-1 font-bold text-2xl'>Upcoming</div>
-          <div className='text-primary font-bold cursor-pointer'>view all</div>
-        </div>
-
-        <div className='flex flex-nowrap mx-5 md:mx-[100px] py-5 overflow-x-scroll gap-4'>
-          <div className='flex justify-center items-center min-w-[127px] min-h-[40px] border-[1px] border-primary text-primary rounded-[4px] cursor-pointer hover:bg-primary hover:text-white'>September</div>
-          <div className='flex justify-center items-center min-w-[127px] min-h-[40px] border-[1px] border-primary text-primary rounded-[4px] cursor-pointer hover:bg-primary hover:text-white'>October</div>
-          <div className='flex justify-center items-center min-w-[127px] min-h-[40px] border-[1px] border-primary text-primary rounded-[4px] cursor-pointer hover:bg-primary hover:text-white'>November</div>
-          <div className='flex justify-center items-center min-w-[127px] min-h-[40px] border-[1px] border-primary text-primary rounded-[4px] cursor-pointer hover:bg-primary hover:text-white'>December</div>
-          <div className='flex justify-center items-center min-w-[127px] min-h-[40px] border-[1px] border-primary text-primary rounded-[4px] cursor-pointer hover:bg-primary hover:text-white'>January</div>
-          <div className='flex justify-center items-center min-w-[127px] min-h-[40px] border-[1px] border-primary text-primary rounded-[4px] cursor-pointer hover:bg-primary hover:text-white'>February</div>
-          <div className='flex justify-center items-center min-w-[127px] min-h-[40px] border-[1px] border-primary text-primary rounded-[4px] cursor-pointer hover:bg-primary hover:text-white'>March</div>
-          <div className='flex justify-center items-center min-w-[127px] min-h-[40px] border-[1px] border-primary text-primary rounded-[4px] cursor-pointer hover:bg-primary hover:text-white'>April</div>
-          <div className='flex justify-center items-center min-w-[127px] min-h-[40px] border-[1px] border-primary text-primary rounded-[4px] cursor-pointer hover:bg-primary hover:text-white'>May</div>
-          <div className='flex justify-center items-center min-w-[127px] min-h-[40px] border-[1px] border-primary text-primary rounded-[4px] cursor-pointer hover:bg-primary hover:text-white'>June</div>
-          <div className='flex justify-center items-center min-w-[127px] min-h-[40px] border-[1px] border-primary text-primary rounded-[4px] cursor-pointer hover:bg-primary hover:text-white'>July</div>
-          <div className='flex justify-center items-center min-w-[127px] min-h-[40px] border-[1px] border-primary text-primary rounded-[4px] cursor-pointer hover:bg-primary hover:text-white'>Augustus</div>
+          <div onClick={toListMovie} className='text-primary font-bold cursor-pointer'>view all</div>
         </div>
 
         <Upcoming />

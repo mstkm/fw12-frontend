@@ -2,18 +2,20 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   bookingDate: null,
-  bookingTime: null,
   movieId: null,
-  userId: null,
+  movieTitle: null,
   cinemaId: null,
   price: null,
   cinemaName: null,
+  cinemaPicture: null,
   movieScheduleId: null,
   fullName: null,
   email: null,
   phoneNumber: null,
-  paymentMethodId: null,
   statusId: null,
+  userId: null,
+  paymentMethodId: null,
+  bookingTime: null,
   seatNum: null
 }
 
@@ -21,56 +23,45 @@ const transactions = createSlice({
   name: 'transactions',
   initialState,
   reducers: {
-    chooseMovie: (state, { payload }) => {
-      state.movieId = payload.movieId
-      state.cinemaId = payload.cinemaId
+    transaction: (state, { payload }) => {
       state.bookingDate = payload.bookingDate
-      state.bookingTime = payload.bookingTime
-      state.price = payload.price
+      state.movieId = payload.movieId
+      state.movieTitle = payload.movieTitle
+      state.cinemaId = payload.cinemaId
       state.cinemaName = payload.cinemaName
+      state.cinemaPicture = payload.cinemaPicture
+      state.price = payload.price
       state.movieScheduleId = payload.movieScheduleId
-      state.userId = payload.userId
-    },
-    chooseSeat: (state, { payload }) => {
-      state.seatNum = payload.seatNum
-    },
-    changeMovie: (state, { payload }) => {
-      state.movieId = null
-      state.cinemaId = null
-      state.bookingDate = null
-      state.bookingTime = null
-      state.price = null
-      state.seatNum = null
-      state.cinemaName = null
-      state.movieScheduleId = null
-      state.userId = null
-    },
-    choosePayment: (state, { payload }) => {
-      state.paymentMethodId = payload.paymentMethodId
       state.fullName = payload.fullName
       state.email = payload.email
       state.phoneNumber = payload.phoneNumber
       state.statusId = payload.statusId
+      state.userId = payload.userId
+      state.paymentMethodId = payload.paymentMethodId
+      state.bookingTime = payload.bookingTime
+      state.seatNum = payload.seatNum
     },
     logoutTransaction: (state, { payload }) => {
       state.bookingDate = null
-      state.bookingTime = null
       state.movieId = null
-      state.userId = null
+      state.movieTitle = null
       state.cinemaId = null
+      state.cinemaName = null
+      state.cinemaPicture = null
       state.price = null
       state.movieScheduleId = null
       state.fullName = null
       state.email = null
       state.phoneNumber = null
-      state.paymentMethodId = null
       state.statusId = null
+      state.userId = null
+      state.paymentMethodId = null
+      state.bookingTime = null
       state.seatNum = null
-      state.cinemaName = null
     }
   }
 })
 
-export const { chooseMovie, chooseSeat, changeMovie, choosePayment, logoutTransaction } = transactions.actions
+export const { transaction, logoutTransaction } = transactions.actions
 
 export default transactions.reducer

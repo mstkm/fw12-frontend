@@ -1,20 +1,51 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable camelcase */
 import Header from '../assets/components/Header'
 import Footer from '../assets/components/Footer'
 import { AlertTriangle } from 'react-feather'
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import http from '../helpers/http'
-import { choosePayment as choosePaymentAction } from '../redux/reducers/transactions'
+import { transaction as transactionAction } from '../redux/reducers/transactions'
 import { useNavigate } from 'react-router-dom'
+import jwt_decode from 'jwt-decode'
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 const Payment = () => {
   const token = useSelector((state) => state.auth.token)
+  const {
+    bookingDate,
+    bookingTime,
+    movieId,
+    movieTitle,
+    cinemaId,
+    price,
+    cinemaName,
+    cinemaPicture,
+    movieScheduleId,
+    userId,
+    seatNum
+  } = useSelector((state) => state?.transactions)
+  const { id } = jwt_decode(token)
   const navigate = useNavigate()
-  if (!token) {
-    navigate('/signin')
+
+  // Get user
+  const [user, setUser] = React.useState(null)
+  React.useEffect(() => {
+    getUser().then((response) => {
+      setUser(response?.data?.results)
+    })
+  })
+  const getUser = async () => {
+    try {
+      const response = await http(token).get(`/users/${id}`)
+      return response
+    } catch (error) {
+      console.log(error)
+    }
   }
 
-  let bookingDate = useSelector((state) => state.transactions.bookingDate)
   const date = new Date(bookingDate).getDate()
   const [day, setDay] = React.useState(new Date(bookingDate).getDay() + 1)
   React.useEffect(() => {
@@ -63,18 +94,9 @@ const Payment = () => {
     }
   }, [month])
   const year = new Date(bookingDate).getFullYear()
-  bookingDate = `${day}, ${date} ${month} ${year}`
-  const bookingTime = useSelector((state) => state.transactions.bookingTime)
-  const cinemaName = useSelector((state) => state.transactions.cinemaName)
-  const seatNum = useSelector((state) => state.transactions.seatNum)
-  const price = useSelector((state) => state.transactions.price)
-  const userId = useSelector((state) => state.transactions.userId)
-  const cinemaId = useSelector((state) => state.transactions.cinemaId)
-  const movieScheduleId = useSelector((state) => state.transactions.movieScheduleId)
-  const paymentMethodId = useSelector((state) => state.transactions.paymentMethodId)
+  const bookingDateFormat = `${day}, ${date} ${month} ${year}`
 
   // Get data movie by id
-  const movieId = useSelector((state) => state.transactions.movieId)
   const [movie, setMovie] = React.useState({})
   React.useEffect(() => {
     getMovie().then((data) => {
@@ -101,9 +123,9 @@ const Payment = () => {
 
   const dispatch = useDispatch()
   const [selectedPaymentMethod, setSelectedPaymentMethod] = React.useState(null)
-  const [fullName, setFullName] = React.useState('')
-  const [email, setEmail] = React.useState('')
-  const [phoneNumber, setPhoneNumber] = React.useState('')
+  const [fullName, setFullName] = React.useState(user?.firstName)
+  const [email, setEmail] = React.useState(user?.email)
+  const [phoneNumber, setPhoneNumber] = React.useState(user?.phoneNumber)
   const [showAlertPaymentMethod, setShowAlertPaymentMethod] = React.useState(false)
   const [showAlertForm, setShowAlertForm] = React.useState(false)
 
@@ -114,43 +136,41 @@ const Payment = () => {
     } else if (fullName === '' || email === '' || phoneNumber === '') {
       setShowAlertForm(true)
     } else {
-      dispatch(choosePaymentAction({
-        paymentMethodId: selectedPaymentMethod,
-        fullName,
-        email,
-        phoneNumber,
-        statusId: 1
-      }))
       const { data } = await http(token).post('/profile/transaction', {
         bookingDate: booking,
+        bookingTime,
         movieId,
-        userId,
+        movieTitle,
         cinemaId,
+        totalPrice: seatNum?.length * price,
+        cinemaName,
+        cinemaPicture,
         movieScheduleId,
-        fullName,
-        email,
-        phoneNumber,
-        statusId: 1,
-        paymentMethodId,
-        seatNum,
-        bookingTime
+        userId,
+        seatNum: seatNum?.join(', '),
+        paymentMethodId: selectedPaymentMethod,
+        fullName: user?.firstName,
+        email: user?.email,
+        phoneNumber: user?.phoneNumber,
+        statusId: 1
       })
+      navigate('/orderHistory')
       return data
     }
   }
-
   return (
     <div>
       <Header />
 
-      <div className="flex gap-8 px-[100px] py-10 font-[mulish] bg-[#EFF0F7]">
+      <div className="flex flex-col-reverse md:flex-row gap-8 px-5 md:px-[100px] py-10 font-[mulish] bg-[#EFF0F7]">
         <div className="flex-[70%]">
           <div className="mb-8">
             <div className='font-bold text-lg mb-5'>Payment Info</div>
-            <div className="bg-[white] p-5 rounded-[6px]">
-              <div className="flex border-b-[1px] p-3">
+            {title
+              ? <div className="bg-[white] p-5 rounded-[6px]">
+              <div className="flex flex-col md:flex-row border-b-[1px] p-3">
                 <div className="flex-1 text-[#6B6B6B]">Date & time</div>
-                <div className="font-bold">{bookingDate + ' at ' + bookingTime}</div>
+                <div className="font-bold">{bookingDateFormat + ' at ' + bookingTime}</div>
               </div>
               <div className="flex border-b-[1px] p-3">
                 <div className="flex-1 text-[#6B6B6B]">Movie title</div>
@@ -166,15 +186,19 @@ const Payment = () => {
               </div>
               <div className="flex p-3">
                 <div className="flex-1 text-[#6B6B6B]">Total payment</div>
-                <div className="font-bold text-lg">{'Rp' + new Intl.NumberFormat('id-ID').format(Number(seatNum.length * price))}</div>
+                <div className="font-bold text-lg">{'Rp' + new Intl.NumberFormat('id-ID').format(Number(seatNum?.length * price))}</div>
               </div>
             </div>
+              : <div>
+              <Skeleton className='h-[280px]' />
+            </div>}
           </div>
 
           <div>
             <div className='font-bold text-lg mb-5'>Choose a Payment Method</div>
             <div className="bg-[white] p-5 rounded-[6px] mb-8">
-              <div className="grid grid-cols-4 gap-5">
+              {paymentMethod?.results
+                ? <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
                 {paymentMethod?.results?.map((payment, index) => {
                   return (
                     <button onClick={() => setSelectedPaymentMethod(payment.id) & setShowAlertPaymentMethod(false)} key={String(index)} className={`flex justify-center items-center border-2 w-[145px] h-[50px] rounded-[8px] hover:border-primary ${(payment.id === selectedPaymentMethod) ? ' bg-primary' : ''}`}>
@@ -182,8 +206,10 @@ const Payment = () => {
                    </button>
                   )
                 })}
-
               </div>
+                : <div>
+                <Skeleton className='h-[300px] md:h-[150px]' />
+              </div>}
               <div className='flex items-center py-8'>
                 <div className='flex-1'>
                   <div className='border-[1px] bg-[#DEDEDE]'></div>
@@ -196,7 +222,7 @@ const Payment = () => {
               <div className="text-center">Pay via cash. <span className="text-primary">See how it work</span></div>
             </div>
 
-            <div className="flex">
+            <div className="flex flex-col md:flex-row items-center gap-4">
               <div className="flex-1">
                 <button onClick={() => navigate('/order')} className="flex justify-center items-center w-[300px] h-[50px] p-5 border-[2px] border-primary text-primary font-bold rounded-[4px] hover:bg-primary hover:text-white">Previous Step</button>
               </div>
@@ -211,23 +237,24 @@ const Payment = () => {
 
         <div className="flex-[30%]">
           <div className='flex-1 font-bold text-lg mb-5'>Personal Info</div>
-          <div className="bg-white p-5 rounded-[6px]">
+          {user?.firstName
+            ? <div className="bg-white p-5 rounded-[6px]">
             <div className="mb-5">
               <div className="mb-2">Full Name</div>
               <div>
-                <input onChange={(e) => setFullName(e.target.value) & setShowAlertForm(false)} className="border-[1px] w-[100%] h-[50px] rounded-[4px] pl-5 focus:outline-none" type='text' placeholder="Jonas El Rodriguez"></input>
+                <input onChange={(e) => setFullName(e.target.value) & setShowAlertForm(false)} className="border-[1px] w-[100%] h-[50px] rounded-[4px] pl-5 focus:outline-none" type='text' defaultValue={user?.firstName}></input>
               </div>
             </div>
             <div className="mb-5">
               <div className="mb-2">Email</div>
               <div>
-                <input onChange={(e) => setEmail(e.target.value) & setShowAlertForm(false)} className="border-[1px] w-[100%] h-[50px] rounded-[4px] pl-5 focus:outline-none" type='email' placeholder="jonasrodri123@gmail.com"></input>
+                <input onChange={(e) => setEmail(e.target.value) & setShowAlertForm(false)} className="border-[1px] w-[100%] h-[50px] rounded-[4px] pl-5 focus:outline-none" type='email' defaultValue={user?.email}></input>
               </div>
             </div>
             <div className="mb-5">
               <div className="mb-2">Phone Number</div>
               <div>
-                <input onChange={(e) => setPhoneNumber(e.target.value) & setShowAlertForm(false)} className="border-[1px] w-[100%] h-[50px] rounded-[4px] pl-5 focus:outline-none" type='text' placeholder="+62 | 81445687121"></input>
+                <input onChange={(e) => setPhoneNumber(e.target.value) & setShowAlertForm(false)} className="border-[1px] w-[100%] h-[50px] rounded-[4px] pl-5 focus:outline-none" type='text' defaultValue={user?.phoneNumber}></input>
               </div>
             </div>
             <div className="mb-5">
@@ -248,6 +275,9 @@ const Payment = () => {
             </div>
               : false}
           </div>
+            : <div>
+            <Skeleton className='h-[400px]' />
+          </div>}
         </div>
       </div>
 

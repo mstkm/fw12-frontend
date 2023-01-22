@@ -9,7 +9,6 @@ const ListMovie = () => {
       setLisMovies(data)
     })
   }, [])
-
   const getLisMovies = async () => {
     const { data } = await http().get('/movies?limit=8&page=1')
     return data
