@@ -7,7 +7,7 @@ const Dashboard = () => {
     <div>
       <HeaderAdmin />
 
-      <div className="flex px-[100px] bg-[#E5E5E5] py-10 font-[mulish] gap-8">
+      <div className="flex flex-col md:flex-row px-5 md:px-[100px] bg-[#E5E5E5] py-10 font-[mulish] gap-8">
         <div className="flex-[70%]">
           <div className="text-2xl font-bold mb-3">Dashboard</div>
           <div>
