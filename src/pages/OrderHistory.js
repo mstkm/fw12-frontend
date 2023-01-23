@@ -10,7 +10,6 @@ import jwt_decode from 'jwt-decode'
 import moment from 'moment'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
-import { Result } from 'postcss'
 
 const OrderHistory = () => {
   const navigate = useNavigate()
@@ -94,7 +93,7 @@ const OrderHistory = () => {
               </div>
               <div className="flex items-center">
                 <div className="flex-1">
-                  <div className={`flex items-center justify-center w-[150px] h-[40px] ${new Date() < new Date(transaction?.bookingDate) ? 'bg-[#00BA88]' : 'bg-black'} rounded-[4px] text-white`}>Ticket Active</div>
+                  <div className={`flex items-center justify-center w-[150px] h-[40px] ${(moment().format() < moment(transaction?.bookingDate).format().split('T')[0] + 'T' + transaction?.bookingTime) ? 'bg-[#00BA88]' : 'bg-black'} rounded-[4px] text-white`}>Ticket Active</div>
                 </div>
                 <div onClick={() => navigate(`/ticketResult/${transaction?.id}`)} className="text-[#AAAAAA] cursor-pointer hover:font-bold hover:text-primary">See Details</div>
               </div>
