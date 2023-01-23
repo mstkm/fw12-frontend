@@ -1,7 +1,9 @@
+/* eslint-disable no-constant-condition */
+/* eslint-disable no-unused-vars */
 /* eslint-disable camelcase */
 import React from 'react'
 import Header from '../assets/components/Header'
-import { Eye } from 'react-feather'
+import { Eye, EyeOff } from 'react-feather'
 import Footer from '../assets/components/Footer'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
@@ -9,6 +11,36 @@ import jwt_decode from 'jwt-decode'
 import http from '../helpers/http'
 import { Oval } from 'react-loader-spinner'
 import Skeleton from 'react-loading-skeleton'
+import { Formik, Form, Field } from 'formik'
+import * as Yup from 'yup'
+import YupPassword from 'yup-password'
+YupPassword(Yup)
+
+const phoneRegExpID = /^(^08)(\d{8,10})$/
+
+const InformationSchema = Yup.object().shape({
+  firstName: Yup.string()
+    .min(2, 'Too Short!')
+    .max(50, 'Too Long!')
+    .required('Required'),
+  lastName: Yup.string()
+    .min(2, 'Too Short!')
+    .max(50, 'Too Long!')
+    .required('Required'),
+  phoneNumber: Yup.string()
+    .matches(phoneRegExpID, 'Invalid phone number')
+    .required('Required'),
+  email: Yup.string().email('Invalid email').required('Required')
+})
+const PasswordSchema = Yup.object().shape({
+  password: Yup.string()
+    .password()
+    .min(8, 'Min length 8')
+    .minLowercase(1, 'Lowercase 1')
+    .minUppercase(1, 'Uppercase 1')
+    .minSymbols(1, 'Symbols 1')
+    .minNumbers(1, 'Numbers 1')
+})
 
 const Profile = () => {
   const navigate = useNavigate()
@@ -23,7 +55,7 @@ const Profile = () => {
   const [userResponse, setUserResponse] = React.useState(null)
   const user = userResponse?.data?.results
   const [profilePicture, setProfilePicture] = React.useState(null)
-  const fullName = user?.firstName + ' ' + user?.lastName
+  const [fullName, setFullName] = React.useState(null)
   React.useEffect(() => {
     getUser().then(response => {
       setUserResponse(response)
@@ -33,6 +65,7 @@ const Profile = () => {
     try {
       const response = await http(token).get(`/users/${id}`)
       setProfilePicture(response?.data?.results?.picture)
+      setFullName(response?.data?.results?.firstName + ' ' + response?.data?.results?.lastName)
       return response
     } catch (error) {
       console.log(error)
@@ -77,6 +110,89 @@ const Profile = () => {
       }
     } else {
       setAlertErrorMessage('Picture not found. Please choose picture!')
+    }
+  }
+
+  // Update information
+  const [loadingUpdateInformation, setLoadingUpdateInformation] = React.useState(false)
+  const [informationSuccess, setInformationSuccess] = React.useState(null)
+  const [informationFailed, setInformationFailed] = React.useState(null)
+  const updateInformation = async (value) => {
+    setLoadingUpdateInformation(true)
+    try {
+      const response = await http(token).patch(`/users/${id}`, value)
+      setFullName(response?.data?.results?.firstName + ' ' + response?.data?.results?.lastName)
+      setInformationSuccess('Update Success')
+      setLoadingUpdateInformation(false)
+      setTimeout(() => {
+        setInformationSuccess(null)
+      }, 5000)
+      return response
+    } catch (error) {
+      console.log(error)
+      setInformationFailed('Update failed')
+      setLoadingUpdateInformation(false)
+      setTimeout(() => {
+        setInformationFailed(null)
+      }, 5000)
+    }
+  }
+
+  // Update password
+  const [loadingUpdatePassword, setLoadingUpdatePassword] = React.useState(false)
+  const [passwordSuccess, setPasswordSuccess] = React.useState(null)
+  const [passwordFailed, setPasswordFailed] = React.useState(null)
+  const updatePassword = async (value) => {
+    const { password, confirmPassword } = value
+    if (password === confirmPassword) {
+      setLoadingUpdatePassword(true)
+      try {
+        const response = await http(token).patch(`/users/${id}`, { password })
+        setPasswordSuccess('Update success')
+        setLoadingUpdatePassword(false)
+        setTimeout(() => {
+          setPasswordSuccess(null)
+        }, 5000)
+        return response
+      } catch (error) {
+        console.log(error)
+        setLoadingUpdatePassword(false)
+        setPasswordFailed('Update failed')
+        setTimeout(() => {
+          setPasswordFailed(null)
+        }, 5000)
+      }
+    } else {
+      setPasswordFailed('Password and confirm password not match')
+      setTimeout(() => {
+        setPasswordFailed(null)
+      }, 5000)
+    }
+  }
+
+  // Show / hide password
+  const [inputType, setInputType] = React.useState(true)
+  const [inputTypeConfirm, setInputTypeConfirm] = React.useState(true)
+  const [iconEye, setIconEye] = React.useState(true)
+  const [iconEyeConfirm, setIconEyeConfirm] = React.useState(true)
+  const showPassword = () => {
+    if (iconEye === true) {
+      setIconEye(false)
+      setInputType(false)
+    }
+    if (iconEye === false) {
+      setIconEye(true)
+      setInputType(true)
+    }
+  }
+  const showConfirmPassword = () => {
+    if (iconEyeConfirm === true) {
+      setIconEyeConfirm(false)
+      setInputTypeConfirm(false)
+    }
+    if (iconEyeConfirm === false) {
+      setIconEyeConfirm(true)
+      setInputTypeConfirm(true)
     }
   }
 
@@ -138,61 +254,126 @@ const Profile = () => {
           <div className="text-[#4E4B66] font-bold py-5 border-b-2 border-primary cursor-pointer">Account Setting</div>
           <div onClick={directToOrderHistory} className="text-[#4E4B66] py-5 cursor-pointer hover:font-bold">Order History</div>
         </div>
-        {!user?.firstName && <Skeleton className='h-[350px]' />}
-        {user?.firstName && <><div className="gap-12 bg-white rounded-[24px] p-8 mb-5">
+        {!user?.firstName && <Skeleton className='h-[350px] my-10' />}
+        {user?.firstName &&
+        <Formik
+          initialValues={{
+            firstName: user?.firstName,
+            lastName: user?.lastName,
+            email: user?.email,
+            phoneNumber: user?.phoneNumber
+          }}
+          validationSchema={InformationSchema}
+          onSubmit={(value) => updateInformation(value)}>
+            {({ errors, touched }) => (
+          <Form>
+          <div className="gap-12 bg-white rounded-[24px] p-8 mb-5">
             <div className="text-[#4E4B66] border-b-[1px] pb-2 mb-5">Details Information</div>
             <div className="grid md:grid-cols-2 gap-5">
               <div>
                 <div className="text-[#4E4B66] mb-2">First Name</div>
                 <div>
-                  <input className="border-[1px] w-[100%] h-[50px] rounded-[16px] pl-5 focus:outline-none" type='text' defaultValue={user?.firstName}></input>
+                  <Field name='firstName' className="border-[1px] w-[100%] h-[50px] rounded-[16px] pl-5 focus:outline-none" type='text'></Field>
+                  {errors.firstName && touched.firstName ? <div className=' text-red-500 text-sm'>{errors.firstName}</div> : null}
                 </div>
               </div>
               <div>
                 <div className="text-[#4E4B66] mb-2">Last Name</div>
                 <div>
-                  <input className="border-[1px] w-[100%] h-[50px] rounded-[16px] pl-5 focus:outline-none" type='text' defaultValue={user?.lastName}></input>
+                  <Field name='lastName' className="border-[1px] w-[100%] h-[50px] rounded-[16px] pl-5 focus:outline-none" type='text'></Field>
+                  {errors.lastName && touched.lastName ? <div className=' text-red-500 text-sm'>{errors.lastName}</div> : null}
                 </div>
               </div>
               <div>
                 <div className="text-[#4E4B66] mb-2">Email</div>
                 <div>
-                  <input className="border-[1px] w-[100%] h-[50px] rounded-[16px] pl-5 focus:outline-none" type='email' defaultValue={user?.email}></input>
+                  <Field name='email' className="border-[1px] w-[100%] h-[50px] rounded-[16px] pl-5 focus:outline-none" type='email'></Field>
+                  {errors.email && touched.email ? <div className=' text-red-500 text-sm'>{errors.email}</div> : null}
                 </div>
               </div>
               <div>
                 <div className="text-[#4E4B66] mb-2">Phone Number</div>
                 <div>
-                  <input className="border-[1px] w-[100%] h-[50px] rounded-[16px] pl-5 focus:outline-none" type='email' defaultValue={user?.phoneNumber}></input>
+                  <Field name='phoneNumber' className="border-[1px] w-[100%] h-[50px] rounded-[16px] pl-5 focus:outline-none" type='text'></Field>
+                  {errors.phoneNumber && touched.phoneNumber ? <div className=' text-red-500 text-sm'>{errors.phoneNumber}</div> : null}
                 </div>
               </div>
             </div>
-          </div><div className="mb-8">
-              <button className="bg-primary w-[350px] h-[50px] text-white rounded-[16px]">Update changes</button>
-            </div></>}
-
-        <div className="gap-12 bg-white rounded-[24px] p-8 mb-5">
-          <div className="text-[#4E4B66] border-b-[1px] pb-2 mb-5">Account and Privacy</div>
-          <div className="grid md:grid-cols-2 gap-5">
-            <div>
-              <div className="text-[#4E4B66] mb-2">New Password</div>
-              <div className="relative">
-                <Eye className="absolute right-4 top-3" />
-                <input className="border-[1px] w-[100%] h-[50px] rounded-[16px] pl-5 focus:outline-none" type='password' placeholder="Write your password"></input>
-              </div>
-            </div>
-            <div>
-              <div className="text-[#4E4B66] mb-2">Confirm Password</div>
-              <div className="relative">
-                <Eye className="absolute right-4 top-3" />
-                <input className="border-[1px] w-[100%] h-[50px] rounded-[16px] pl-5 focus:outline-none" type='text' placeholder="Confirm your password"></input>
-              </div>
-            </div>
+            {loadingUpdateInformation && <div className='mt-5 flex justify-center'>
+            <Oval
+              height={25}
+              width={25}
+              color="#00005C"
+              wrapperStyle={{}}
+              wrapperClass=""
+              visible={true}
+              ariaLabel='oval-loading'
+              secondaryColor="grey"
+              strokeWidth={5}
+              strokeWidthSecondary={5}
+            />
+          </div>}
+          {informationSuccess && <p className='text-green-600 text-center mt-5'>{informationSuccess}</p>}
+          {informationFailed && <p className='text-red-600 text-center mt-5'>{informationFailed}</p>}
           </div>
-        </div>
-        <div className="mb-5">
-          <button className="bg-primary w-[350px] h-[50px] text-white rounded-[16px]">Update changes</button>
-        </div>
+          <div className="mb-8">
+            <button type='submit' className="bg-primary w-[350px] h-[50px] text-white rounded-[16px]">Update changes</button>
+          </div>
+          </Form>
+            )}
+        </Formik>}
+
+        <Formik
+          initialValues={{
+            password: '',
+            confirmPassword: ''
+          }}
+          validationSchema={PasswordSchema}
+          onSubmit={value => updatePassword(value)}>
+        {({ errors, touched }) => (
+          <Form>
+          <div className="gap-12 bg-white rounded-[24px] p-8 mb-5">
+            <div className="text-[#4E4B66] border-b-[1px] pb-2 mb-5">Account and Privacy</div>
+            <div className="grid md:grid-cols-2 gap-5">
+              <div>
+                <div className="text-[#4E4B66] mb-2">New Password</div>
+                <div className="relative">
+                  {iconEye ? <Eye onClick={showPassword} className="absolute right-4 top-3" /> : <EyeOff onClick={showPassword} className="absolute right-4 top-3" />}
+                  <Field name='password' className="border-[1px] w-[100%] h-[50px] rounded-[16px] pl-5 focus:outline-none" type={inputType ? 'password' : 'text'} placeholder="Write your password"></Field>
+                  {errors.password && touched.password ? <div className=' text-red-500 text-sm'>{errors.password}</div> : null}
+                </div>
+              </div>
+              <div>
+                <div className="text-[#4E4B66] mb-2">Confirm Password</div>
+                <div className="relative">
+                  {iconEyeConfirm ? <Eye onClick={showConfirmPassword} className="absolute right-4 top-3" /> : <EyeOff onClick={showConfirmPassword} className="absolute right-4 top-3" />}
+                  <Field name='confirmPassword' className="border-[1px] w-[100%] h-[50px] rounded-[16px] pl-5 focus:outline-none" type={inputTypeConfirm ? 'password' : 'text'} placeholder="Confirm your password"></Field>
+                </div>
+              </div>
+            </div>
+            {loadingUpdatePassword && <div className='mt-5 flex justify-center'>
+            <Oval
+              height={25}
+              width={25}
+              color="#00005C"
+              wrapperStyle={{}}
+              wrapperClass=""
+              visible={true}
+              ariaLabel='oval-loading'
+              secondaryColor="grey"
+              strokeWidth={5}
+              strokeWidthSecondary={5}
+            />
+          </div>}
+            {passwordSuccess && <p className='mt-5 text-green-600 text-center'>{passwordSuccess}</p>}
+            {passwordFailed && <p className='mt-5 text-red-600 text-center'>{passwordFailed}</p>}
+          </div>
+          <div className="mb-5">
+            <button type='submit' className="bg-primary w-[350px] h-[50px] text-white rounded-[16px]">Update changes</button>
+          </div>
+          </Form>
+        )}
+        </Formik>
 
       </div>
     </div>
