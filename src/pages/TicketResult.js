@@ -1,3 +1,4 @@
+/* eslint-disable no-constant-condition */
 import React from 'react'
 import Header from '../assets/components/Header'
 import Footer from '../assets/components/Footer'
@@ -45,7 +46,6 @@ const TicketResult = () => {
       console.log(error)
     }
   }
-
   return (
     <>
       <Header />
@@ -114,7 +114,8 @@ const TicketResult = () => {
 
       {/* Responsive mobile */}
       <div className='md:hidden bg-[#E5E5E5] py-10 px-10 font-[mulish]'>
-        <div className='relative bg-white rounded-xl'>
+        {movie?.genre
+          ? <div className='relative bg-white rounded-xl'>
           <div className='absolute -left-8 top-60 bg-[#E5E5E5] w-[50px] h-[50px] rounded-full'></div>
           <div className='absolute -right-8 top-60 bg-[#E5E5E5] w-[50px] h-[50px] rounded-full'></div>
           <div className='flex justify-center py-10 border-b-2 border-[#E5E5E5] border-dashed'>
@@ -161,6 +162,9 @@ const TicketResult = () => {
             </div>
           </div>
         </div>
+          : <div>
+        <Skeleton className='h-[500px]' />
+      </div>}
       </div>
       <Footer />
     </>
