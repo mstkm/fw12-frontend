@@ -6,10 +6,10 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout as logoutAction } from '../../redux/reducers/auth'
 import { logoutTransaction as logoutTransactionAction } from '../../redux/reducers/transactions'
-import jwt_decode from 'jwt-decode'
 import http from '../../helpers/http'
+import jwt_decode from 'jwt-decode'
 
-const Header = () => {
+const Header = (profilePicture) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const token = useSelector(state => state?.auth?.token)
@@ -17,7 +17,6 @@ const Header = () => {
 
   // Get user
   const [user, setUser] = React.useState(null)
-  const profilePicture = user?.picture
   React.useEffect(() => {
     getUser().then(response => {
       setUser(response?.data?.results)
@@ -85,7 +84,7 @@ const Header = () => {
 
       <div className='relative'>
         <div className='group cursor-pointer'>
-          <img className='w-[50px] h-[50px] rounded-full' src={profilePicture || 'https://res.cloudinary.com/dvzrmzldr/image/upload/v1673836551/Desain_tanpa_judul_bsia1l.png'} alt='foto-profil' />
+          <img className='w-[50px] h-[50px] rounded-full' src={user?.picture || profilePicture?.image || 'https://res.cloudinary.com/dvzrmzldr/image/upload/v1673836551/Desain_tanpa_judul_bsia1l.png'} alt='foto-profil' />
           <div id='drop-profile' className='z-20 group-hover:block hidden absolute top-[50px] right-1 border-[1px] border-[#DEDED] rounded-[2px] bg-[#FCFDFE] pl-2 pr-8 pt-1 pb-3'>
             <div onClick={directToProfile} className='mb-3 cursor-pointer hover:font-bold'>Profile</div>
             <div onClick={() => dispatch(logoutAction()) & dispatch(logoutTransactionAction())} className='cursor-pointer hover:font-bold'>Logout</div>
