@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import http from '../../helpers/http'
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 function NowShowing () {
   const [nowShowingMovies, setNowShowingMovies] = React.useState({})
@@ -16,7 +18,9 @@ function NowShowing () {
   }
 
   return (
-    <div className='flex flex-nowrap mt-10 gap-6 mx-5 md:mx-[100px] overflow-x-scroll'>
+    <>
+    {nowShowingMovies?.results
+      ? <div className='flex flex-nowrap mt-10 gap-6 mx-5 md:mx-[100px] overflow-x-scroll'>
       {nowShowingMovies?.results?.map((movie, index) => {
         return (
           <React.Fragment key={String(index)}>
@@ -37,6 +41,8 @@ function NowShowing () {
       })}
 
     </div>
+      : <div className='mx-5 md:mx-[100px] py-10'><Skeleton className='h-[300px]' /></div>}
+    </>
   )
 }
 
