@@ -79,6 +79,7 @@ const Profile = () => {
   const [alertSuccessMessage, setAlertSuccessMessage] = React.useState(null)
   const [alertErrorMessage, setAlertErrorMessage] = React.useState(null)
   const [loadingUpdatePicture, setLoadingUpdatePicture] = React.useState(false)
+  const fileSize = picture?.size
   const openModal = () => {
     setOpenModalPicture(false)
     setPicture(null)
@@ -86,7 +87,7 @@ const Profile = () => {
     setAlertErrorMessage(null)
   }
   const updatePicture = async () => {
-    if (picture) {
+    if (picture && fileSize < 5024 * 1024) {
       setLoadingUpdatePicture(true)
       setAlertErrorMessage(null)
       try {
@@ -109,6 +110,8 @@ const Profile = () => {
       } catch (error) {
         console.log(error)
       }
+    } else if (picture && fileSize > 5024 * 1024) {
+      setAlertErrorMessage('File too large. Max 5 MB.')
     } else {
       setAlertErrorMessage('Picture not found. Please choose picture!')
     }
@@ -199,7 +202,7 @@ const Profile = () => {
 
   return (
     <div className='relative'>
-    {role === '1' ? <HeaderAdmin /> : <Header />}
+    {role === '1' ? <HeaderAdmin image={profilePicture} /> : <Header image={profilePicture} />}
     <div className="relative flex flex-col md:flex-row gap-8 bg-[#E5E5E5] px-5 md:px-[100px] py-10 font-[mulish]">
       {openModalPicture && <div className='fixed top-0 -left-0 overflow-auto w-full h-screen bg-black/50 z-10 flex justify-center items-center'>
         <div className='bg-white rounded p-10'>
@@ -207,7 +210,7 @@ const Profile = () => {
             <input onChange={e => {
               setPicture(e.target.files[0])
               setAlertErrorMessage(false)
-            }} className='file:bg-primary file:border-0 file:rounded file:text-white file:btn file:normal-case hover:file:bg-blue-600 cursor-pointer bg-slate-300 rounded' type="file" accept="image/png, image/jpeg" />
+            }} className='file:bg-primary file:border-0 file:rounded file:text-white file:btn file:normal-case hover:file:bg-blue-600 cursor-pointer bg-slate-300 rounded' type="file" accept="image/png, image/jpeg, image/jpg" />
           </div>
           {loadingUpdatePicture && <div className='mt-5 flex justify-center'>
             <Oval
