@@ -14,6 +14,7 @@ import Skeleton from 'react-loading-skeleton'
 import { Formik, Form, Field } from 'formik'
 import * as Yup from 'yup'
 import YupPassword from 'yup-password'
+import HeaderAdmin from '../assets/components/HeaderAdmin'
 YupPassword(Yup)
 
 const phoneRegExpID = /^(^08)(\d{8,10})$/
@@ -45,7 +46,7 @@ const PasswordSchema = Yup.object().shape({
 const Profile = () => {
   const navigate = useNavigate()
   const token = useSelector((state) => state.auth.token)
-  const { id } = jwt_decode(token)
+  const { id, role } = jwt_decode(token)
 
   const directToOrderHistory = () => {
     navigate('/orderHistory')
@@ -198,7 +199,7 @@ const Profile = () => {
 
   return (
     <div className='relative'>
-    <Header />
+    {role === '1' ? <HeaderAdmin /> : <Header />}
     <div className="relative flex flex-col md:flex-row gap-8 bg-[#E5E5E5] px-5 md:px-[100px] py-10 font-[mulish]">
       {openModalPicture && <div className='fixed top-0 -left-0 overflow-auto w-full h-screen bg-black/50 z-10 flex justify-center items-center'>
         <div className='bg-white rounded p-10'>
