@@ -1,10 +1,41 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import http from '../helpers/http'
+import { Oval } from 'react-loader-spinner'
+import { useDispatch } from 'react-redux'
+import { forgotPassword as forgotPasswordAction } from '../redux/reducers/forgotPassword'
 
 const ForgotPassword = () => {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const directToUpdatePassword = () => {
     navigate('/updatePassword')
+  }
+
+  // Forgot password
+  const [loadingForgotPassword, setLoadingForgotPassword] = React.useState(false)
+  const [failedMessage, setFailedMessage] = React.useState(null)
+  const [successMessage, setSuccessMessage] = React.useState(null)
+  const handleForgotPassword = async (event) => {
+    event.preventDefault()
+    setLoadingForgotPassword(true)
+    setFailedMessage(null)
+    setSuccessMessage(null)
+    const email = event.target.email.value
+    try {
+      const response = await http().post('/auth/forgotPassword', { email })
+      setLoadingForgotPassword(false)
+      setSuccessMessage(response?.data?.message + '. Check your email.')
+      dispatch(forgotPasswordAction({ email }))
+      setTimeout(() => {
+        directToUpdatePassword()
+      }, 3000)
+    } catch (error) {
+      console.log(error)
+      setLoadingForgotPassword(false)
+      setFailedMessage(error?.response?.data?.message)
+    }
   }
 
   return (
@@ -43,13 +74,29 @@ const ForgotPassword = () => {
       <div className="flex flex-col flex-[40%] justify-center px-10 max-[425.98px]:py-0">
         <div className='text-3xl font-bold mb-4'>Fill your complete email</div>
         <div className='text-[#AAAAAA] mb-10'>we`ll send a link to your email shortly</div>
-        <form className='mb-8'>
+        {loadingForgotPassword && <div className='mb-5 flex justify-center'>
+          <Oval
+            height={25}
+            width={25}
+            color="#00005C"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
+            ariaLabel='oval-loading'
+            secondaryColor="grey"
+            strokeWidth={5}
+            strokeWidthSecondary={5}
+          />
+        </div>}
+        {successMessage && <p className='mb-5 text-center text-green-600'>{successMessage}</p>}
+        {failedMessage && <p className='mb-5 text-center text-red-600'>{failedMessage}</p>}
+        <form onSubmit={handleForgotPassword} className='mb-8'>
           <div className='mb-5'>
             <div className='text-[#4E4B66] mb-2'>Email</div>
-            <input className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[4px] pl-4 focus:outline-none' placeholder='Write your email'></input>
+            <input name='email' className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[4px] pl-4 focus:outline-none' placeholder='Write your email'></input>
           </div>
           <div className='mt-10'>
-            <button onClick={directToUpdatePassword} className='w-[100%] h-[50px] bg-primary border-[1px] border-primary rounded-[4px] pl-4 text-white'>Send</button>
+            <button type='submit' className='w-[100%] h-[50px] bg-primary border-[1px] border-primary rounded-[4px] pl-4 text-white'>Send</button>
           </div>
         </form>
       </div>
