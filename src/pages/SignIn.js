@@ -1,45 +1,46 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 import { Eye, EyeOff } from 'react-feather'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-// import { login as loginAction } from '../redux/reducers/auth';
-import { loginAction } from '../redux/actions/auth'
+import { login as loginAction } from '../redux/reducers/auth'
+import http from '../helpers/http'
+import { Oval } from 'react-loader-spinner'
 
 const SignIn = () => {
   const navigate = useNavigate()
   const token = useSelector((state) => state.auth.token)
-
-  const [showAlertLogin, setShowAlertLogin] = React.useState(true)
-
   const dispatch = useDispatch()
-  const login = (event) => {
+
+  // Login
+  const [loadingLogin, setLoadingLogin] = React.useState(false)
+  const [loginSuccessMessage, setLoginSuccessMessage] = React.useState(null)
+  const [loginFailedMessage, setLoginFailedMessage] = React.useState(null)
+  const login = async (event) => {
     event.preventDefault()
+    setLoadingLogin(true)
+    setLoginSuccessMessage(null)
+    setLoginFailedMessage(null)
     const email = event.target.email.value
     const password = event.target.password.value
-    const cb = () => {
-      navigate('/')
-    }
-    dispatch(loginAction({ email, password, cb }))
-    if (token === null) {
+    try {
+      const response = await http().post('/auth/login', { email, password })
+      const token = response?.data?.results?.token
+      setLoadingLogin(false)
+      setLoginSuccessMessage(response?.data?.message)
+      dispatch(loginAction({ token }))
+      const cb = () => {
+        navigate('/')
+      }
       setTimeout(() => {
-        setShowAlertLogin(true)
-      }, 500)
+        cb()
+      }, 3000)
+      return response
+    } catch (error) {
+      console.log(error)
+      setLoadingLogin(false)
+      setLoginFailedMessage(error?.response?.data?.message)
     }
-  }
-
-  const hideAlertLogin = () => {
-    setShowAlertLogin(false)
-  }
-
-  const AlertLogin = () => {
-    return (
-      <div className='flex bg-red-100 border-[1px] border-red-600 py-3 px-5 rounded-[8px] mb-3'>
-        <div className='flex-1'>Wrong username or password</div>
-        <div>
-          <button onClick={hideAlertLogin} className='bg-gray-50 border-[1px] px-2 rounded-[4px]'>x</button>
-        </div>
-      </div>
-    )
   }
 
   const [inputType, setInputType] = React.useState('password')
@@ -71,7 +72,22 @@ const SignIn = () => {
       <div className="flex flex-col flex-[40%] justify-center px-10 max-[425.98px]:pt-[5rem] max-[768.98px]:pt-[10rem] max-[768.98px]:pb-[2rem] max-[768.98px]:overflow-y-scroll">
         <div className='text-5xl font-bold mb-4'>Sign In</div>
         <div className='text-[#AAAAAA] mb-10'>Sign in with your data that you entered during your registration</div>
-        {showAlertLogin ? <AlertLogin /> : false}
+        {loadingLogin && <div className='mb-5 flex justify-center'>
+          <Oval
+            height={25}
+            width={25}
+            color="#00005C"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
+            ariaLabel='oval-loading'
+            secondaryColor="grey"
+            strokeWidth={5}
+            strokeWidthSecondary={5}
+          />
+        </div>}
+        {loginSuccessMessage && <p className='mb-5 text-center text-green-600'>{loginSuccessMessage}</p>}
+        {loginFailedMessage && <p className='mb-5 text-center text-red-600'>{loginFailedMessage}</p>}
         <form onSubmit={login} className='mb-8'>
           <div className='mb-5'>
             <div className='text-[#4E4B66] mb-2'>Email</div>
