@@ -8,7 +8,6 @@ import http from '../helpers/http'
 import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import moment from 'moment'
-import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 
 const TicketResult = () => {
@@ -33,20 +32,21 @@ const TicketResult = () => {
 
   // Get movie
   const [movie, setMovie] = React.useState({})
-  const movieId = transaction?.movieId
   React.useEffect(() => {
     getMovie().then((response) => {
       setMovie(response?.data?.results)
     })
-  }, [movieId])
+  }, [])
   const getMovie = async () => {
     try {
-      const response = await http().get(`/movies/${movieId}`)
+      const response = await http().get(`/movies/${transaction?.movieId}`)
       return response
     } catch (error) {
       console.log(error)
     }
   }
+  const title = movie?.title || transaction?.movieTitle
+  const category = movie?.genre?.split(', ')[0] || '-'
   return (
     <>
       <Header />
@@ -54,8 +54,7 @@ const TicketResult = () => {
       <div className="hidden md:block bg-[#E5E5E5] py-10 px-[190px] font-[mulish]">
         <div className="flex flex-col justify-center items-center bg-white rounded-[8px] py-10">
           <div className="font-bold mb-5">Proof of Payment</div>
-          {movie?.genre
-            ? <div className="flex w-[600px] border-[1px] rounded-[16px]">
+          <div className="flex w-[600px] border-[1px] rounded-[16px]">
             <div className="flex-[70%]">
               <div className="flex bg-primary rounded-tl-[16px] items-center px-10 mb-5 py-5">
                 <div className="flex-1">
@@ -65,7 +64,7 @@ const TicketResult = () => {
               </div>
               <div className="px-10 mb-3">
                 <div className="text-[#AAAAAA]">Movie</div>
-                <div className="font-bold">{transaction?.movieTitle}</div>
+                <div className="font-bold">{title}</div>
               </div>
               <div className="grid grid-cols-3 gap-3 px-10 pb-3">
                 <div>
@@ -78,7 +77,7 @@ const TicketResult = () => {
                 </div>
                 <div>
                   <div className="text-[#AAAAAA]">Category</div>
-                  <div className="font-bold">{movie?.genre.split(', ')[0]}</div>
+                  <div className="font-bold">{category}</div>
                 </div>
                 <div>
                   <div className="text-[#AAAAAA]">Count</div>
@@ -106,17 +105,12 @@ const TicketResult = () => {
               </div>
             </div>
           </div>
-            : <div>
-            <Skeleton className='h-[300px]' />
-          </div>
-          }
         </div>
       </div>
 
       {/* Responsive mobile */}
       <div className='md:hidden bg-[#E5E5E5] py-10 px-10 font-[mulish]'>
-        {movie?.genre
-          ? <div className='relative bg-white rounded-xl'>
+      <div className='relative bg-white rounded-xl'>
           <div className='absolute -left-8 top-60 bg-[#E5E5E5] w-[50px] h-[50px] rounded-full'></div>
           <div className='absolute -right-8 top-60 bg-[#E5E5E5] w-[50px] h-[50px] rounded-full'></div>
           <div className='flex justify-center py-10 border-b-2 border-[#E5E5E5] border-dashed'>
@@ -126,11 +120,11 @@ const TicketResult = () => {
             <div className='flex'>
               <div className='flex-1'>
                 <p>Movie</p>
-                <p className='font-bold'>{movie?.title}</p>
+                <p className='font-bold'>{title}</p>
               </div>
               <div className='w-[100px]'>
                 <p>Category</p>
-                <p className='font-bold'>{movie?.genre?.split(', ')[0]}</p>
+                <p className='font-bold'>{category}</p>
               </div>
             </div>
             <div className='flex'>
@@ -163,9 +157,6 @@ const TicketResult = () => {
             </div>
           </div>
         </div>
-          : <div>
-        <Skeleton className='h-[500px]' />
-      </div>}
       </div>
       <Footer />
     </>

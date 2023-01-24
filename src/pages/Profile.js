@@ -256,7 +256,7 @@ const Profile = () => {
       <div className="flex-[70%]">
         <div className="flex gap-12 bg-white rounded-[24px] px-8 mb-5">
           <div className="text-[#4E4B66] font-bold py-5 border-b-2 border-primary cursor-pointer">Account Setting</div>
-          <div onClick={directToOrderHistory} className="text-[#4E4B66] py-5 cursor-pointer hover:font-bold">Order History</div>
+          {role === '2' && <div onClick={directToOrderHistory} className="text-[#4E4B66] py-5 cursor-pointer hover:font-bold">Order History</div>}
         </div>
         {!user?.firstName && <Skeleton className='h-[350px] my-10' />}
         {user?.firstName &&

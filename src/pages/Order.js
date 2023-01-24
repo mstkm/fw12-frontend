@@ -32,6 +32,8 @@ const Order = () => {
   const bookingTimesArr = transactions?.map(el => el.bookingTime)
   const seatNumSold = transactions?.map(el => el.seatNum)
   const [seatNumSoldArr, setSeatNumSoldArr] = React.useState([])
+  console.log(bookingTimesArr)
+  console.log(bookingTime)
   React.useEffect(() => {
     getTransactions().then(response => {
       setTransactions(response?.data?.results)
@@ -288,7 +290,7 @@ const Order = () => {
             </div>
             <div className="flex mb-2">
               <div className="flex-1 text-sm text-[#6B6B6B]">{bookingDateFormat}</div>
-              <div className="text-sm font-bold">{bookingTime}</div>
+              <div className="text-sm font-bold">{`${bookingTime?.split(':')[0]}:${bookingTime?.split(':')[1]}${bookingTime?.split(':')[0] < 12 ? 'am' : 'pm'}`}</div>
             </div>
             <div className="flex mb-2">
               <div className="flex-1 text-sm text-[#6B6B6B]">One ticket price</div>

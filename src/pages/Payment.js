@@ -171,7 +171,7 @@ const Payment = () => {
               ? <div className="bg-[white] p-5 rounded-[6px]">
               <div className="flex flex-col md:flex-row border-b-[1px] p-3">
                 <div className="flex-1 text-[#6B6B6B]">Date & time</div>
-                <div className="font-bold">{bookingDateFormat + ' at ' + bookingTime}</div>
+                <div className="font-bold">{bookingDateFormat + ' at ' + bookingTime?.split(':')[0] + ':' + bookingTime?.split(':')[1] + (bookingTime?.split(':')[0] < 12 ? 'am' : 'pm')}</div>
               </div>
               <div className="flex border-b-[1px] p-3">
                 <div className="flex-1 text-[#6B6B6B]">Movie title</div>
