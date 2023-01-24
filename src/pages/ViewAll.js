@@ -70,10 +70,10 @@ const ViewAll = () => {
             <input onChange={(e) => setSearch(e.target.value)} className='w-[200px] h-[50px] border-[1px] border-[#DEDED] rounded-[16px] bg-[#FCFDFE] pl-5 focus:outline-none' placeholder='Search Movie Name ...'></input>
           </div>
         </div>
-
         {ListMovies?.results
           ? <>
-          <div className='grid grid-cols-2 md:grid-cols-4 gap-4 p-4 md:p-8 bg-[white] md:mx-[100px] mt-5 rounded-[8px]'>
+          <div className={`grid ${ListMovies?.results?.length && 'grid-cols-2 md:grid-cols-4'} gap-4 p-4 md:p-8 bg-[white] md:mx-[100px] mt-5 rounded-[8px]`}>
+            {!ListMovies?.results?.length && <p className='text-center'>No results.</p>}
             {ListMovies?.results?.map((movie, index) => {
               return (
                 <React.Fragment key={String(index)}>
@@ -100,7 +100,6 @@ const ViewAll = () => {
           : <div className='md:mx-[100px] mx-5 py-10'>
           <Skeleton className='h-[800px]' />
         </div>}
-
       </div>
 
       <Footer />
