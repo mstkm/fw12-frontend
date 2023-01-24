@@ -33,6 +33,8 @@ const ManageMovie = () => {
   const [durationMinute, setDurationMinute] = React.useState(null)
   const [synopsis, setSynopsis] = React.useState(null)
   const [loadingSubmit, setLoadingSubmit] = React.useState(false)
+  const [updateMovieSuccess, setUpdateMovieSuccess] = React.useState(null)
+  const [updateMovieFailed, setUpdateMovieFailed] = React.useState(null)
   const [addMovieSuccess, setAddMovieSuccess] = React.useState(null)
   const [addMovieFailed, setAddMovieFailed] = React.useState(null)
   const handleSubmit = async (e) => {
@@ -49,6 +51,11 @@ const ManageMovie = () => {
           duration: movie?.duration,
           synopsis: synopsis || movie?.synopsis
         })
+        setLoadingSubmit(false)
+        setUpdateMovieSuccess('Update movie success')
+        setTimeout(() => {
+          setUpdateMovieSuccess(null)
+        }, 5000)
         // const movieId = response?.data?.results?.id
         // console.log(movieId)
         // category?.split(', ').map(async genre => {
@@ -63,6 +70,11 @@ const ManageMovie = () => {
         // })
       } catch (error) {
         console.log(error)
+        setLoadingSubmit(false)
+        setUpdateMovieFailed('Update movie failed')
+        setTimeout(() => {
+          setUpdateMovieFailed(null)
+        }, 5000)
       }
     } else {
       // Add new movie
@@ -253,6 +265,8 @@ const ManageMovie = () => {
           strokeWidthSecondary={5}
           />
         </div>}
+        {updateMovieFailed && <p className='mt-8 text-red-600 text-center'>{updateMovieFailed}</p>}
+        {updateMovieSuccess && <p className='mt-8 text-green-600 text-center'>{updateMovieSuccess}</p>}
         {addMovieFailed && <p className='mt-8 text-red-600 text-center'>{addMovieFailed}</p>}
         {addMovieSuccess && <p className='mt-8 text-green-600 text-center'>{addMovieSuccess}</p>}
       </form>
