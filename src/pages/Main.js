@@ -15,26 +15,114 @@ import TicketResult from './TicketResult'
 import ManageMovie from './ManageMovie'
 import ManageSchedule from './ManageSchedule'
 import Dashboard from './Dashboard'
+import WithoutAuth from '../assets/components/WithoutAuth'
+import WithAuthUser from '../assets/components/WithAuthUser'
+import WithAuthAdmin from '../assets/components/WithAuthAdmin'
+import WithAuthUserPayment from '../assets/components/WithAuthUserPayment'
 
 const Main = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/forgotPassword" element={<ForgotPassword />} />
-        <Route path="/updatePassword" element={<UpdatePassword />} />
-        <Route path='/viewAll' element={<ViewAll />} />
-        <Route path='/movieDetails/:id' element={<MovieDetails />} />
-        <Route path='/order' element={<Order />} />
-        <Route path='/payment' element={<Payment />} />
-        <Route path='/profile' element={<Profile />} />
-        <Route path='/orderHistory' element={<OrderHistory />} />
-        <Route path='/ticketResult/:id' element={<TicketResult />} />
-        <Route path='/manageMovie' element={<ManageMovie />} />
-        <Route path='/manageSchedule' element={<ManageSchedule />} />
-        <Route path='/dashboard' element={<Dashboard />} />
+        <Route path="/" element={<Home />}/>
+        <Route
+          path="/signup"
+          element={
+            <WithoutAuth>
+              <SignUp />
+            </WithoutAuth>
+          } />
+        <Route
+          path="/signin"
+          element={
+            <WithoutAuth>
+              <SignIn />
+            </WithoutAuth>
+          } />
+        <Route
+          path="/forgotPassword"
+          element={
+            <WithoutAuth>
+              <ForgotPassword />
+            </WithoutAuth>
+          } />
+        <Route
+          path="/updatePassword"
+          element={
+            <WithoutAuth>
+              <UpdatePassword />
+            </WithoutAuth>
+          } />
+        <Route
+          path='/viewAll'
+          element={
+            <WithAuthUser>
+              <ViewAll />
+            </WithAuthUser>
+          } />
+        <Route
+          path='/movieDetails/:id'
+          element={
+            <WithAuthUser>
+              <MovieDetails />
+            </WithAuthUser>
+          } />
+        <Route
+          path='/order'
+          element={
+            <WithAuthUserPayment>
+              <Order />
+            </WithAuthUserPayment>
+          } />
+        <Route
+          path='/payment'
+          element={
+            <WithAuthUserPayment>
+              <Payment />
+            </WithAuthUserPayment>
+          } />
+        <Route
+          path='/profile'
+          element={
+            <WithAuthUser>
+              <Profile />
+            </WithAuthUser>
+          } />
+        <Route
+          path='/orderHistory'
+          element={
+            <WithAuthUser>
+              <OrderHistory />
+            </WithAuthUser>
+          } />
+        <Route
+          path='/ticketResult/:id'
+          element={
+            <WithAuthUser>
+              <TicketResult />
+            </WithAuthUser>
+          } />
+        <Route
+          path='/dashboard'
+          element={
+            <WithAuthAdmin>
+              <Dashboard />
+            </WithAuthAdmin>
+          } />
+        <Route
+          path='/manageMovie'
+          element={
+            <WithAuthAdmin>
+              <ManageMovie />
+            </WithAuthAdmin>
+          } />
+        <Route
+          path='/manageSchedule'
+          element={
+            <WithAuthAdmin>
+              <ManageSchedule />
+            </WithAuthAdmin>
+          } />
       </Routes>
     </BrowserRouter>
   )
