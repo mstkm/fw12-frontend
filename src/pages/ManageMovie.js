@@ -55,7 +55,7 @@ const ManageMovie = () => {
         setUpdateMovieSuccess('Update movie success')
         setTimeout(() => {
           setUpdateMovieSuccess(null)
-        }, 5000)
+        }, 3000)
         // const movieId = response?.data?.results?.id
         // console.log(movieId)
         // category?.split(', ').map(async genre => {
@@ -74,7 +74,7 @@ const ManageMovie = () => {
         setUpdateMovieFailed('Update movie failed')
         setTimeout(() => {
           setUpdateMovieFailed(null)
-        }, 5000)
+        }, 3000)
       }
     } else {
       // Add new movie
@@ -102,14 +102,14 @@ const ManageMovie = () => {
         setAddMovieSuccess('Add movie success')
         setTimeout(() => {
           setAddMovieSuccess(null)
-        }, 5000)
+        }, 3000)
       } catch (error) {
         console.log(error)
         setLoadingSubmit(false)
         setAddMovieFailed('Add movie failed')
         setTimeout(() => {
           setAddMovieFailed(null)
-        }, 5000)
+        }, 3000)
       }
     }
   }
@@ -127,6 +127,7 @@ const ManageMovie = () => {
   const getLisMovies = async () => {
     try {
       const response = await http().get(`/movies?limit=8&page=${page}&search=${search}&sort=${sort}&sortBy=title&month`)
+      setLisMovies(response?.data)
       return response
     } catch (error) {
       console.log(error)
@@ -135,7 +136,7 @@ const ManageMovie = () => {
 
   // Pagination
   const increament = () => {
-    if (page < ListMovies?.pageInfo?.totalPage - 1) {
+    if (page < ListMovies?.pageInfo?.totalPage) {
       setPage(page + 1)
     } else {
       setPage(page)
@@ -167,10 +168,11 @@ const ManageMovie = () => {
       console.log(response)
       setLoadingDelete(false)
       setSuccessDelete('Delete success')
+      getLisMovies()
       setTimeout(() => {
         setSuccessDelete(null)
         setOpenModalDelete(false)
-      }, 5000)
+      }, 3000)
       return response
     } catch (error) {
       console.log(error)
@@ -301,7 +303,7 @@ const ManageMovie = () => {
             {successDelete && <p className='mt-8 text-center text-green-600'>{successDelete}</p>}
             {failedDelete && <p className='mt-8 text-center text-red-600'>{failedDelete}</p>}
           </div>
-        </div>}
+      </div>}
       <div className='flex flex-col md:flex-row gap-5 px-5 md:px-[100px]'>
         <div className='flex-1 font-bold text-2xl'>Data Movie</div>
         <div className='flex'>
@@ -319,7 +321,7 @@ const ManageMovie = () => {
       </div>
 
       <div className='px-5 md:px-[100px] py-5 font-[mulish] bg-[#E5E5E5]'>
-        <div className='grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 p-4 md:p-8 bg-[white] rounded-[8px]'>
+        <div className={`grid ${ListMovies?.results?.length && 'grid-cols-2 md:grid-cols-4'} gap-2 md:gap-4 p-4 md:p-8 bg-[white] rounded-[8px]`}>
           {ListMovies?.results?.map((movie, index) => {
             return (
               <React.Fragment key={String(index)}>
@@ -339,6 +341,7 @@ const ManageMovie = () => {
               </React.Fragment>
             )
           })}
+          {!ListMovies?.results?.length && <p className='text-center'>No results.</p>}
         </div>
 
         <div className='flex justify-center gap-3 mt-8 mb-8'>
