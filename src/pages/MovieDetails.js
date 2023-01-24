@@ -66,7 +66,7 @@ const MovieDetails = () => {
 
   // Select Schedule
   const selectSchedule = (el, cinema, price, cinemaName, movieScheduleId) => {
-    setSelectedTime(el.slice(0, 2) < 12 ? el.slice(0, 5) + 'am' : el.slice(0, 5) + 'pm')
+    setSelectedTime(el)
     setSelectedCinema(cinema)
     setselectedPrice(price)
     setSelectedCinemaName(cinemaName)
@@ -175,7 +175,7 @@ const MovieDetails = () => {
           </div>
           <div className="grid grid-cols-4 px-5 py-5 gap-2 text-sm">
             {cinema.time.sort().map((el, index) => {
-              return (<button key={String(index)} className={`btn-ghost ${cinema.cinemaId === selectedCinema && (el.slice(0, 2) < 12 ? el.slice(0, 5) + 'am' : el.slice(0, 5) + 'pm') === selectedTime && 'text-primary font-bold'}`} onClick={() => selectSchedule(el, cinema.cinemaId, cinema.price, cinema.cinemaName, cinema.id)}>{el.slice(0, 2) < 12 ? el.slice(0, 5) + 'am' : el.slice(0, 5) + 'pm'}</button>)
+              return (<button key={String(index)} className={`btn-ghost ${cinema.cinemaId === selectedCinema && el === selectedTime && 'text-primary font-bold'}`} onClick={() => selectSchedule(el, cinema.cinemaId, cinema.price, cinema.cinemaName, cinema.id)}>{el.slice(0, 2) < 12 ? el.slice(0, 5) + 'am' : el.slice(0, 5) + 'pm'}</button>)
             })}
           </div>
 

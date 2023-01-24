@@ -24,6 +24,37 @@ const Order = () => {
   if (!token) {
     navigate('/signin')
   }
+
+  // Get transactions
+  const [transactions, setTransactions] = React.useState(null)
+  const movieSchedulesArr = transactions?.map(el => el.movieScheduleId)
+  const bookingDatesArr = transactions?.map(el => el.bookingDate.split('T')[0])
+  const bookingTimesArr = transactions?.map(el => el.bookingTime)
+  const seatNumSold = transactions?.map(el => el.seatNum)
+  const [seatNumSoldArr, setSeatNumSoldArr] = React.useState([])
+  React.useEffect(() => {
+    getTransactions().then(response => {
+      setTransactions(response?.data?.results)
+      if (
+        bookingDatesArr?.includes(bookingDate) &&
+        movieSchedulesArr?.includes(movieScheduleId) &&
+        bookingTimesArr?.includes(bookingTime)
+      ) {
+        setSeatNumSoldArr(seatNumSold?.join(', ').split(', '))
+      } else {
+        setSeatNumSoldArr(null)
+      }
+    })
+  }, [transactions])
+  const getTransactions = async () => {
+    try {
+      const response = await http(token).get('/transactions?limit=1000')
+      return response
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   // Get data movie by id
   const [movie, setMovie] = React.useState({})
   React.useEffect(() => {
@@ -89,14 +120,15 @@ const Order = () => {
 
   // Select seat
   const [selectedSeat, setSelectedSeat] = React.useState([])
-
   const selectSeat = (seat) => {
-    if (!selectedSeat.includes(seat)) {
+    if (!selectedSeat.includes(seat) && !seatNumSoldArr?.includes(seat)) {
       setSelectedSeat([...selectedSeat, seat])
     } else {
       setSelectedSeat(selectedSeat.filter(el => el !== seat))
     }
   }
+
+  // Checkout
   const dispatch = useDispatch()
   const [showAlertChooseSeat, setShowAlertChooseSeat] = React.useState(false)
   const checkOut = () => {
@@ -172,7 +204,12 @@ const Order = () => {
                         if (alphabet !== ' ') {
                           const seatNumber = alphabet + String(number)
                           return (
-                          <button key={String(i)} onClick={() => selectSeat(seatNumber)} className={`flex justify-center items-center w-5 h-5 hover:bg-primary rounded ${selectedSeat.includes(seatNumber) ? ' bg-primary' : ' bg-[#D6D8E7]'}`} />
+                          <button key={String(i)} onClick={() => selectSeat(seatNumber)} className={`flex justify-center items-center w-5 h-5 hover:bg-primary rounded ${seatNumSoldArr?.includes(seatNumber) &&
+                            bookingDatesArr?.includes(bookingDate) &&
+                            bookingTimesArr?.includes(bookingTime) &&
+                            movieSchedulesArr?.includes(movieScheduleId)
+                            ? ' bg-[#6E7191] hover:bg-[#6E7191]'
+                            : (selectedSeat.includes(seatNumber) ? ' bg-primary' : ' bg-[#D6D8E7]')}`} />
                           )
                         } else {
                           return (<button key={String(i)} className="flex justify-center items-center w-5 h-5">{number}</button>)
@@ -189,7 +226,12 @@ const Order = () => {
                       if ((number > 0)) {
                         if (alphabet !== ' ') {
                           const seatNumber = alphabet + String(number)
-                          return (<button key={String(i)} onClick={() => selectSeat(seatNumber)} className={`flex justify-center items-center w-5 h-5 hover:bg-primary rounded ${selectedSeat.includes(seatNumber) ? ' bg-primary' : ' bg-[#D6D8E7]'}`} />
+                          return (<button key={String(i)} onClick={() => selectSeat(seatNumber)} className={`flex justify-center items-center w-5 h-5 hover:bg-primary rounded ${seatNumSoldArr?.includes(seatNumber) &&
+                            bookingDatesArr?.includes(bookingDate) &&
+                            bookingTimesArr?.includes(bookingTime) &&
+                            movieSchedulesArr?.includes(movieScheduleId)
+                            ? ' bg-[#6E7191] hover:bg-[#6E7191]'
+                            : (selectedSeat.includes(seatNumber) ? ' bg-primary' : ' bg-[#D6D8E7]')}`} />
                           )
                         } else {
                           return (<button key={String(i)} className="flex justify-center items-center w-5 h-5">{number}</button>)

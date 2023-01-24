@@ -3,6 +3,7 @@ import React from 'react'
 import Header from '../assets/components/Header'
 import Footer from '../assets/components/Footer'
 import TicketActive from '../assets/components/TicketActive'
+import TicketExpired from '../assets/components/TicketExpired'
 import http from '../helpers/http'
 import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
@@ -20,7 +21,7 @@ const TicketResult = () => {
     getTransaction().then(response => {
       setTransaction(response?.data?.results)
     })
-  }, [id])
+  }, [])
   const getTransaction = async () => {
     try {
       const response = await http(token).get(`/profile/transaction/details/${id}`)
@@ -101,7 +102,7 @@ const TicketResult = () => {
                 <img className="w-[115px] h-[28px]" src={require('../assets/images/bannerKarcisWhite.png')} alt='Logo' />
               </div>
               <div className="flex justify-center items-center py-5">
-                <TicketActive />
+                {(moment().format() < moment(transaction?.bookingDate).format().split('T')[0] + 'T' + transaction?.bookingTime) ? <TicketActive /> : <TicketExpired />}
               </div>
             </div>
           </div>

@@ -4,7 +4,6 @@ import { Search, Menu } from 'react-feather'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout as logoutAction } from '../../redux/reducers/auth'
-import { logoutTransaction as logoutTransactionAction } from '../../redux/reducers/transactions'
 import http from '../../helpers/http'
 import jwt_decode from 'jwt-decode'
 
@@ -64,6 +63,13 @@ const HeaderAdmin = (profilePicture) => {
       setDropMenu(false)
     }
   }
+
+  // Handle logout
+  const handleLogout = () => {
+    dispatch(logoutAction())
+    navigate('/')
+  }
+
   return (
     <>
     <div className='hidden md:flex items-center px-[100px] py-7 font-[mulish]'>
@@ -89,7 +95,7 @@ const HeaderAdmin = (profilePicture) => {
           <img className='w-[50px] h-[50px] rounded-full' src={user?.picture || profilePicture?.image || 'https://res.cloudinary.com/dvzrmzldr/image/upload/v1673836551/Desain_tanpa_judul_bsia1l.png'} alt='foto-profil' />
           <div id='drop-profile' className='z-20 group-hover:block hidden absolute top-[50px] right-1 border-[1px] border-[#DEDED] rounded-[2px] bg-[#FCFDFE] pl-2 pr-8 pt-1 pb-3'>
             <div onClick={directToProfile} className='mb-3 cursor-pointer hover:font-bold'>Profile</div>
-            <div onClick={() => dispatch(logoutAction()) & dispatch(logoutTransactionAction())} className='cursor-pointer hover:font-bold'>Logout</div>
+            <div onClick={handleLogout} className='cursor-pointer hover:font-bold'>Logout</div>
           </div>
         </div>
       </div>
@@ -122,7 +128,7 @@ const HeaderAdmin = (profilePicture) => {
         <div onClick={() => navigate('/profile')} className='py-5 w-full border-t-2'>
           <p className='text-center'>Profile</p>
         </div>
-        <div onClick={() => dispatch(logoutAction()) & dispatch(logoutTransactionAction())} className='py-5 w-full border-t-2'>
+        <div onClick={handleLogout} className='py-5 w-full border-t-2'>
           <p className='text-center'>Logout</p>
         </div>
         <div className='py-10 w-full border-t-2'>

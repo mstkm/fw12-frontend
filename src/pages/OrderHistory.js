@@ -93,7 +93,7 @@ const OrderHistory = () => {
               </div>
               <div className="flex items-center">
                 <div className="flex-1">
-                  <div className={`flex items-center justify-center w-[150px] h-[40px] ${(moment().format() < moment(transaction?.bookingDate).format().split('T')[0] + 'T' + transaction?.bookingTime) ? 'bg-[#00BA88]' : 'bg-black'} rounded-[4px] text-white`}>Ticket Active</div>
+                  <div className={`flex items-center justify-center w-[150px] h-[40px] ${(moment().format() < moment(transaction?.bookingDate).format().split('T')[0] + 'T' + transaction?.bookingTime) ? 'bg-[#00BA88]' : 'bg-black'} rounded-[4px] text-white`}>{(moment().format() < moment(transaction?.bookingDate).format().split('T')[0] + 'T' + transaction?.bookingTime) ? 'Ticket Active' : 'Ticket Expired'}</div>
                 </div>
                 <div onClick={() => navigate(`/ticketResult/${transaction?.id}`)} className="text-[#AAAAAA] cursor-pointer hover:font-bold hover:text-primary">See Details</div>
               </div>

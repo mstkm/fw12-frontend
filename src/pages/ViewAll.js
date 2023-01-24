@@ -21,16 +21,18 @@ const ViewAll = () => {
   }, [page, sort, search])
   const getLisMovies = async () => {
     try {
-      const response = await http().get(`/movies/nowShowing?limit=8&page=${page}&search=${search}&sort=${sort}&sortBy=title&month`)
+      const response = await http().get(`/movies?limit=8&page=${page}&search=${search}&sort=${sort}&sortBy=title&month`)
       return response
     } catch (error) {
       console.log(error)
     }
   }
 
+  console.log(ListMovies)
+
   // Pagination
   const increament = () => {
-    if (page < ListMovies?.pageInfo?.totalPage - 1) {
+    if (page < ListMovies?.pageInfo?.totalPage) {
       setPage(page + 1)
     } else {
       setPage(page)

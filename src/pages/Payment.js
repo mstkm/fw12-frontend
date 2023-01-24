@@ -6,13 +6,14 @@ import { AlertTriangle } from 'react-feather'
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import http from '../helpers/http'
-import { transaction as transactionAction } from '../redux/reducers/transactions'
+import { logoutTransaction as logoutTransactionAction } from '../redux/reducers/transactions'
 import { useNavigate } from 'react-router-dom'
 import jwt_decode from 'jwt-decode'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 
 const Payment = () => {
+  const dispatch = useDispatch()
   const token = useSelector((state) => state.auth.token)
   const {
     bookingDate,
@@ -121,7 +122,6 @@ const Payment = () => {
     return data
   }
 
-  const dispatch = useDispatch()
   const [selectedPaymentMethod, setSelectedPaymentMethod] = React.useState(null)
   const [fullName, setFullName] = React.useState(user?.firstName)
   const [email, setEmail] = React.useState(user?.email)
@@ -155,6 +155,7 @@ const Payment = () => {
         statusId: 1
       })
       navigate('/orderHistory')
+      dispatch(logoutTransactionAction())
       return data
     }
   }

@@ -1,15 +1,15 @@
-/* eslint-disable no-unused-vars */
+/* eslint-disable camelcase */
 import React from 'react'
 import { Eye, EyeOff } from 'react-feather'
 import { Link, useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { login as loginAction } from '../redux/reducers/auth'
 import http from '../helpers/http'
 import { Oval } from 'react-loader-spinner'
+import jwt_decode from 'jwt-decode'
 
 const SignIn = () => {
   const navigate = useNavigate()
-  const token = useSelector((state) => state.auth.token)
   const dispatch = useDispatch()
 
   // Login
@@ -26,11 +26,16 @@ const SignIn = () => {
     try {
       const response = await http().post('/auth/login', { email, password })
       const token = response?.data?.results?.token
+      const { role } = jwt_decode(token)
       setLoadingLogin(false)
       setLoginSuccessMessage(response?.data?.message)
       dispatch(loginAction({ token }))
       const cb = () => {
-        navigate('/')
+        if (role === '1') {
+          navigate('/dashboard')
+        } else {
+          navigate('/')
+        }
       }
       setTimeout(() => {
         cb()
