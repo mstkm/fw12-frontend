@@ -19,6 +19,7 @@ import WithoutAuth from '../assets/components/WithoutAuth'
 import WithAuthUser from '../assets/components/WithAuthUser'
 import WithAuthAdmin from '../assets/components/WithAuthAdmin'
 import WithAuthUserPayment from '../assets/components/WithAuthUserPayment'
+import WithAuthProfile from '../assets/components/WithAuthProfile'
 
 const Main = () => {
   return (
@@ -84,9 +85,9 @@ const Main = () => {
         <Route
           path='/profile'
           element={
-            <WithAuthUser>
+            <WithAuthProfile>
               <Profile />
-            </WithAuthUser>
+            </WithAuthProfile>
           } />
         <Route
           path='/orderHistory'
