@@ -1,26 +1,26 @@
 <div align="center">
   <br>
   <h1><strong>Karcis App</strong></h1>
-  <p>Aplikasi pemesanan tiket secara online.</p>
+  <p>Online ticket booking application.</p>
 
   <!-- [**View the Web App**](https://exceltodynamodbjson.vercel.app) -->
 </div>
 
-## Daftar Isi
+## Table of Contents
 
-- [Daftar isi](#daftar-isi)
-- [Deskripsi](#deskripsi)
-- [Teknologi](#teknologi)
+- [Table of Contents](#table-of-contents)
+- [Description](#description)
+- [Technologies](#technologies)
 
-## Deskripsi
+## Description
 
-**Karcis App** adalah aplikasi yang dapat digunakan untuk memesan tiket menonton film di bioskop. Ada dua peran pengguna dalam aplikasi ini yaitu pelanggan dan admin. Pelanggan bisa membuat akun atau registrasi melalui aplikasi untuk dapat menggunakan aplikasi. Akun admin yang dapat digunakan yaitu email: admin@mail.com, password: Admin123? untuk dapat menggunakan aplikasi sebagai admin.  
+**Karcis App** is an application that can be used to order tickets to watch movies in cinemas. There are two user roles in this application namely customer and admin. Customers can create an account or register through the application to be able to use the application. The admin account that can be used is email: admin@mail.com, password: Admin123? to be able to use the application as an admin.  
 
 <br>
 <img src="https://res.cloudinary.com/dvzrmzldr/image/upload/v1674563946/Screenshot_20230124_193817_jg5bsn.png">
 <br>
 
-## Teknologi
+## Technologies
 
 -   [React.js](https://reactjs.org/)
 -   [TailwindCSS](https://tailwindcss.com/)
