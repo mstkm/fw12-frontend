@@ -44,11 +44,11 @@ const Home = () => {
 
       {/* Jumbotron */}
       <div className='flex flex-col md:flex-row md:items-center p-5 md:px-24 md:py-7 font-[mulish]'>
-        <div className='flex-1'>
+        <div className='flex-1 fadeInLeft'>
           <p className='md:text-xl text-[#A0A3BD] font-medium'>Nearest Cinema, Newest Movie,</p>
           <p className='md:text-5xl text-primary font-bold'>Find out now!</p>
         </div>
-        <div className='flex-1 flex justify-center'>
+        <div className='flex-1 flex justify-center fadeInRight'>
           <img src={Jumbotron} alt='jumbotron' />
         </div>
       </div>
