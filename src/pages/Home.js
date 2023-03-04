@@ -39,6 +39,9 @@ const Home = () => {
 
   return (
     <div>
+      <head>
+        <meta name="google-site-verification" content="DylT07o12Km3HI9_7g48DK_owuOIc4JlpqP0pLlT62g" />
+      </head>
       {/* Header */}
       {!token ? <Head /> : <Header />}
 
