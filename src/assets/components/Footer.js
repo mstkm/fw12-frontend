@@ -3,7 +3,7 @@ import { Facebook, Instagram, Twitter, Youtube } from 'react-feather'
 
 const Footer = () => {
   return (
-    <div className='font-[mulish] px-5 md:px-[100px] py-10'>
+    <div className='font-[mulish] px-5 md:px-[100px] py-10 bg-white'>
       <div className='flex flex-col md:flex-row gap-8'>
         <div className='flex-1'>
           <div className='mb-4'>

@@ -74,7 +74,7 @@ const SignIn = () => {
       </div>
 
       {/* Right */}
-      <div className="flex flex-col flex-[40%] justify-center px-10 max-[425.98px]:pt-[5rem] max-[768.98px]:pt-[10rem] max-[768.98px]:pb-[2rem] max-[768.98px]:overflow-y-scroll">
+      <div className="flex flex-col flex-[40%] justify-center px-10 max-[425.98px]:pt-[5rem] max-[768.98px]:pt-[10rem] max-[768.98px]:pb-[2rem] max-[768.98px]:overflow-y-scroll bg-white">
         <div className='text-5xl font-bold mb-4'>Sign In</div>
         <div className='text-[#AAAAAA] mb-10'>Sign in with your data that you entered during your registration</div>
         {loadingLogin && <div className='mb-5 flex justify-center'>
@@ -96,13 +96,13 @@ const SignIn = () => {
         <form onSubmit={login} className='mb-8'>
           <div className='mb-5'>
             <div className='text-[#4E4B66] mb-2'>Email</div>
-            <input className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none' type='text' name='email' placeholder='Write your email'></input>
+            <input className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none bg-white' type='text' name='email' placeholder='Write your email'></input>
           </div>
           <div className='mb-5'>
             <div className='text-[#4E4B66] mb-2'>Password</div>
             <div className='relative'>
               {iconEye ? <Eye onClick={showPassword} className='absolute top-3 right-[15px] cursor-pointer'/> : <EyeOff onClick={showPassword} className='absolute top-3 right-[15px] cursor-pointer'/>}
-                <input className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none' name='password' type={inputType} placeholder='Write your password'></input>
+                <input className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none bg-white' name='password' type={inputType} placeholder='Write your password'></input>
             </div>
           </div>
           <div className='mt-10'>

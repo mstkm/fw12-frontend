@@ -116,7 +116,7 @@ const UpdatePassword = () => {
       </div>
 
       {/* Right */}
-      <div className="flex flex-col flex-[40%] justify-center px-10 max-[425.98px]:py-[300px]">
+      <div className="flex flex-col flex-[40%] justify-center px-10 max-[425.98px]:py-[300px] bg-white">
         <div className='text-3xl font-bold mb-4'>Fill your complete email</div>
         <div className='text-[#AAAAAA] mb-10'>set your new password</div>
         {loadingUpdatePassword && <div className='mb-8 flex justify-center'>
@@ -149,14 +149,14 @@ const UpdatePassword = () => {
             <div className='mb-5'>
               <div className='text-[#4E4B66] mb-2'>Code</div>
               <div className='relative'>
-                  <Field className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none' name='code' type='text' placeholder='Write your code'></Field>
+                  <Field className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none bg-white' name='code' type='text' placeholder='Write your code'></Field>
               </div>
             </div>
             <div className='mb-5'>
               <div className='text-[#4E4B66] mb-2'>Password</div>
               <div className='relative'>
                 {iconEyeA ? <Eye onClick={showPasswordA} className='absolute top-3 right-[15px] cursor-pointer'/> : <EyeOff onClick={showPasswordA} className='absolute top-3 right-[15px] cursor-pointer'/>}
-                  <Field className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none' name='password' type={inputTypeA} placeholder='Write your password'></Field>
+                  <Field className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none bg-white' name='password' type={inputTypeA} placeholder='Write your password'></Field>
                   {errors.password && touched.password ? <div className=' text-red-500 text-sm'>{errors.password}</div> : null}
               </div>
             </div>
@@ -164,7 +164,7 @@ const UpdatePassword = () => {
               <div className='text-[#4E4B66] mb-2'>Confirm Password</div>
               <div className='relative'>
               {iconEyeB ? <Eye onClick={showPasswordB} className='absolute top-3 right-[15px] cursor-pointer'/> : <EyeOff onClick={showPasswordB} className='absolute top-3 right-[15px] cursor-pointer'/>}
-                  <Field className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none' name='confirmPassword' type={inputTypeB} placeholder='Write your confirm password'></Field>
+                  <Field className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none bg-white' name='confirmPassword' type={inputTypeB} placeholder='Write your confirm password'></Field>
               </div>
             </div>
             <div className='mt-10'>

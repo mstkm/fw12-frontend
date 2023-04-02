@@ -105,7 +105,7 @@ const MovieDetails = () => {
 
     {/* Movie Details */}
     {movie?.title
-      ? <div className="flex flex-col items-center md:flex-row gap-8 px-5 md:px-[100px] py-10 font-[mulish]">
+      ? <div className="flex flex-col items-center md:flex-row gap-8 px-5 md:px-[100px] py-10 font-[mulish] bg-white">
       <div className="border-[1px] w-fit border-[#DEDEDE] rounded-[16px] p-10">
         <img src={movie?.picture} alt={movie?.title} className='h-[300px] md:h-[362.83px] w-[180px] md:w-[236.72px] rounded-[8px]'/>
       </div>

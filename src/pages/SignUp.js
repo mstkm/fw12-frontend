@@ -99,7 +99,7 @@ const SignUp = () => {
       </div>
 
       {/* Right */}
-      <div className='flex flex-col flex-[40%] justify-center px-10 overflow-y-scroll'>
+      <div className='flex flex-col flex-[40%] justify-center px-10 overflow-y-scroll bg-white'>
         <div className='text-5xl font-bold mb-4 mt-[18rem] max-[425.98px]:mt-[20rem] max-[768.98px]:mt-[25rem]'>Sign Up</div>
         <div className='text-[#AAAAAA] mb-10'>Fill your additional details</div>
         {loadingRegister && <div className='flex justify-center mb-10'>
@@ -142,29 +142,29 @@ const SignUp = () => {
               <Form>
           <div className='mb-5'>
           <div className='text-[#4E4B66] mb-2'>First Name</div>
-            <Field className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none' name='firstName' placeholder='Write your first name'></Field>
+            <Field className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none bg-white' name='firstName' placeholder='Write your first name'></Field>
             {errors.firstName && touched.firstName ? <div className=' text-red-500 text-sm'>{errors.firstName}</div> : null}
           </div>
           <div className='mb-5'>
           <div className='text-[#4E4B66] mb-2'>Last Name</div>
-            <Field className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none' name='lastName' placeholder='Write your last name'></Field>
+            <Field className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none bg-white' name='lastName' placeholder='Write your last name'></Field>
             {errors.lastName && touched.lastName ? <div className=' text-red-500 text-sm'>{errors.lastName}</div> : null}
           </div>
           <div className='mb-5'>
           <div className='text-[#4E4B66] mb-2'>Phone Number</div>
-            <Field className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none' name='phoneNumber' placeholder='Write your phone number'></Field>
+            <Field className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none bg-white' name='phoneNumber' placeholder='Write your phone number'></Field>
             {errors.phoneNumber && touched.phoneNumber ? <div className=' text-red-500 text-sm'>{errors.phoneNumber}</div> : null}
           </div>
           <div className='mb-5'>
             <div className='text-[#4E4B66] mb-2'>Email</div>
-            <Field className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none' name='email' placeholder='Write your email'></Field>
+            <Field className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none bg-white' name='email' placeholder='Write your email'></Field>
             {errors.email && touched.email ? <div className=' text-red-500 text-sm'>{errors.email}</div> : null}
           </div>
           <div className='mb-5'>
             <div className='text-[#4E4B66] mb-2'>Password</div>
             <div className='relative'>
               {iconEye ? <Eye onClick={showPassword} className='absolute top-3 right-[15px] cursor-pointer'/> : <EyeOff onClick={showPassword} className='absolute top-3 right-[15px] cursor-pointer'/>}
-              <Field className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none' name='password' type={inputType} placeholder='Write your password'></Field>
+              <Field className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[16px] pl-4 focus:outline-none bg-white' name='password' type={inputType} placeholder='Write your password'></Field>
               {errors.password && touched.password ? <div className=' text-red-500 text-sm'>{errors.password}</div> : null}
             </div>
           </div>

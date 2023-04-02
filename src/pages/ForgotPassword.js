@@ -71,7 +71,7 @@ const ForgotPassword = () => {
       </div>
 
       {/* Right */}
-      <div className="flex flex-col flex-[40%] justify-center px-10 max-[425.98px]:py-0">
+      <div className="flex flex-col flex-[40%] justify-center px-10 max-[425.98px]:py-0 bg-white">
         <div className='text-3xl font-bold mb-4'>Fill your complete email</div>
         <div className='text-[#AAAAAA] mb-10'>we`ll send a link to your email shortly</div>
         {loadingForgotPassword && <div className='mb-5 flex justify-center'>
@@ -93,7 +93,7 @@ const ForgotPassword = () => {
         <form onSubmit={handleForgotPassword} className='mb-8'>
           <div className='mb-5'>
             <div className='text-[#4E4B66] mb-2'>Email</div>
-            <input name='email' className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[4px] pl-4 focus:outline-none' placeholder='Write your email'></input>
+            <input name='email' className='w-[100%] h-[50px] border-[1px] border-[#DEDEDE] rounded-[4px] pl-4 focus:outline-none bg-white' placeholder='Write your email'></input>
           </div>
           <div className='mt-10'>
             <button type='submit' className='w-[100%] h-[50px] bg-primary border-[1px] border-primary rounded-[4px] pl-4 text-white'>Send</button>
