@@ -56,7 +56,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className='mt-[60px] text-center text-[#6E7191] text-sm'>© 2020 Tickitz. All Rights Reserved.</div>
+      <div className='mt-[60px] text-center text-[#6E7191] text-sm'>© 2022 Karcis. All Rights Reserved.</div>
     </div>
   )
 }
